@@ -11,19 +11,9 @@ export default function Footer() {
           className="font-mono text-text-muted tracking-widest"
           style={{ fontSize: '10px' }}
         >
-          GDGoC_USM // APEXFEST_2026
+          GDGoC_USM // APEXFEST
         </p>
 
-        {/* Center — pulsing dot + status */}
-        <div className="flex items-center gap-2" aria-label="System status: online">
-          <span className="pulse-dot pulse-dot-cyan" aria-hidden="true" />
-          <span
-            className="font-mono text-text-muted tracking-widest"
-            style={{ fontSize: '10px' }}
-          >
-            SYSTEM ONLINE
-          </span>
-        </div>
 
         {/* Right */}
         <p

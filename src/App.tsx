@@ -1,10 +1,9 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { ReactLenis } from 'lenis/react'
 import Layout from './components/Layout'
 import BackgroundEffects from './components/BackgroundEffects'
 import Home from './pages/Home'
-import About from './pages/About'
-import Sponsors from './pages/Sponsors'
 
 // Lazy-loaded heavy pages for code splitting
 const GameFest = lazy(() => import('./pages/GameFest'))
@@ -33,12 +32,11 @@ function LoadingFallback() {
 
 function App() {
   return (
-    <>
+    <ReactLenis root>
       <BackgroundEffects />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
           <Route
             path="/gamefest"
             element={
@@ -55,10 +53,9 @@ function App() {
               </Suspense>
             }
           />
-          <Route path="/sponsors" element={<Sponsors />} />
         </Route>
       </Routes>
-    </>
+    </ReactLenis>
   )
 }
 

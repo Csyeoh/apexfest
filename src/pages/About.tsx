@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
 
 /* ========================================
@@ -257,8 +256,7 @@ function GDGoCBadge() {
 
 export default function About() {
   return (
-    <PageWrapper>
-    <section className="min-h-screen max-w-7xl mx-auto px-6 py-16">
+    <section id="about" className="min-h-screen max-w-7xl mx-auto px-6 py-16">
       <PageHeader />
 
       {/* Two-column layout */}
@@ -277,6 +275,5 @@ export default function About() {
       <MissionStatement />
       <GDGoCBadge />
     </section>
-    </PageWrapper>
   )
 }

@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
 
 /* ========================================
@@ -419,8 +418,7 @@ function BecomeASponsor() {
 
 export default function Sponsors() {
   return (
-    <PageWrapper>
-    <section className="min-h-screen max-w-7xl mx-auto px-6 py-16">
+    <section id="sponsors" className="min-h-screen max-w-7xl mx-auto px-6 py-16 pt-24">
       <PageHeader />
       <TitleSponsor />
       <GoldSponsors />
@@ -429,6 +427,5 @@ export default function Sponsors() {
       <StatsStrip />
       <BecomeASponsor />
     </section>
-    </PageWrapper>
   )
 }

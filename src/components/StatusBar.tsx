@@ -11,7 +11,7 @@ export default function StatusBar() {
         className="font-mono text-text-muted tracking-widest"
         style={{ fontSize: '11px' }}
       >
-        SYS::APEXFEST_2026 — ONLINE
+        SYS::APEXFEST — ONLINE
       </span>
     </div>
   )

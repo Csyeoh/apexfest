@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface NavItem {
@@ -8,28 +8,39 @@ interface NavItem {
 }
 
 const navLinks: NavItem[] = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
+  { to: '/#home', label: 'Home' },
+  { to: '/#about', label: 'About' },
   { to: '/gamefest', label: 'GameFest' },
   { to: '/techfest', label: 'TechFest' },
-  { to: '/sponsors', label: 'Sponsors' },
+  { to: '/#sponsors', label: 'Sponsors' },
 ]
 
 function NavLinkItem({ link }: { link: NavItem }) {
   const [hovered, setHovered] = useState(false)
+  const location = useLocation()
+
+  const isHashLink = link.to.includes('#')
+  const targetHash = isHashLink ? link.to.split('#')[1] : ''
+  const currentHash = location.hash.replace('#', '')
+
+  let isActive = false
+  if (isHashLink) {
+    if (location.pathname === '/') {
+      isActive = currentHash === targetHash || (targetHash === 'home' && currentHash === '')
+    }
+  } else {
+    isActive = location.pathname.startsWith(link.to)
+  }
 
   return (
     <li>
-      <NavLink
+      <Link
         to={link.to}
-        end={link.to === '/'}
-        className={({ isActive }) =>
-          `relative inline-block font-mono uppercase transition-colors duration-200 ${
-            isActive
-              ? 'text-techfest'
-              : 'text-text-muted hover:text-text-base'
-          }`
-        }
+        className={`relative inline-block font-mono uppercase transition-colors duration-200 ${
+          isActive
+            ? 'text-techfest'
+            : 'text-text-muted hover:text-text-base'
+        }`}
         style={{
           fontSize: '10px',
           letterSpacing: '3px',
@@ -38,23 +49,19 @@ function NavLinkItem({ link }: { link: NavItem }) {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        {({ isActive }) => (
-          <>
-            {link.label}
-            <motion.span
-              className="absolute bottom-[-4px] left-0 w-full h-[1px]"
-              style={{
-                backgroundColor: '#00dcc0',
-                transformOrigin: 'left',
-              }}
-              initial={false}
-              animate={{ scaleX: isActive ? 1 : hovered ? 1 : 0 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
-              aria-hidden="true"
-            />
-          </>
-        )}
-      </NavLink>
+        {link.label}
+        <motion.span
+          className="absolute bottom-[-4px] left-0 w-full h-[1px]"
+          style={{
+            backgroundColor: '#00dcc0',
+            transformOrigin: 'left',
+          }}
+          initial={false}
+          animate={{ scaleX: isActive ? 1 : hovered ? 1 : 0 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          aria-hidden="true"
+        />
+      </Link>
     </li>
   )
 }
@@ -78,8 +85,8 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <NavLink
-          to="/"
+        <Link
+          to="/#home"
           className="font-display font-bold text-lg tracking-wider select-none"
           aria-label="ApexFest home"
           onClick={closeMenu}
@@ -88,7 +95,7 @@ export default function Navbar() {
           <span style={{ color: '#ffb830' }}>USM</span>{' '}
           <span style={{ color: '#00dcc0' }}>// APEX</span>
           <span style={{ color: '#ffb830' }}>FEST</span>
-        </NavLink>
+        </Link>
 
         {/* Desktop Nav Links */}
         <ul className="hidden md:flex items-center gap-8">
@@ -145,14 +152,23 @@ export default function Navbar() {
           >
             <ul className="flex flex-col px-6 py-4 gap-1">
               {navLinks.map((link) => {
-                const isActive = link.to === '/'
-                  ? location.pathname === '/'
-                  : location.pathname.startsWith(link.to)
+                const isHashLink = link.to.includes('#')
+                const targetHash = isHashLink ? link.to.split('#')[1] : ''
+                const currentHash = location.hash.replace('#', '')
+                
+                let isActive = false
+                if (isHashLink) {
+                  if (location.pathname === '/') {
+                    isActive = currentHash === targetHash || (targetHash === 'home' && currentHash === '')
+                  }
+                } else {
+                  isActive = location.pathname.startsWith(link.to)
+                }
+
                 return (
                   <li key={link.to}>
-                    <NavLink
+                    <Link
                       to={link.to}
-                      end={link.to === '/'}
                       onClick={closeMenu}
                       className="block py-3 font-mono uppercase transition-colors duration-150"
                       style={{
@@ -164,7 +180,7 @@ export default function Navbar() {
                       aria-label={`Navigate to ${link.label}`}
                     >
                       {link.label}
-                    </NavLink>
+                    </Link>
                   </li>
                 )
               })}
