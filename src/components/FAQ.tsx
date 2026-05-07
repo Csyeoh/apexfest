@@ -9,20 +9,24 @@ interface FAQItem {
 
 const gameFestFaqItems: FAQItem[] = [
   {
-    question: 'Who can participate in Game Fest 2026?',
-    answer: 'Game Fest is open to all currently enrolled students at USM. External participants may join as wildcard entries if slots are available. Each participant must have a valid student ID for verification during check-in.',
+    question: 'Who can participate?',
+    answer: 'The event is open to all undergraduates students.',
   },
   {
-    question: 'What games will be featured?',
-    answer: 'The game lineup includes titles across FPS, MOBA, Fighting, and Card Game categories. Specific titles and tournament formats will be announced on our official Discord server two weeks before qualifiers begin.',
+    question: 'Is there a registration fee?',
+    answer: 'No, participation is completely free for all undergraduates students.',
   },
   {
-    question: 'Is there an entry fee?',
-    answer: 'No. Game Fest 2026 is completely free to enter for all registered participants. There are no hidden fees or paid tiers — just show up, compete, and have fun.',
+    question: 'How do I qualify for the physical D-Day ?',
+    answer: 'Only the Top 32 players from Online Open Qualifier will receive an exclusive invite to the physical event.',
   },
   {
-    question: 'Can I join multiple game categories?',
-    answer: 'Yes, you may register for up to two game categories. However, you are responsible for ensuring your match schedules do not conflict. In case of overlap, you must choose one and forfeit the other.',
+    question: 'Who can join the side quest?',
+    answer: 'The side booths are open to all attendees, not just the Top 32 finalists.',
+  },
+  {
+    question: 'Will there be MyCSD points?',
+    answer: 'Yes! Gamefest will provide MyCSD points for participants.',
   },
 ]
 
