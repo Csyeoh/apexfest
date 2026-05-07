@@ -2,13 +2,12 @@ import { useState } from 'react'
 import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
 
-type GameFestTab = 'timeline' | 'rules' | 'prizepool' | 'faq' | 'register'
+type GameFestTab = 'timeline' | 'rules' | 'prizepool' | 'register'
 
 const tabs: { key: GameFestTab; label: string }[] = [
   { key: 'timeline', label: 'Timeline' },
   { key: 'rules', label: 'Rules' },
   { key: 'prizepool', label: 'Prizepool' },
-  { key: 'faq', label: 'FAQ' },
   { key: 'register', label: 'Register' },
 ]
 
@@ -274,91 +273,6 @@ function PrizepoolTab() {
 }
 
 /* ========================================
-   FAQ TAB
-   ======================================== */
-
-interface FAQItem {
-  question: string
-  answer: string
-}
-
-const faqItems: FAQItem[] = [
-  {
-    question: 'Who can participate in Game Fest 2026?',
-    answer: 'Game Fest is open to all currently enrolled students at USM. External participants may join as wildcard entries if slots are available. Each participant must have a valid student ID for verification during check-in.',
-  },
-  {
-    question: 'What games will be featured?',
-    answer: 'The game lineup includes titles across FPS, MOBA, Fighting, and Card Game categories. Specific titles and tournament formats will be announced on our official Discord server two weeks before qualifiers begin.',
-  },
-  {
-    question: 'Is there an entry fee?',
-    answer: 'No. Game Fest 2026 is completely free to enter for all registered participants. There are no hidden fees or paid tiers — just show up, compete, and have fun.',
-  },
-  {
-    question: 'Can I join multiple game categories?',
-    answer: 'Yes, you may register for up to two game categories. However, you are responsible for ensuring your match schedules do not conflict. In case of overlap, you must choose one and forfeit the other.',
-  },
-]
-
-function FAQTab() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
-
-  const toggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index)
-  }
-
-  return (
-    <div className="max-w-3xl space-y-0">
-      {faqItems.map((item, i) => {
-        const isOpen = openIndex === i
-        return (
-          <RevealOnScroll key={i} direction="up" delay={i * 0.08}>
-            <div
-              style={{
-                borderBottom: '1px solid rgba(255,184,48,0.15)',
-                borderTop: i === 0 ? '1px solid rgba(255,184,48,0.15)' : 'none',
-              }}
-            >
-              <button
-                type="button"
-                onClick={() => toggle(i)}
-                aria-expanded={isOpen}
-                aria-label={`${item.question} — click to ${isOpen ? 'collapse' : 'expand'}`}
-                className="w-full flex items-center justify-between py-5 px-2 text-left cursor-pointer transition-colors duration-150"
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.03)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent'
-                }}
-              >
-                <span className="font-display text-text-base text-sm tracking-wide pr-4">
-                  {item.question}
-                </span>
-                <span
-                  className="font-mono text-gamefest flex-shrink-0"
-                  style={{ fontSize: '18px', lineHeight: 1 }}
-                >
-                  {isOpen ? '−' : '+'}
-                </span>
-              </button>
-              {isOpen && (
-                <div className="px-2 pb-5">
-                  <p className="font-body text-text-muted text-base leading-relaxed">
-                    {item.answer}
-                  </p>
-                </div>
-              )}
-            </div>
-          </RevealOnScroll>
-        )
-      })}
-    </div>
-  )
-}
-
-/* ========================================
    REGISTER TAB
    ======================================== */
 
@@ -573,8 +487,6 @@ export default function GameFest() {
         return <RulesTab />
       case 'prizepool':
         return <PrizepoolTab />
-      case 'faq':
-        return <FAQTab />
       case 'register':
         return <RegisterTab />
     }

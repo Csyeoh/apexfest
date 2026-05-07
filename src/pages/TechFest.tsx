@@ -8,7 +8,6 @@ const tabs: { key: TechFestTab; label: string }[] = [
   { key: 'timeline', label: 'Timeline' },
   { key: 'speakers', label: 'Speakers' },
   { key: 'topics', label: 'Topics' },
-  { key: 'faq', label: 'FAQ' },
 ]
 
 /* ========================================
@@ -299,87 +298,6 @@ function TopicsTab() {
 }
 
 /* ========================================
-   FAQ TAB
-   ======================================== */
-
-interface FAQItem {
-  question: string
-  answer: string
-}
-
-const faqItems: FAQItem[] = [
-  {
-    question: 'Is TechFest free to attend?',
-    answer: 'Yes — TechFest 2.0 is completely free for all currently enrolled USM students. External attendees may register subject to availability and a nominal fee that will be announced closer to the event date.',
-  },
-  {
-    question: 'Will sessions be recorded?',
-    answer: 'Select sessions will be recorded and made available post-event on our official YouTube channel. However, workshops and interactive panels will not be recorded to encourage open participation.',
-  },
-  {
-    question: 'Can I submit a lightning talk?',
-    answer: 'Absolutely. We are running an open call for 5-minute lightning talks on any AI or tech topic. Submission details will be shared via our Discord and social media channels — stay tuned for the announcement.',
-  },
-]
-
-function FAQTab() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
-
-  const toggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index)
-  }
-
-  return (
-    <div className="max-w-3xl space-y-0">
-      {faqItems.map((item, i) => {
-        const isOpen = openIndex === i
-        return (
-          <RevealOnScroll key={i} direction="up" delay={i * 0.08}>
-            <div
-              style={{
-                borderBottom: '1px solid rgba(0,220,192,0.15)',
-                borderTop: i === 0 ? '1px solid rgba(0,220,192,0.15)' : 'none',
-              }}
-            >
-              <button
-                type="button"
-                onClick={() => toggle(i)}
-                aria-expanded={isOpen}
-                aria-label={`${item.question} — click to ${isOpen ? 'collapse' : 'expand'}`}
-                className="w-full flex items-center justify-between py-5 px-2 text-left cursor-pointer transition-colors duration-150"
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.03)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent'
-                }}
-              >
-                <span className="font-display text-text-base text-sm tracking-wide pr-4">
-                  {item.question}
-                </span>
-                <span
-                  className="font-mono text-techfest flex-shrink-0"
-                  style={{ fontSize: '18px', lineHeight: 1 }}
-                >
-                  {isOpen ? '−' : '+'}
-                </span>
-              </button>
-              {isOpen && (
-                <div className="px-2 pb-5">
-                  <p className="font-body text-text-muted text-base leading-relaxed">
-                    {item.answer}
-                  </p>
-                </div>
-              )}
-            </div>
-          </RevealOnScroll>
-        )
-      })}
-    </div>
-  )
-}
-
-/* ========================================
    PAGE COMPONENT
    ======================================== */
 
@@ -394,8 +312,6 @@ export default function TechFest() {
         return <SpeakersTab />
       case 'topics':
         return <TopicsTab />
-      case 'faq':
-        return <FAQTab />
     }
   }
 

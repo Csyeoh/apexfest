@@ -13,6 +13,7 @@ const navLinks: NavItem[] = [
   { to: '/gamefest', label: 'GameFest' },
   { to: '/techfest', label: 'TechFest' },
   { to: '/#sponsors', label: 'Sponsors' },
+  { to: '/#faq', label: 'FAQ' },
 ]
 
 function NavLinkItem({ link }: { link: NavItem }) {

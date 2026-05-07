@@ -26,6 +26,7 @@
     color: #e8e4d4;
     min-height: 100vh;
     overflow-x: hidden;
+    overflow-y: scroll;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

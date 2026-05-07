@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import PageWrapper from '../components/PageWrapper'
 import About from './About'
 import Sponsors from './Sponsors'
+import FAQ from '../components/FAQ'
 
 /* ========================================
    CORNER BRACKET — animated draw-in
@@ -381,6 +382,7 @@ export default function Home() {
       {/* Merged Pages */}
       <About />
       <Sponsors />
+      <FAQ />
       </div>
     </PageWrapper>
   )
