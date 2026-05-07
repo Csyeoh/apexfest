@@ -235,6 +235,22 @@ body::before {
 }
 
 /* ========================================
+   SWIPER PAGINATION OVERRIDES
+   ======================================== */
+.swiper-pagination-bullet {
+  background-color: rgba(232, 228, 212, 0.4) !important;
+  opacity: 1 !important;
+  transform: scale(0.75);
+  transition: transform 0.3s ease, background-color 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #00dcc0 !important;
+  box-shadow: 0 0 8px rgba(0, 220, 192, 0.6) !important;
+  transform: scale(1.25);
+}
+
+/* ========================================
    KEYFRAMES
    ======================================== */
 
