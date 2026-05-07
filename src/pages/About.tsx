@@ -1,4 +1,11 @@
 import { motion } from 'framer-motion'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Autoplay } from 'swiper/modules'
+
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+
 import RevealOnScroll from '../components/RevealOnScroll'
 
 /* ========================================
@@ -26,7 +33,7 @@ function PageHeader() {
 }
 
 /* ========================================
-   PROSE COLUMN — staggered paragraphs
+   PROSE COLUMN — new generated content
    ======================================== */
 
 const paragraphs = [
@@ -34,10 +41,20 @@ const paragraphs = [
     key: 'intro',
     content: (
       <>
-        GDGoC USM ApexFest is the flagship annual event hosted by the Google Developer
-        Groups on Campus chapter at Universiti Sains Malaysia. Designed to bring together
-        students from every discipline, ApexFest is a celebration of skill, creativity,
-        and the drive to build something bigger than ourselves.
+        ApexFest is a premier two-day tech and gaming festival organized by the Google
+        Developer Group on Campus Universiti Sains Malaysia (GDGoC USM). Happening on May
+        23 and 24, 2026, the series brings together the thrill of esports and the
+        innovation of Google technologies.
+      </>
+    ),
+  },
+  {
+    key: 'middle',
+    content: (
+      <>
+        Whether you are looking to level up your gaming skills, dive into hands-on tech
+        workshops, or connect with a passionate community of students, ApexFest has
+        something for everyone.
       </>
     ),
   },
@@ -45,11 +62,8 @@ const paragraphs = [
     key: 'gamefest',
     content: (
       <>
-        <span className="text-gamefest font-semibold">Game Fest 2026</span> is the
-        competitive heart of ApexFest — a multi-title gaming tournament where players
-        battle across FPS, MOBA, fighting, and card game brackets. From solo showdowns to
-        team-based warfare, Game Fest is where campus legends are forged and rivalries
-        ignite.
+        <span className="text-gamefest font-semibold">Day 1: GameFest</span> – A hybrid
+        gaming event bridging competitive esports with casual campus engagement.
       </>
     ),
   },
@@ -57,21 +71,9 @@ const paragraphs = [
     key: 'techfest',
     content: (
       <>
-        <span className="text-techfest font-semibold">TechFest 2.0</span> pushes the
-        boundary of what students know about artificial intelligence and emerging
-        technology. Featuring industry speakers, hands-on workshops, and deep-dive
-        sessions, TechFest goes beyond the prompt — exploring real-world AI deployment,
-        ethics, and the tools shaping our future.
-      </>
-    ),
-  },
-  {
-    key: 'closing',
-    content: (
-      <>
-        ApexFest is where gamers, builders, and thinkers converge. Whether you're here to
-        compete, learn, or connect — you belong. Two events. One stage. Infinite
-        possibilities.
+        <span className="text-techfest font-semibold">Day 2: TechFest</span> – An
+        interactive showcase empowering students with hands-on experience across major
+        Google technologies.
       </>
     ),
   },
@@ -79,7 +81,7 @@ const paragraphs = [
 
 function ProseColumn() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pr-0 md:pr-8">
       {paragraphs.map((para, i) => (
         <motion.p
           key={para.key}
@@ -98,58 +100,59 @@ function ProseColumn() {
 }
 
 /* ========================================
-   STAT CARDS — scale pop-in
+   ABOUT SLIDESHOW — replacing stat cards
    ======================================== */
 
-interface StatCard {
-  value: string
-  label: string
-  valueColor: 'amber' | 'cyan'
-}
+function AboutSlideshow() {
+  const slides = [
+    '/images/haphoto0.jpg',
+    '/images/haphoto1.jpg',
+    '/images/haphoto2.jpg',
+    '/images/haphoto3.jpg',
+  ]
 
-const stats: StatCard[] = [
-  { value: '2', label: 'Events', valueColor: 'amber' },
-  { value: 'USM', label: 'Campus', valueColor: 'cyan' },
-  { value: '2026', label: 'Year', valueColor: 'amber' },
-  { value: '∞', label: 'Possibilities', valueColor: 'cyan' },
-]
-
-function StatCards() {
   return (
-    <div className="grid grid-cols-2 gap-4">
-      {stats.map((stat, i) => (
-        <motion.div
-          key={stat.label}
-          className="p-6 text-center"
+    <RevealOnScroll direction="up" delay={0.2}>
+      <div className="w-full lg:w-[40vw] max-w-[550px] lg:max-w-[470px]">
+        <div
+          className="rounded-xl overflow-hidden"
           style={{
-            backgroundColor: '#0f0f1a',
-            border: '1px solid rgba(0,220,192,0.2)',
+            border: '1px solid rgba(0, 220, 192, 0.2)',
+            boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.5)',
           }}
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.1 }}
         >
-          <p
-            className="font-display font-bold mb-1"
-            style={{
-              fontSize: '28px',
-              color: stat.valueColor === 'amber' ? '#ffb830' : '#00dcc0',
+          <Swiper
+            navigation={true}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
             }}
+            loop={true}
+            modules={[Navigation, Autoplay]}
+            className="w-full rounded-xl"
           >
-            {stat.value}
-          </p>
-          <p className="font-body text-text-muted text-sm">
-            {stat.label}
-          </p>
-        </motion.div>
-      ))}
-    </div>
+            {slides.map((src, i) => (
+              <SwiperSlide key={i}>
+                <div className="aspect-[4/3] w-full">
+                  <img
+                    alt={`ApexFest Highlight ${i + 1}`}
+                    className="w-full h-full object-cover select-none"
+                    src={src}
+                  />
+                  {/* Subtle dark gradient overlay to tie into the theme */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080c0e]/80 via-transparent to-transparent pointer-events-none" />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+    </RevealOnScroll>
   )
 }
 
 /* ========================================
-   MISSION STATEMENT — slide from left
+   MISSION STATEMENT
    ======================================== */
 
 function MissionStatement() {
@@ -162,9 +165,7 @@ function MissionStatement() {
       transition={{ duration: 0.55, ease: 'easeOut', delay: 0.6 }}
     >
       <div className="flex gap-6">
-        {/* Vertical amber accent line */}
         <div className="w-[2px] flex-shrink-0 bg-gamefest" />
-
         <div>
           <p
             className="font-mono text-text-muted mb-3"
@@ -186,7 +187,7 @@ function MissionStatement() {
 }
 
 /* ========================================
-   GDGoC BADGE — spring bounce-in
+   GDGoC BADGE
    ======================================== */
 
 function GDGoCBadge() {
@@ -207,7 +208,6 @@ function GDGoCBadge() {
         className="inline-flex items-center gap-3 px-6 py-3"
         style={{ border: '1px solid rgba(0,220,192,0.3)' }}
       >
-        {/* GDGoC logo placeholder */}
         <div
           className="flex items-center justify-center px-3 py-1"
           style={{ border: '1px solid rgba(0,220,192,0.4)' }}
@@ -219,8 +219,6 @@ function GDGoCBadge() {
             GDGoC
           </span>
         </div>
-
-        {/* Chapter name */}
         <div className="flex flex-col">
           <span
             className="font-mono text-text-base"
@@ -235,8 +233,6 @@ function GDGoCBadge() {
             CAMPUS CHAPTER // VERIFIED
           </span>
         </div>
-
-        {/* Verified indicator */}
         <span
           className="w-[8px] h-[8px] flex-shrink-0"
           style={{
@@ -259,21 +255,17 @@ export default function About() {
     <section id="about" className="min-h-screen max-w-7xl mx-auto px-6 py-16">
       <PageHeader />
 
-      {/* Two-column layout */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
-        {/* Left — prose (takes 2 cols) */}
-        <div className="md:col-span-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
           <ProseColumn />
         </div>
-
-        {/* Right — stat cards (takes 1 col) */}
-        <div className="flex items-start">
-          <StatCards />
+        <div className="flex justify-center lg:justify-end w-full">
+          <AboutSlideshow />
         </div>
       </div>
 
-      <MissionStatement />
-      <GDGoCBadge />
+      {/* <MissionStatement /> */}
+      {/* <GDGoCBadge /> */}
     </section>
   )
 }
