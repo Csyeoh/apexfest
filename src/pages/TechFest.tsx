@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
+import msLeongImage from '../assets/speakers/msleong.jpg'
 
-type TechFestTab = 'timeline' | 'speakers' | 'topics' | 'faq'
+type TechFestTab = 'about' | 'timeline' | 'speakers' | 'topics'
 
 const tabs: { key: TechFestTab; label: string }[] = [
+  { key: 'about', label: 'About' },
   { key: 'timeline', label: 'Timeline' },
   { key: 'speakers', label: 'Speakers' },
   { key: 'topics', label: 'Topics' },
@@ -101,68 +103,139 @@ function TabBar({ activeTab, onTabChange }: TabBarProps) {
 }
 
 /* ========================================
+   ABOUT TAB
+   ======================================== */
+
+function AboutTab() {
+  return (
+    <RevealOnScroll direction="up">
+      <div className="max-w-3xl">
+        <p className="font-body text-text-base text-lg leading-relaxed mb-8">
+          <strong className="text-techfest font-display tracking-wide">TechFest 2.0</strong> is a one-day interactive event designed to empower university students with hands-on experience across various Google technologies. The event aims to bridge the gap between learning and innovation while building a strong, collaborative community of future tech leaders.
+        </p>
+
+        <div className="space-y-6">
+          <div className="flex gap-4 transition-all duration-300 hover:-translate-y-1 hover:drop-shadow-md">
+            <div className="w-1 h-auto bg-techfest rounded-full" />
+            <div>
+              <h3 className="font-mono text-techfest mb-1" style={{ fontSize: '11px', letterSpacing: '2px' }}>PARTICIPATION</h3>
+              <p className="font-body text-text-muted text-base">Open to all passionate students from higher education institutions in Malaysia who are eager to explore Google technologies.</p>
+            </div>
+          </div>
+          
+          <div className="flex gap-4 transition-all duration-300 hover:-translate-y-1 hover:drop-shadow-md">
+            <div className="w-1 h-auto bg-techfest rounded-full" />
+            <div>
+              <h3 className="font-mono text-techfest mb-1" style={{ fontSize: '11px', letterSpacing: '2px' }}>EVENT IMPACT</h3>
+              <p className="font-body text-text-muted text-base">Attendees will gain hands-on experience, discover real-world applications, and accelerate their technical learning.</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4 transition-all duration-300 hover:-translate-y-1 hover:drop-shadow-md">
+            <div className="w-1 h-auto bg-techfest rounded-full" />
+            <div>
+              <h3 className="font-mono text-techfest mb-1" style={{ fontSize: '11px', letterSpacing: '2px' }}>EVENT FORMAT</h3>
+              <p className="font-body text-text-muted text-base">The day features four expert speaker sharing sessions and five interactive booth sessions.</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4 transition-all duration-300 hover:-translate-y-1 hover:drop-shadow-md">
+            <div className="w-1 h-auto bg-techfest rounded-full" />
+            <div>
+              <h3 className="font-mono text-techfest mb-1" style={{ fontSize: '11px', letterSpacing: '2px' }}>MAJOR TECH TRACKS</h3>
+              <p className="font-body text-text-muted text-base">Activities and sessions will dive into five key areas: Fullstack Development, Cloud Computing, Generative AI, Machine Learning, and Cybersecurity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </RevealOnScroll>
+  )
+}
+
+/* ========================================
    TIMELINE TAB
    ======================================== */
 
-interface TimelineEvent {
-  date: string
-  title: string
-  description: string
+interface AgendaItem {
+  time: string
+  event: string
+  isHighlight?: boolean
 }
 
-const timelineEvents: TimelineEvent[] = [
-  {
-    date: 'JUL 10, 2026',
-    title: 'Speaker Announcement',
-    description: 'The full speaker lineup is revealed. Follow our socials for exclusive previews and session breakdowns leading up to the event.',
-  },
-  {
-    date: 'JUL 18, 2026',
-    title: 'Registration Closes',
-    description: 'Last day to secure your seat. Walk-ins may be accommodated subject to venue capacity on the day itself.',
-  },
-  {
-    date: 'JUL 25, 2026',
-    title: 'TechFest Day',
-    description: 'A full day of keynotes, panels, workshops, and networking at USM campus. Doors open at 8:00 AM — be early, be ready.',
-  },
+const techfestAgenda: AgendaItem[] = [
+  { time: '09:00 AM', event: 'Opening Ceremony' },
+  { time: '09:20 AM', event: 'Hands-on Session: "Building ADK with Skills and Tools" by Ms. Leong Lai Fong', isHighlight: true },
+  { time: '10:20 AM', event: 'Hands-on Session: Cloud Computing', isHighlight: true },
+  { time: '11:20 AM', event: 'Interactive Booth Sessions (All Tech Tracks)' },
+  { time: '12:30 PM', event: 'Break' },
+  { time: '02:00 PM', event: 'Hands-on Session: Generative AI, Machine Learning', isHighlight: true },
+  { time: '03:00 PM', event: 'Hands-on Session: Cybersecurity', isHighlight: true },
+  { time: '04:00 PM', event: 'Interactive Booth Sessions (All Tech Tracks)' },
+  { time: '05:00 PM', event: 'Closing Ceremony' },
+  { time: '05:45 PM', event: 'End' },
 ]
 
 function TimelineTab() {
   return (
-    <div className="max-w-2xl">
-      {timelineEvents.map((event, i) => (
-        <RevealOnScroll key={event.title} direction="left" delay={i * 0.1}>
-          <div className="flex gap-6">
-            {/* Dot + connector */}
-            <div className="flex flex-col items-center">
-              <div
-                className="w-[11px] h-[11px] flex-shrink-0 mt-1"
-                style={{ border: '3px solid #00dcc0' }}
-              />
-              {i < timelineEvents.length - 1 && (
-                <div className="w-[1px] flex-1 min-h-[48px]" style={{ backgroundColor: 'rgba(0,220,192,0.3)' }} />
-              )}
-            </div>
-
-            {/* Content */}
-            <div className="pb-10">
-              <p
-                className="font-mono text-techfest mb-1"
-                style={{ fontSize: '10px', letterSpacing: '3px' }}
-              >
-                {event.date}
-              </p>
-              <h3 className="font-display font-bold text-text-base text-lg mb-2">
-                {event.title}
-              </h3>
-              <p className="font-body text-text-muted text-base leading-relaxed">
-                {event.description}
-              </p>
-            </div>
+    <div className="max-w-3xl">
+      {/* DAY PANEL */}
+      <RevealOnScroll direction="up">
+        <div className="mb-8 flex items-start sm:items-center gap-4">
+          <div className="w-[8px] h-[8px] bg-[#00dcc0] rounded-sm flex-shrink-0 mt-2 sm:mt-0" />
+          <div>
+            <h2 className="font-display font-bold text-text-base text-xl sm:text-2xl uppercase tracking-wide">
+              MAY 24, 2026 // TechFest 2.0
+            </h2>
+            <p className="font-mono text-[#00dcc0] opacity-80 mt-1" style={{ fontSize: '11px', letterSpacing: '1px' }}>
+              Venue: Universiti Sains Malaysia Main Campus
+            </p>
           </div>
-        </RevealOnScroll>
-      ))}
+        </div>
+
+        {/* AGENDA LIST */}
+        <div className="flex flex-col">
+          {techfestAgenda.map((row, idx) => (
+            <div 
+              key={idx}
+              className="flex items-stretch transition-colors duration-200"
+              style={{
+                border: row.isHighlight ? '1px solid rgba(0,220,192,0.35)' : '1px solid rgba(0,220,192,0.1)',
+                backgroundColor: row.isHighlight ? 'rgba(0,220,192,0.06)' : 'transparent',
+                marginBottom: '8px',
+              }}
+              onMouseEnter={(e) => {
+                if (!row.isHighlight) {
+                  e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.05)'
+                  e.currentTarget.style.borderColor = 'rgba(0,220,192,0.3)'
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!row.isHighlight) {
+                  e.currentTarget.style.backgroundColor = 'transparent'
+                  e.currentTarget.style.borderColor = 'rgba(0,220,192,0.1)'
+                }
+              }}
+            >
+              {/* Time Column */}
+              <div 
+                className="w-[72px] flex-shrink-0 flex items-center justify-center p-3"
+                style={{ borderRight: '1px solid rgba(0,220,192,0.12)' }}
+              >
+                <span className="font-mono text-[#00dcc0] text-center" style={{ fontSize: '10px' }}>
+                  {row.time}
+                </span>
+              </div>
+
+              {/* Event Column */}
+              <div className="flex-1 flex flex-col justify-center p-3 pl-4">
+                <span className="font-display text-[#e8e4d4]" style={{ fontSize: '14px', fontWeight: row.isHighlight ? 700 : 400, letterSpacing: '0.5px' }}>
+                  {row.event}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </RevealOnScroll>
     </div>
   )
 }
@@ -177,10 +250,11 @@ interface Speaker {
   role: string
   org: string
   initials: string
+  image?: string
 }
 
 const speakers: Speaker[] = [
-  { id: 'SPEAKER_01', name: 'TBA', role: 'Keynote Speaker', org: 'To Be Announced', initials: '?' },
+  { id: 'SPEAKER_01', name: 'Ms. Leong Lai Fong', role: 'Senior AI Engineer', org: 'Guest Speaker', initials: 'LF', image: msLeongImage },
   { id: 'SPEAKER_02', name: 'TBA', role: 'Workshop Lead', org: 'To Be Announced', initials: '?' },
   { id: 'SPEAKER_03', name: 'TBA', role: 'Panelist', org: 'To Be Announced', initials: '?' },
 ]
@@ -206,17 +280,21 @@ function SpeakersTab() {
                 {speaker.id}
               </p>
 
-              {/* Avatar placeholder */}
+              {/* Avatar placeholder / image */}
               <div
-                className="w-20 h-20 flex items-center justify-center mb-5 mx-auto"
+                className="w-20 h-20 flex items-center justify-center mb-5 mx-auto overflow-hidden"
                 style={{ border: '1px solid rgba(0,220,192,0.4)' }}
               >
-                <span
-                  className="font-display font-bold text-techfest"
-                  style={{ fontSize: '28px' }}
-                >
-                  {speaker.initials}
-                </span>
+                {speaker.image ? (
+                  <img src={speaker.image} alt={speaker.name} className="w-full h-full object-cover" />
+                ) : (
+                  <span
+                    className="font-display font-bold text-techfest"
+                    style={{ fontSize: '28px' }}
+                  >
+                    {speaker.initials}
+                  </span>
+                )}
               </div>
 
               {/* Name */}
@@ -253,46 +331,77 @@ interface Topic {
   title: string
 }
 
-const topics: Topic[] = [
-  { number: '01', title: 'Generative AI in Production' },
-  { number: '02', title: 'Prompt Engineering Deep Dive' },
-  { number: '03', title: 'AI Ethics and Responsible Deployment' },
-  { number: '04', title: 'Building with LLM APIs' },
-  { number: '05', title: 'The Future of Human-AI Collaboration' },
+const speakerTopics: Topic[] = [
+  { number: 'S1', title: 'Building ADK with Skills and Tools' },
+  { number: 'S2', title: 'Cloud Computing' },
+  { number: 'S3', title: 'Generative AI & Machine Learning' },
+  { number: 'S4', title: 'Cybersecurity' },
 ]
+
+const boothTopics: Topic[] = [
+  { number: 'B1', title: 'Fullstack Development' },
+  { number: 'B2', title: 'Cloud Computing' },
+  { number: 'B3', title: 'Generative AI' },
+  { number: 'B4', title: 'Machine Learning' },
+  { number: 'B5', title: 'Cybersecurity' },
+]
+
+function TopicItem({ topic, delay }: { topic: Topic; delay: number }) {
+  return (
+    <RevealOnScroll direction="left" delay={delay}>
+      <div
+        className="flex items-center gap-5 py-4 px-5 transition-all duration-200 cursor-default"
+        style={{
+          borderLeft: '2px solid rgba(0,220,192,0.2)',
+          backgroundColor: 'rgba(0,220,192,0.02)',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderLeftColor = '#00dcc0'
+          e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.06)'
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderLeftColor = 'rgba(0,220,192,0.2)'
+          e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.02)'
+        }}
+      >
+        <span
+          className="font-mono text-techfest flex-shrink-0"
+          style={{ fontSize: '13px', letterSpacing: '2px' }}
+        >
+          {topic.number}
+        </span>
+        <span className="font-body text-text-base text-lg">
+          {topic.title}
+        </span>
+      </div>
+    </RevealOnScroll>
+  )
+}
 
 function TopicsTab() {
   return (
-    <div className="max-w-3xl space-y-3">
-      {topics.map((topic, i) => (
-        <RevealOnScroll key={topic.number} direction="left" delay={i * 0.1}>
-          <div
-            className="flex items-center gap-5 py-4 px-5 transition-all duration-200 cursor-default"
-            style={{
-              borderLeft: '2px solid rgba(0,220,192,0.2)',
-              backgroundColor: 'rgba(0,220,192,0.02)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderLeftColor = '#00dcc0'
-              e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.06)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderLeftColor = 'rgba(0,220,192,0.2)'
-              e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.02)'
-            }}
-          >
-            <span
-              className="font-mono text-techfest flex-shrink-0"
-              style={{ fontSize: '13px', letterSpacing: '2px' }}
-            >
-              {topic.number}
-            </span>
-            <span className="font-body text-text-base text-lg">
-              {topic.title}
-            </span>
-          </div>
-        </RevealOnScroll>
-      ))}
+    <div className="max-w-3xl space-y-12">
+      <div>
+        <p className="font-mono text-techfest mb-6 opacity-60 uppercase" style={{ fontSize: '11px', letterSpacing: '3px' }}>
+          // Speaker Sessions
+        </p>
+        <div className="space-y-3">
+          {speakerTopics.map((topic, i) => (
+            <TopicItem key={topic.number} topic={topic} delay={i * 0.1} />
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <p className="font-mono text-techfest mb-6 opacity-60 uppercase" style={{ fontSize: '11px', letterSpacing: '3px' }}>
+          // Booth Sessions
+        </p>
+        <div className="space-y-3">
+          {boothTopics.map((topic, i) => (
+            <TopicItem key={topic.number} topic={topic} delay={i * 0.1} />
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
@@ -302,10 +411,12 @@ function TopicsTab() {
    ======================================== */
 
 export default function TechFest() {
-  const [activeTab, setActiveTab] = useState<TechFestTab>('timeline')
+  const [activeTab, setActiveTab] = useState<TechFestTab>('about')
 
   const renderTab = (): React.ReactNode => {
     switch (activeTab) {
+      case 'about':
+        return <AboutTab />
       case 'timeline':
         return <TimelineTab />
       case 'speakers':

@@ -2,9 +2,10 @@ import { useState } from 'react'
 import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
 
-type GameFestTab = 'timeline' | 'rules' | 'prizepool' | 'register'
+type GameFestTab = 'about' | 'timeline' | 'rules' | 'prizepool' | 'register'
 
 const tabs: { key: GameFestTab; label: string }[] = [
+  { key: 'about', label: 'About' },
   { key: 'timeline', label: 'Timeline' },
   { key: 'rules', label: 'Rules' },
   { key: 'prizepool', label: 'Prizepool' },
@@ -96,73 +97,239 @@ function TabBar({ activeTab, onTabChange }: TabBarProps) {
 }
 
 /* ========================================
+   ABOUT TAB
+   ======================================== */
+
+function AboutTab() {
+  return (
+    <RevealOnScroll direction="up">
+      <div className="max-w-3xl">
+        <p className="font-body text-text-base text-lg leading-relaxed mb-8">
+          <strong className="text-gamefest font-display tracking-wide">Gamefest 2026</strong> is the ultimate hybrid gaming experience organized by GDGoC USM. Featuring the high-stakes, block-stacking intensity of TETR.IO, the event is designed to transition from wide-scale online qualifiers to a pulse-pounding physical finale.
+        </p>
+
+        <div className="space-y-6">
+          <div className="flex gap-4 transition-all duration-300 hover:-translate-y-1 hover:drop-shadow-md">
+            <div className="w-1 h-auto bg-gamefest rounded-full" />
+            <div>
+              <h3 className="font-mono text-gamefest mb-1" style={{ fontSize: '11px', letterSpacing: '2px' }}>PARTICIPATION</h3>
+              <p className="font-body text-text-muted text-base">The event is completely free and open to all undergraduate students.</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4 transition-all duration-300 hover:-translate-y-1 hover:drop-shadow-md">
+            <div className="w-1 h-auto bg-gamefest rounded-full" />
+            <div>
+              <h3 className="font-mono text-gamefest mb-1" style={{ fontSize: '11px', letterSpacing: '2px' }}>PERKS</h3>
+              <p className="font-body text-text-muted text-base">The top 3 champions will walk away with legit gear, including a keyboard, headphones, and a mouse.</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4 transition-all duration-300 hover:-translate-y-1 hover:drop-shadow-md">
+            <div className="w-1 h-auto bg-gamefest rounded-full" />
+            <div>
+              <h3 className="font-mono text-gamefest mb-1" style={{ fontSize: '11px', letterSpacing: '2px' }}>PHASE 1 - ONLINE OPEN QUALIFIER</h3>
+              <p className="font-body text-text-muted text-base">Players will compete in Free-For-All (FFA) rounds to determine skill rankings. The field will be narrowed down to the Top 32 players.</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4 transition-all duration-300 hover:-translate-y-1 hover:drop-shadow-md">
+            <div className="w-1 h-auto bg-gamefest rounded-full" />
+            <div>
+              <h3 className="font-mono text-gamefest mb-1" style={{ fontSize: '11px', letterSpacing: '2px' }}>PHASE 2 - PHYSICAL D-DAY</h3>
+              <p className="font-body text-text-muted text-base">The Top 32 finalists receive exclusive invites to battle in a group tournament featuring high-energy, live-projected gameplay. All 32 finalists will also have meals and drinks provided on this day.</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4 transition-all duration-300 hover:-translate-y-1 hover:drop-shadow-md">
+            <div className="w-1 h-auto bg-gamefest rounded-full" />
+            <div>
+              <h3 className="font-mono text-gamefest mb-1" style={{ fontSize: '11px', letterSpacing: '2px' }}>SIDE QUESTS</h3>
+              <p className="font-body text-text-muted text-base">Open to all attendees (not just finalists), featuring interactive booths like Competitive Monkeytype, the classic Chrome Dinosaur Game, and massive Jackbox play.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </RevealOnScroll>
+  )
+}
+
+/* ========================================
    TIMELINE TAB
    ======================================== */
 
+interface AgendaItem {
+  time: string
+  event: string
+  location?: string
+  isMatch?: boolean
+  sectionHeader?: string
+}
+
 interface TimelineEvent {
+  id: string
+  tabLabel: string
   date: string
   title: string
   description: string
+  agenda?: AgendaItem[]
 }
 
 const timelineEvents: TimelineEvent[] = [
   {
-    date: 'JUN 01, 2026',
-    title: 'Registration Opens',
-    description: 'Sign up through the official ApexFest portal. Early registration recommended — slots are limited per game category.',
+    id: 'day1',
+    tabLabel: 'Day 1 // Online',
+    date: 'MAY 16, 2026',
+    title: 'Online Qualification Day',
+    description: 'Meeting Platform: Cisco Webex | Game Platform: TETR.IO',
+    agenda: [
+      { time: '08:00 PM', event: 'Participant Check-in', sectionHeader: 'Pre-match' },
+      { time: '08:15 PM', event: 'Technical Briefing' },
+      { time: '08:30 PM', event: 'Tier 1 Start (Parallel)', isMatch: true, sectionHeader: 'Qualification Rounds' },
+      { time: '09:00 PM', event: 'Tier 1 Results & Break' },
+      { time: '09:15 PM', event: 'Tier 2 Start (Parallel)', isMatch: true },
+      { time: '09:45 PM', event: 'Final Finalist Reveal', sectionHeader: 'Wrap-up' },
+      { time: '10:00 PM', event: 'Closing & RSVP' },
+    ]
   },
   {
-    date: 'JUN 20, 2026',
-    title: 'Registration Closes',
-    description: 'Final day to submit your registration form and lock in your game category. No late entries accepted.',
-  },
-  {
-    date: 'JUL 05, 2026',
-    title: 'Qualifier Rounds',
-    description: 'Online qualifier matches begin. Top performers from each bracket advance to the grand finals stage.',
-  },
-  {
-    date: 'JUL 20, 2026',
-    title: 'Grand Finals',
-    description: 'Live on-stage finals at USM campus. Champions are crowned, prizes are awarded, legends are made.',
+    id: 'day2',
+    tabLabel: 'Day 2 // Physical',
+    date: 'MAY 23, 2026',
+    title: 'Physical D-Day',
+    description: 'Venue: School of Computer Science Auditorium',
+    agenda: [
+      { time: '09:00 AM', event: 'Registration Open', location: 'Auditorium', sectionHeader: 'Setup & Opening' },
+      { time: '09:30 AM', event: 'Booth Open for Monkeytype and Jackbox', location: 'SCL1&2' },
+      { time: '10:00 AM', event: 'Opening Ceremony & Finalist Introduction', location: 'Auditorium' },
+      { time: '10:30 AM', event: 'Group Stage Qualifiers for Groups A & B - Recursive FFA', location: 'Auditorium', isMatch: true, sectionHeader: 'Group Stage' },
+      { time: '12:00 PM', event: 'Group Stage Qualifiers for Groups C & D - Recursive FFA', location: 'Auditorium', isMatch: true },
+      { time: '01:00 PM', event: 'Rest Time & Side Booth Activation', location: 'SCL1&2' },
+      { time: '02:00 PM', event: 'The Knockout Stage - Top 8 Bracket Bo3', location: 'Auditorium', isMatch: true, sectionHeader: 'Finals' },
+      { time: '04:00 PM', event: 'Grand Finals - Top 2 Championship Match Bo5', location: 'Auditorium', isMatch: true },
+      { time: '04:45 PM', event: 'Prize Ceremony & Photography', location: 'Auditorium', sectionHeader: 'Closing' },
+      { time: '05:15 PM', event: 'Teardown & Event Adjourned', location: 'Auditorium' },
+    ]
   },
 ]
 
 function TimelineTab() {
-  return (
-    <div className="max-w-2xl">
-      {timelineEvents.map((event, i) => (
-        <RevealOnScroll key={event.title} direction="left" delay={i * 0.1}>
-          <div className="flex gap-6">
-            {/* Dot + connector */}
-            <div className="flex flex-col items-center">
-              <div
-                className="w-[11px] h-[11px] flex-shrink-0 mt-1"
-                style={{ border: '3px solid #ffb830' }}
-              />
-              {i < timelineEvents.length - 1 && (
-                <div className="w-[1px] flex-1 min-h-[48px]" style={{ backgroundColor: 'rgba(255,184,48,0.3)' }} />
-              )}
-            </div>
+  const [activeDay, setActiveDay] = useState<'day1' | 'day2'>('day1')
 
-            {/* Content */}
-            <div className="pb-10">
-              <p
-                className="font-mono text-gamefest mb-1"
-                style={{ fontSize: '10px', letterSpacing: '3px' }}
-              >
-                {event.date}
-              </p>
-              <h3 className="font-display font-bold text-text-base text-lg mb-2">
-                {event.title}
-              </h3>
-              <p className="font-body text-text-muted text-base leading-relaxed">
-                {event.description}
-              </p>
-            </div>
+  const currentEvent = timelineEvents.find(e => e.id === activeDay)!
+
+  return (
+    <div className="max-w-3xl">
+      {/* TAB SWITCHER */}
+      <div className="flex w-full mb-10" style={{ border: '1px solid rgba(255,184,48,0.3)' }}>
+        {timelineEvents.map((evt) => {
+          const isActive = activeDay === evt.id
+          return (
+            <button
+              key={evt.id}
+              onClick={() => setActiveDay(evt.id as 'day1' | 'day2')}
+              className="flex-1 font-display uppercase transition-colors duration-200 cursor-pointer"
+              style={{
+                padding: '12px 0',
+                backgroundColor: isActive ? '#ffb830' : 'transparent',
+                color: isActive ? '#0b0906' : 'rgba(232,228,212,0.5)',
+                fontWeight: isActive ? 700 : 400,
+                fontSize: '14px',
+                letterSpacing: '2px',
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.color = '#ffb830'
+                  e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.06)'
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.color = 'rgba(232,228,212,0.5)'
+                  e.currentTarget.style.backgroundColor = 'transparent'
+                }
+              }}
+            >
+              {evt.tabLabel}
+            </button>
+          )
+        })}
+      </div>
+
+      {/* DAY PANEL */}
+      <RevealOnScroll key={activeDay} direction="up">
+        <div className="mb-8 flex items-start sm:items-center gap-4">
+          <div className="w-[8px] h-[8px] bg-[#ffb830] rounded-sm flex-shrink-0 mt-2 sm:mt-0" />
+          <div>
+            <h2 className="font-display font-bold text-text-base text-xl sm:text-2xl uppercase tracking-wide">
+              {currentEvent.date} // {currentEvent.title}
+            </h2>
+            <p className="font-mono text-[#ffb830] opacity-80 mt-1" style={{ fontSize: '11px', letterSpacing: '1px' }}>
+              {currentEvent.description}
+            </p>
           </div>
-        </RevealOnScroll>
-      ))}
+        </div>
+
+        {/* AGENDA LIST */}
+        <div className="flex flex-col">
+          {currentEvent.agenda?.map((row, idx) => (
+            <div key={idx}>
+              {/* Section Label */}
+              {row.sectionHeader && (
+                <div className={`mb-2 ${idx !== 0 ? 'mt-8' : ''}`}>
+                  <span className="font-mono text-[#ffb830] opacity-50 uppercase" style={{ fontSize: '9px', letterSpacing: '3px' }}>
+                    // {row.sectionHeader}
+                  </span>
+                </div>
+              )}
+
+              {/* Agenda Row */}
+              <div 
+                className="flex items-stretch transition-colors duration-200"
+                style={{
+                  border: row.isMatch ? '1px solid rgba(255,184,48,0.35)' : '1px solid rgba(255,184,48,0.1)',
+                  backgroundColor: row.isMatch ? 'rgba(255,184,48,0.06)' : 'transparent',
+                  marginBottom: '8px',
+                }}
+                onMouseEnter={(e) => {
+                  if (!row.isMatch) {
+                    e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.05)'
+                    e.currentTarget.style.borderColor = 'rgba(255,184,48,0.3)'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!row.isMatch) {
+                    e.currentTarget.style.backgroundColor = 'transparent'
+                    e.currentTarget.style.borderColor = 'rgba(255,184,48,0.1)'
+                  }
+                }}
+              >
+                {/* Time Column */}
+                <div 
+                  className="w-[72px] flex-shrink-0 flex items-center justify-center p-3"
+                  style={{ borderRight: '1px solid rgba(255,184,48,0.12)' }}
+                >
+                  <span className="font-mono text-[#ffb830] text-center" style={{ fontSize: '10px' }}>
+                    {row.time}
+                  </span>
+                </div>
+
+                {/* Event Column */}
+                <div className="flex-1 flex flex-col justify-center p-3 pl-4">
+                  <span className="font-display text-[#e8e4d4]" style={{ fontSize: '14px', fontWeight: row.isMatch ? 700 : 400, letterSpacing: '0.5px' }}>
+                    {row.event}
+                  </span>
+                  {row.location && (
+                    <span className="font-mono text-text-muted mt-1 uppercase" style={{ fontSize: '9px', letterSpacing: '1px' }}>
+                      {row.location}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </RevealOnScroll>
     </div>
   )
 }
@@ -477,10 +644,12 @@ function RegisterTab() {
    ======================================== */
 
 export default function GameFest() {
-  const [activeTab, setActiveTab] = useState<GameFestTab>('timeline')
+  const [activeTab, setActiveTab] = useState<GameFestTab>('about')
 
   const renderTab = (): React.ReactNode => {
     switch (activeTab) {
+      case 'about':
+        return <AboutTab />
       case 'timeline':
         return <TimelineTab />
       case 'rules':
@@ -494,13 +663,13 @@ export default function GameFest() {
 
   return (
     <PageWrapper>
-    <section className="min-h-screen max-w-7xl mx-auto px-6 py-10 md:py-16">
-      <PageHeader />
-      <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
-      <div key={activeTab} className="tab-content-enter" role="tabpanel">
-        {renderTab()}
-      </div>
-    </section>
+      <section className="min-h-screen max-w-7xl mx-auto px-6 py-10 md:py-16">
+        <PageHeader />
+        <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
+        <div key={activeTab} className="tab-content-enter" role="tabpanel">
+          {renderTab()}
+        </div>
+      </section>
     </PageWrapper>
   )
 }
