@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useLenis } from 'lenis/react'
 import { motion } from 'framer-motion'
 import PageWrapper from '../components/PageWrapper'
 import About from './About'
@@ -233,6 +234,32 @@ function EventCard({ accent, tag, title, description, metaItems, to, delay }: Ev
 
 export default function Home() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const lenis = useLenis()
+
+  useEffect(() => {
+    if (!lenis) return
+
+    if (location.hash) {
+      // When navigating from another route (e.g. /gamefest), React Router preserves the Y scroll position.
+      // We need to force Lenis to recalculate and scroll to the new target.
+      const targetHash = location.hash
+
+      const attemptScroll = () => {
+        lenis.resize()
+        lenis.scrollTo(targetHash, { offset: -64, duration: 1.2 })
+      }
+
+      // Fire across staggered intervals to ensure layout (like Swiper) is fully resolved
+      requestAnimationFrame(() => {
+        setTimeout(attemptScroll, 50)
+        setTimeout(attemptScroll, 300)
+        setTimeout(attemptScroll, 800)
+      })
+    } else {
+      lenis.scrollTo(0, { immediate: true })
+    }
+  }, [location, lenis])
 
   return (
     <PageWrapper>
