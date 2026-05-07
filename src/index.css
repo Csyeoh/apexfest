@@ -56,14 +56,14 @@ body::before {
   background-size: 40px 40px;
 }
 
-/* Scanline overlay — fixed on top of everything */
+/* Scanline overlay — fixed on top of everything, with slow CRT drift */
 #root::before {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% + 4px);
   pointer-events: none;
   z-index: 9999;
   background: repeating-linear-gradient(
@@ -73,6 +73,12 @@ body::before {
     rgba(0, 255, 200, 0.013) 2px,
     rgba(0, 255, 200, 0.013) 4px
   );
+  animation: scanline-drift 8s linear infinite;
+}
+
+@keyframes scanline-drift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
 }
 
 #root {
@@ -234,3 +240,65 @@ body::before {
     transform: scale(0.85);
   }
 }
+
+/* ========================================
+   GLITCH TEXT — CRT colour-split effect
+   Plays once on mount, 0.8s
+   ======================================== */
+
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.glitch-text::before {
+  color: #ff3333;
+  animation: glitch-shift-1 0.8s steps(2, end) forwards;
+  clip-path: inset(0 0 60% 0);
+  opacity: 0.6;
+}
+
+.glitch-text::after {
+  color: #00dcc0;
+  animation: glitch-shift-2 0.8s steps(3, end) forwards;
+  clip-path: inset(40% 0 0 0);
+  opacity: 0.6;
+}
+
+@keyframes glitch-shift-1 {
+  0% { transform: translate(-3px, -1px); opacity: 0.6; }
+  10% { transform: translate(2px, 1px); }
+  20% { transform: translate(-2px, 0px); clip-path: inset(10% 0 50% 0); }
+  30% { transform: translate(3px, -1px); clip-path: inset(0 0 70% 0); }
+  40% { transform: translate(-1px, 2px); clip-path: inset(20% 0 40% 0); }
+  50% { transform: translate(2px, -2px); }
+  60% { transform: translate(-3px, 1px); clip-path: inset(5% 0 55% 0); }
+  70% { transform: translate(1px, 0px); }
+  80% { transform: translate(0, 0); opacity: 0; }
+  100% { transform: translate(0, 0); opacity: 0; }
+}
+
+@keyframes glitch-shift-2 {
+  0% { transform: translate(2px, 1px); opacity: 0.6; }
+  10% { transform: translate(-3px, -1px); }
+  20% { transform: translate(1px, 2px); clip-path: inset(50% 0 10% 0); }
+  30% { transform: translate(-2px, 0px); clip-path: inset(30% 0 20% 0); }
+  40% { transform: translate(3px, 1px); clip-path: inset(60% 0 5% 0); }
+  50% { transform: translate(-1px, -2px); }
+  60% { transform: translate(2px, 0px); clip-path: inset(45% 0 15% 0); }
+  70% { transform: translate(-2px, 1px); }
+  80% { transform: translate(0, 0); opacity: 0; }
+  100% { transform: translate(0, 0); opacity: 0; }
+}
+

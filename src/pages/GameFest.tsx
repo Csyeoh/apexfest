@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import PageWrapper from '../components/PageWrapper'
+import RevealOnScroll from '../components/RevealOnScroll'
 
 type GameFestTab = 'timeline' | 'rules' | 'prizepool' | 'faq' | 'register'
 
@@ -16,19 +18,21 @@ const tabs: { key: GameFestTab; label: string }[] = [
 
 function PageHeader() {
   return (
-    <div className="mb-12">
-      <p
-        className="font-mono text-gamefest mb-3"
-        style={{ fontSize: '10px', letterSpacing: '3px' }}
-      >
-        EVENT_01 // GAMING
-      </p>
-      <h1 className="font-display font-black leading-none mb-4" style={{ fontSize: '56px' }}>
-        <span className="text-text-base">Game Fest </span>
-        <span className="text-gamefest">2026</span>
-      </h1>
-      <div className="w-24 h-[1px] bg-gamefest" />
-    </div>
+    <RevealOnScroll direction="left">
+      <div className="mb-12">
+        <p
+          className="font-mono text-gamefest mb-3"
+          style={{ fontSize: '10px', letterSpacing: '3px' }}
+        >
+          EVENT_01 // GAMING
+        </p>
+        <h1 className="font-display font-black leading-none mb-4" style={{ fontSize: '56px' }}>
+          <span className="text-text-base">Game Fest </span>
+          <span className="text-gamefest">2026</span>
+        </h1>
+        <div className="w-24 h-[1px] bg-gamefest" />
+      </div>
+    </RevealOnScroll>
   )
 }
 
@@ -43,50 +47,52 @@ interface TabBarProps {
 
 function TabBar({ activeTab, onTabChange }: TabBarProps) {
   return (
-    <div
-      className="flex w-fit mb-12 overflow-x-auto max-w-full"
-      style={{ border: '1px solid rgba(255,184,48,0.3)' }}
-      role="tablist"
-      aria-label="GameFest sections"
-    >
-      {tabs.map((tab, i) => {
-        const isActive = activeTab === tab.key
-        return (
-          <button
-            key={tab.key}
-            type="button"
-            role="tab"
-            aria-selected={isActive}
-            aria-label={`${tab.label} tab`}
-            onClick={() => onTabChange(tab.key)}
-            className="font-display uppercase transition-colors duration-150 cursor-pointer flex-shrink-0"
-            style={{
-              fontSize: '11px',
-              letterSpacing: '2px',
-              padding: '10px 22px',
-              backgroundColor: isActive ? '#ffb830' : 'transparent',
-              color: isActive ? '#0a0a0f' : 'rgba(232,228,212,0.5)',
-              fontWeight: isActive ? 700 : 400,
-              borderRight: i < tabs.length - 1 ? '1px solid rgba(255,184,48,0.2)' : 'none',
-            }}
-            onMouseEnter={(e) => {
-              if (!isActive) {
-                e.currentTarget.style.color = '#ffb830'
-                e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.06)'
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isActive) {
-                e.currentTarget.style.color = 'rgba(232,228,212,0.5)'
-                e.currentTarget.style.backgroundColor = 'transparent'
-              }
-            }}
-          >
-            {tab.label}
-          </button>
-        )
-      })}
-    </div>
+    <RevealOnScroll direction="up" delay={0.1}>
+      <div
+        className="flex w-fit mb-12 overflow-x-auto max-w-full"
+        style={{ border: '1px solid rgba(255,184,48,0.3)' }}
+        role="tablist"
+        aria-label="GameFest sections"
+      >
+        {tabs.map((tab, i) => {
+          const isActive = activeTab === tab.key
+          return (
+            <button
+              key={tab.key}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              aria-label={`${tab.label} tab`}
+              onClick={() => onTabChange(tab.key)}
+              className="font-display uppercase transition-colors duration-150 cursor-pointer flex-shrink-0"
+              style={{
+                fontSize: '11px',
+                letterSpacing: '2px',
+                padding: '10px 22px',
+                backgroundColor: isActive ? '#ffb830' : 'transparent',
+                color: isActive ? '#0a0a0f' : 'rgba(232,228,212,0.5)',
+                fontWeight: isActive ? 700 : 400,
+                borderRight: i < tabs.length - 1 ? '1px solid rgba(255,184,48,0.2)' : 'none',
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.color = '#ffb830'
+                  e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.06)'
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.color = 'rgba(232,228,212,0.5)'
+                  e.currentTarget.style.backgroundColor = 'transparent'
+                }
+              }}
+            >
+              {tab.label}
+            </button>
+          )
+        })}
+      </div>
+    </RevealOnScroll>
   )
 }
 
@@ -127,34 +133,36 @@ function TimelineTab() {
   return (
     <div className="max-w-2xl">
       {timelineEvents.map((event, i) => (
-        <div key={event.title} className="flex gap-6">
-          {/* Dot + connector */}
-          <div className="flex flex-col items-center">
-            <div
-              className="w-[11px] h-[11px] flex-shrink-0 mt-1"
-              style={{ border: '3px solid #ffb830' }}
-            />
-            {i < timelineEvents.length - 1 && (
-              <div className="w-[1px] flex-1 min-h-[48px]" style={{ backgroundColor: 'rgba(255,184,48,0.3)' }} />
-            )}
-          </div>
+        <RevealOnScroll key={event.title} direction="left" delay={i * 0.1}>
+          <div className="flex gap-6">
+            {/* Dot + connector */}
+            <div className="flex flex-col items-center">
+              <div
+                className="w-[11px] h-[11px] flex-shrink-0 mt-1"
+                style={{ border: '3px solid #ffb830' }}
+              />
+              {i < timelineEvents.length - 1 && (
+                <div className="w-[1px] flex-1 min-h-[48px]" style={{ backgroundColor: 'rgba(255,184,48,0.3)' }} />
+              )}
+            </div>
 
-          {/* Content */}
-          <div className="pb-10">
-            <p
-              className="font-mono text-gamefest mb-1"
-              style={{ fontSize: '10px', letterSpacing: '3px' }}
-            >
-              {event.date}
-            </p>
-            <h3 className="font-display font-bold text-text-base text-lg mb-2">
-              {event.title}
-            </h3>
-            <p className="font-body text-text-muted text-base leading-relaxed">
-              {event.description}
-            </p>
+            {/* Content */}
+            <div className="pb-10">
+              <p
+                className="font-mono text-gamefest mb-1"
+                style={{ fontSize: '10px', letterSpacing: '3px' }}
+              >
+                {event.date}
+              </p>
+              <h3 className="font-display font-bold text-text-base text-lg mb-2">
+                {event.title}
+              </h3>
+              <p className="font-body text-text-muted text-base leading-relaxed">
+                {event.description}
+              </p>
+            </div>
           </div>
-        </div>
+        </RevealOnScroll>
       ))}
     </div>
   )
@@ -175,36 +183,38 @@ const rules: string[] = [
 
 function RulesTab() {
   return (
-    <div
-      className="max-w-3xl p-8"
-      style={{
-        border: '1px solid rgba(255,184,48,0.25)',
-        backgroundColor: 'rgba(255,184,48,0.02)',
-      }}
-    >
-      <p
-        className="font-mono text-gamefest mb-6"
-        style={{ fontSize: '10px', letterSpacing: '3px' }}
+    <RevealOnScroll direction="up">
+      <div
+        className="max-w-3xl p-8"
+        style={{
+          border: '1px solid rgba(255,184,48,0.25)',
+          backgroundColor: 'rgba(255,184,48,0.02)',
+        }}
       >
-        // GENERAL RULES
-      </p>
+        <p
+          className="font-mono text-gamefest mb-6"
+          style={{ fontSize: '10px', letterSpacing: '3px' }}
+        >
+          // GENERAL RULES
+        </p>
 
-      <ol className="space-y-5">
-        {rules.map((rule, i) => (
-          <li key={i} className="flex gap-4">
-            <span
-              className="font-mono text-gamefest flex-shrink-0 mt-0.5"
-              style={{ fontSize: '13px', letterSpacing: '1px' }}
-            >
-              {String(i + 1).padStart(2, '0')}.
-            </span>
-            <p className="font-body text-text-muted text-base leading-relaxed">
-              {rule}
-            </p>
-          </li>
-        ))}
-      </ol>
-    </div>
+        <ol className="space-y-5">
+          {rules.map((rule, i) => (
+            <li key={i} className="flex gap-4">
+              <span
+                className="font-mono text-gamefest flex-shrink-0 mt-0.5"
+                style={{ fontSize: '13px', letterSpacing: '1px' }}
+              >
+                {String(i + 1).padStart(2, '0')}.
+              </span>
+              <p className="font-body text-text-muted text-base leading-relaxed">
+                {rule}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </RevealOnScroll>
   )
 }
 
@@ -228,35 +238,36 @@ const prizes: PrizeEntry[] = [
 function PrizepoolTab() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
-      {prizes.map((prize) => (
-        <div
-          key={prize.rank}
-          className="p-8 text-center"
-          style={{
-            border: prize.highlight
-              ? '1px solid rgba(255,184,48,0.6)'
-              : '1px solid rgba(255,184,48,0.2)',
-            backgroundColor: prize.highlight
-              ? 'rgba(255,184,48,0.04)'
-              : 'transparent',
-          }}
-        >
-          <p
-            className="font-mono text-gamefest mb-4"
-            style={{ fontSize: '12px', letterSpacing: '4px' }}
+      {prizes.map((prize, i) => (
+        <RevealOnScroll key={prize.rank} direction="up" delay={i * 0.15}>
+          <div
+            className="p-8 text-center"
+            style={{
+              border: prize.highlight
+                ? '1px solid rgba(255,184,48,0.6)'
+                : '1px solid rgba(255,184,48,0.2)',
+              backgroundColor: prize.highlight
+                ? 'rgba(255,184,48,0.04)'
+                : 'transparent',
+            }}
           >
-            {prize.rank}
-          </p>
-          <p
-            className="font-display font-bold text-text-base mb-2"
-            style={{ fontSize: '28px' }}
-          >
-            {prize.amount}
-          </p>
-          <p className="font-body text-text-muted text-base">
-            {prize.label}
-          </p>
-        </div>
+            <p
+              className="font-mono text-gamefest mb-4"
+              style={{ fontSize: '12px', letterSpacing: '4px' }}
+            >
+              {prize.rank}
+            </p>
+            <p
+              className="font-display font-bold text-text-base mb-2"
+              style={{ fontSize: '28px' }}
+            >
+              {prize.amount}
+            </p>
+            <p className="font-body text-text-muted text-base">
+              {prize.label}
+            </p>
+          </div>
+        </RevealOnScroll>
       ))}
     </div>
   )
@@ -302,44 +313,45 @@ function FAQTab() {
       {faqItems.map((item, i) => {
         const isOpen = openIndex === i
         return (
-          <div
-            key={i}
-            style={{
-              borderBottom: '1px solid rgba(255,184,48,0.15)',
-              borderTop: i === 0 ? '1px solid rgba(255,184,48,0.15)' : 'none',
-            }}
-          >
-            <button
-              type="button"
-              onClick={() => toggle(i)}
-              aria-expanded={isOpen}
-              aria-label={`${item.question} — click to ${isOpen ? 'collapse' : 'expand'}`}
-              className="w-full flex items-center justify-between py-5 px-2 text-left cursor-pointer transition-colors duration-150"
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.03)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent'
+          <RevealOnScroll key={i} direction="up" delay={i * 0.08}>
+            <div
+              style={{
+                borderBottom: '1px solid rgba(255,184,48,0.15)',
+                borderTop: i === 0 ? '1px solid rgba(255,184,48,0.15)' : 'none',
               }}
             >
-              <span className="font-display text-text-base text-sm tracking-wide pr-4">
-                {item.question}
-              </span>
-              <span
-                className="font-mono text-gamefest flex-shrink-0"
-                style={{ fontSize: '18px', lineHeight: 1 }}
+              <button
+                type="button"
+                onClick={() => toggle(i)}
+                aria-expanded={isOpen}
+                aria-label={`${item.question} — click to ${isOpen ? 'collapse' : 'expand'}`}
+                className="w-full flex items-center justify-between py-5 px-2 text-left cursor-pointer transition-colors duration-150"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.03)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent'
+                }}
               >
-                {isOpen ? '−' : '+'}
-              </span>
-            </button>
-            {isOpen && (
-              <div className="px-2 pb-5">
-                <p className="font-body text-text-muted text-base leading-relaxed">
-                  {item.answer}
-                </p>
-              </div>
-            )}
-          </div>
+                <span className="font-display text-text-base text-sm tracking-wide pr-4">
+                  {item.question}
+                </span>
+                <span
+                  className="font-mono text-gamefest flex-shrink-0"
+                  style={{ fontSize: '18px', lineHeight: 1 }}
+                >
+                  {isOpen ? '−' : '+'}
+                </span>
+              </button>
+              {isOpen && (
+                <div className="px-2 pb-5">
+                  <p className="font-body text-text-muted text-base leading-relaxed">
+                    {item.answer}
+                  </p>
+                </div>
+              )}
+            </div>
+          </RevealOnScroll>
         )
       })}
     </div>
@@ -424,123 +436,125 @@ function RegisterTab() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-xl p-8"
-      style={{
-        border: '1px solid rgba(255,184,48,0.25)',
-      }}
-    >
-      <div className="space-y-8">
-        {/* Full Name */}
-        <div>
-          <label
-            className="font-mono text-text-muted uppercase block mb-2"
-            style={{ fontSize: '10px', letterSpacing: '3px' }}
-          >
-            Full Name
-          </label>
-          <input
-            type="text"
-            required
-            value={form.fullName}
-            onChange={(e) => handleChange('fullName', e.target.value)}
-            placeholder="Enter your full name"
-            style={inputStyle}
-            onFocus={inputFocusHandler}
-            onBlur={inputBlurHandler}
-          />
-        </div>
-
-        {/* Student ID */}
-        <div>
-          <label
-            className="font-mono text-text-muted uppercase block mb-2"
-            style={{ fontSize: '10px', letterSpacing: '3px' }}
-          >
-            Student ID
-          </label>
-          <input
-            type="text"
-            required
-            value={form.studentId}
-            onChange={(e) => handleChange('studentId', e.target.value)}
-            placeholder="e.g. 123456"
-            style={inputStyle}
-            onFocus={inputFocusHandler}
-            onBlur={inputBlurHandler}
-          />
-        </div>
-
-        {/* Email */}
-        <div>
-          <label
-            className="font-mono text-text-muted uppercase block mb-2"
-            style={{ fontSize: '10px', letterSpacing: '3px' }}
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            required
-            value={form.email}
-            onChange={(e) => handleChange('email', e.target.value)}
-            placeholder="you@student.usm.my"
-            style={inputStyle}
-            onFocus={inputFocusHandler}
-            onBlur={inputBlurHandler}
-          />
-        </div>
-
-        {/* Game Category */}
-        <div>
-          <label
-            className="font-mono text-text-muted uppercase block mb-2"
-            style={{ fontSize: '10px', letterSpacing: '3px' }}
-          >
-            Game Category
-          </label>
-          <select
-            required
-            value={form.gameCategory}
-            onChange={(e) => handleChange('gameCategory', e.target.value)}
-            style={{
-              ...inputStyle,
-              cursor: 'pointer',
-              appearance: 'none',
-              WebkitAppearance: 'none',
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23ffb830' stroke-width='1.5'/%3E%3C/svg%3E")`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'right 4px center',
-            }}
-            onFocus={inputFocusHandler}
-            onBlur={inputBlurHandler}
-          >
-            <option value="" disabled>Select a category</option>
-            <option value="fps">FPS</option>
-            <option value="moba">MOBA</option>
-            <option value="fighting">Fighting</option>
-            <option value="card-game">Card Game</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Submit */}
-      <button
-        type="submit"
-        aria-label="Submit registration form"
-        className="w-full mt-10 py-3.5 font-display font-bold uppercase tracking-widest cursor-pointer transition-opacity duration-150 hover:opacity-90"
+    <RevealOnScroll direction="right">
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-xl p-8"
         style={{
-          backgroundColor: '#ffb830',
-          color: '#0a0a0f',
-          fontSize: '12px',
-          letterSpacing: '3px',
-          border: 'none',
+          border: '1px solid rgba(255,184,48,0.25)',
         }}
       >
-        Submit Registration
-      </button>
-    </form>
+        <div className="space-y-8">
+          {/* Full Name */}
+          <div>
+            <label
+              className="font-mono text-text-muted uppercase block mb-2"
+              style={{ fontSize: '10px', letterSpacing: '3px' }}
+            >
+              Full Name
+            </label>
+            <input
+              type="text"
+              required
+              value={form.fullName}
+              onChange={(e) => handleChange('fullName', e.target.value)}
+              placeholder="Enter your full name"
+              style={inputStyle}
+              onFocus={inputFocusHandler}
+              onBlur={inputBlurHandler}
+            />
+          </div>
+
+          {/* Student ID */}
+          <div>
+            <label
+              className="font-mono text-text-muted uppercase block mb-2"
+              style={{ fontSize: '10px', letterSpacing: '3px' }}
+            >
+              Student ID
+            </label>
+            <input
+              type="text"
+              required
+              value={form.studentId}
+              onChange={(e) => handleChange('studentId', e.target.value)}
+              placeholder="e.g. 123456"
+              style={inputStyle}
+              onFocus={inputFocusHandler}
+              onBlur={inputBlurHandler}
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <label
+              className="font-mono text-text-muted uppercase block mb-2"
+              style={{ fontSize: '10px', letterSpacing: '3px' }}
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              required
+              value={form.email}
+              onChange={(e) => handleChange('email', e.target.value)}
+              placeholder="you@student.usm.my"
+              style={inputStyle}
+              onFocus={inputFocusHandler}
+              onBlur={inputBlurHandler}
+            />
+          </div>
+
+          {/* Game Category */}
+          <div>
+            <label
+              className="font-mono text-text-muted uppercase block mb-2"
+              style={{ fontSize: '10px', letterSpacing: '3px' }}
+            >
+              Game Category
+            </label>
+            <select
+              required
+              value={form.gameCategory}
+              onChange={(e) => handleChange('gameCategory', e.target.value)}
+              style={{
+                ...inputStyle,
+                cursor: 'pointer',
+                appearance: 'none',
+                WebkitAppearance: 'none',
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23ffb830' stroke-width='1.5'/%3E%3C/svg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 4px center',
+              }}
+              onFocus={inputFocusHandler}
+              onBlur={inputBlurHandler}
+            >
+              <option value="" disabled>Select a category</option>
+              <option value="fps">FPS</option>
+              <option value="moba">MOBA</option>
+              <option value="fighting">Fighting</option>
+              <option value="card-game">Card Game</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          aria-label="Submit registration form"
+          className="w-full mt-10 py-3.5 font-display font-bold uppercase tracking-widest cursor-pointer transition-opacity duration-150 hover:opacity-90"
+          style={{
+            backgroundColor: '#ffb830',
+            color: '#0a0a0f',
+            fontSize: '12px',
+            letterSpacing: '3px',
+            border: 'none',
+          }}
+        >
+          Submit Registration
+        </button>
+      </form>
+    </RevealOnScroll>
   )
 }
 
@@ -567,6 +581,7 @@ export default function GameFest() {
   }
 
   return (
+    <PageWrapper>
     <section className="min-h-screen max-w-7xl mx-auto px-6 py-10 md:py-16">
       <PageHeader />
       <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
@@ -574,5 +589,6 @@ export default function GameFest() {
         {renderTab()}
       </div>
     </section>
+    </PageWrapper>
   )
 }

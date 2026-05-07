@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface NavItem {
   to: string
@@ -13,6 +14,50 @@ const navLinks: NavItem[] = [
   { to: '/techfest', label: 'TechFest' },
   { to: '/sponsors', label: 'Sponsors' },
 ]
+
+function NavLinkItem({ link }: { link: NavItem }) {
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <li>
+      <NavLink
+        to={link.to}
+        end={link.to === '/'}
+        className={({ isActive }) =>
+          `relative inline-block font-mono uppercase transition-colors duration-200 ${
+            isActive
+              ? 'text-techfest'
+              : 'text-text-muted hover:text-text-base'
+          }`
+        }
+        style={{
+          fontSize: '10px',
+          letterSpacing: '3px',
+        }}
+        aria-label={`Navigate to ${link.label}`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {({ isActive }) => (
+          <>
+            {link.label}
+            <motion.span
+              className="absolute bottom-[-4px] left-0 w-full h-[1px]"
+              style={{
+                backgroundColor: '#00dcc0',
+                transformOrigin: 'left',
+              }}
+              initial={false}
+              animate={{ scaleX: isActive ? 1 : hovered ? 1 : 0 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              aria-hidden="true"
+            />
+          </>
+        )}
+      </NavLink>
+    </li>
+  )
+}
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -48,26 +93,7 @@ export default function Navbar() {
         {/* Desktop Nav Links */}
         <ul className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <li key={link.to}>
-              <NavLink
-                to={link.to}
-                end={link.to === '/'}
-                className={({ isActive }) =>
-                  `nav-link-hover font-mono uppercase transition-colors duration-200 ${
-                    isActive
-                      ? 'text-techfest'
-                      : 'text-text-muted hover:text-text-base'
-                  }`
-                }
-                style={{
-                  fontSize: '10px',
-                  letterSpacing: '3px',
-                }}
-                aria-label={`Navigate to ${link.label}`}
-              >
-                {link.label}
-              </NavLink>
-            </li>
+            <NavLinkItem key={link.to} link={link} />
           ))}
         </ul>
 
@@ -103,43 +129,49 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu dropdown */}
-      {menuOpen && (
-        <div
-          className="md:hidden"
-          style={{
-            borderTop: '1px solid rgba(0,220,192,0.1)',
-            backgroundColor: 'rgba(10,10,15,0.97)',
-          }}
-        >
-          <ul className="flex flex-col px-6 py-4 gap-1">
-            {navLinks.map((link) => {
-              const isActive = link.to === '/'
-                ? location.pathname === '/'
-                : location.pathname.startsWith(link.to)
-              return (
-                <li key={link.to}>
-                  <NavLink
-                    to={link.to}
-                    end={link.to === '/'}
-                    onClick={closeMenu}
-                    className="block py-3 font-mono uppercase transition-colors duration-150"
-                    style={{
-                      fontSize: '11px',
-                      letterSpacing: '3px',
-                      color: isActive ? '#00dcc0' : 'rgba(232,228,212,0.5)',
-                      borderBottom: '1px solid rgba(0,220,192,0.06)',
-                    }}
-                    aria-label={`Navigate to ${link.label}`}
-                  >
-                    {link.label}
-                  </NavLink>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      )}
+      {/* Mobile menu dropdown — animated with Framer Motion */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="md:hidden overflow-hidden"
+            style={{
+              borderTop: '1px solid rgba(0,220,192,0.1)',
+              backgroundColor: 'rgba(10,10,15,0.97)',
+            }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+          >
+            <ul className="flex flex-col px-6 py-4 gap-1">
+              {navLinks.map((link) => {
+                const isActive = link.to === '/'
+                  ? location.pathname === '/'
+                  : location.pathname.startsWith(link.to)
+                return (
+                  <li key={link.to}>
+                    <NavLink
+                      to={link.to}
+                      end={link.to === '/'}
+                      onClick={closeMenu}
+                      className="block py-3 font-mono uppercase transition-colors duration-150"
+                      style={{
+                        fontSize: '11px',
+                        letterSpacing: '3px',
+                        color: isActive ? '#00dcc0' : 'rgba(232,228,212,0.5)',
+                        borderBottom: '1px solid rgba(0,220,192,0.06)',
+                      }}
+                      aria-label={`Navigate to ${link.label}`}
+                    >
+                      {link.label}
+                    </NavLink>
+                  </li>
+                )
+              })}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }
