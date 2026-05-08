@@ -218,10 +218,10 @@ function TimelineTab() {
             >
               {/* Time Column */}
               <div 
-                className="w-[72px] flex-shrink-0 flex items-center justify-center p-3"
+                className="w-[90px] flex-shrink-0 flex items-center justify-center p-3"
                 style={{ borderRight: '1px solid rgba(0,220,192,0.12)' }}
               >
-                <span className="font-mono text-[#00dcc0] text-center" style={{ fontSize: '10px' }}>
+                <span className="font-mono font-bold text-[#00dcc0] text-center" style={{ fontSize: '12px', letterSpacing: '1px' }}>
                   {row.time}
                 </span>
               </div>
