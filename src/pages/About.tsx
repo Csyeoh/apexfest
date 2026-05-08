@@ -8,6 +8,11 @@ import 'swiper/css/navigation'
 
 import RevealOnScroll from '../components/RevealOnScroll'
 
+import slide1 from '../assets/slideshow/img_1556.webp'
+import slide2 from '../assets/slideshow/img_1561.webp'
+import slide3 from '../assets/slideshow/img_1574.webp'
+import slide4 from '../assets/slideshow/img_1914.webp'
+
 /* ========================================
    PAGE HEADER
    ======================================== */
@@ -105,10 +110,10 @@ function ProseColumn() {
 
 function AboutSlideshow() {
   const slides = [
-    '/images/haphoto0.jpg',
-    '/images/haphoto1.jpg',
-    '/images/haphoto2.jpg',
-    '/images/haphoto3.jpg',
+    slide1,
+    slide2,
+    slide3,
+    slide4,
   ]
 
   return (
