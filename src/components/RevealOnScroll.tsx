@@ -21,6 +21,7 @@ export default function RevealOnScroll({
       whileInView={{ opacity: 1, [axis]: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.55, ease: 'easeOut', delay }}
+      style={{ willChange: 'transform, opacity' }}
     >
       {children}
     </motion.div>

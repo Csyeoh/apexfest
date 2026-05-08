@@ -32,7 +32,7 @@ function LoadingFallback() {
 
 function App() {
   return (
-    <ReactLenis root>
+    <ReactLenis root options={{ lerp: 0.15, wheelMultiplier: 1.2, smoothWheel: true }}>
       <BackgroundEffects />
       <Routes>
         <Route element={<Layout />}>
