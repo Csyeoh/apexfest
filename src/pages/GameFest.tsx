@@ -392,46 +392,154 @@ interface PrizeEntry {
 }
 
 const prizes: PrizeEntry[] = [
-  { rank: '1ST', amount: 'RM1,500', label: 'Champion', highlight: true },
-  { rank: '2ND', amount: 'RM800', label: 'Runner Up', highlight: false },
-  { rank: '3RD', amount: 'RM400', label: 'Third Place', highlight: false },
+  { rank: '1ST', amount: '?', label: 'Champion', highlight: true },
+  { rank: '2ND', amount: '?', label: '1st Runner Up', highlight: false },
+  { rank: '3RD', amount: '?', label: '2nd Runner Up', highlight: false },
 ]
 
 function PrizepoolTab() {
+  const podiumPrizes = [prizes[1], prizes[0], prizes[2]]
+  
+  const getPodiumStyles = (rank: string) => {
+    if (rank === '1ST') {
+      return {
+        height: '110px',
+        borderTop: '2px solid #ffb830',
+        borderLeft: '1px solid #ffb830',
+        borderRight: '1px solid #ffb830',
+        borderBottom: 'none',
+        backgroundColor: 'rgba(255,184,48,0.06)'
+      }
+    }
+    if (rank === '2ND') {
+      return {
+        height: '75px',
+        borderTop: '2px solid rgba(255,184,48,0.35)',
+        borderLeft: '1px solid rgba(255,184,48,0.35)',
+        borderRight: '1px solid rgba(255,184,48,0.35)',
+        borderBottom: 'none',
+        backgroundColor: 'rgba(255,184,48,0.03)'
+      }
+    }
+    return {
+      height: '50px',
+      borderTop: '2px solid rgba(255,184,48,0.2)',
+      borderLeft: '1px solid rgba(255,184,48,0.2)',
+      borderRight: '1px solid rgba(255,184,48,0.2)',
+      borderBottom: 'none',
+      backgroundColor: 'transparent'
+    }
+  }
+
+  const renderAmount = (amount: string, isFirst: boolean, isPodium: boolean) => {
+    if (amount === '?') {
+      return (
+        <span 
+          className="inline-block font-mono text-gamefest border border-gamefest rounded-sm"
+          style={{ fontSize: '9px', padding: '2px 7px', letterSpacing: '1px' }}
+        >
+          TBA
+        </span>
+      )
+    }
+    return (
+      <span 
+        style={{ 
+          fontFamily: "'Orbitron', sans-serif", 
+          fontWeight: 900,
+          fontSize: isPodium ? (isFirst ? '26px' : '20px') : (isFirst ? '16px' : '14px'),
+          color: isFirst ? '#ffb830' : (isPodium ? '#e8e4d4' : 'rgba(232, 228, 212, 0.6)')
+        }}
+      >
+        {amount}
+      </span>
+    )
+  }
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
-      {prizes.map((prize, i) => (
-        <RevealOnScroll key={prize.rank} direction="up" delay={i * 0.15}>
-          <div
-            className="p-8 text-center"
-            style={{
-              border: prize.highlight
-                ? '1px solid rgba(255,184,48,0.6)'
-                : '1px solid rgba(255,184,48,0.2)',
-              backgroundColor: prize.highlight
-                ? 'rgba(255,184,48,0.04)'
-                : 'transparent',
-            }}
-          >
-            <p
-              className="font-mono text-gamefest mb-4"
-              style={{ fontSize: '12px', letterSpacing: '4px' }}
-            >
-              {prize.rank}
-            </p>
-            <p
-              className="font-display font-bold text-text-base mb-2"
-              style={{ fontSize: '28px' }}
-            >
-              {prize.amount}
-            </p>
-            <p className="font-body text-text-muted text-base">
-              {prize.label}
-            </p>
-          </div>
-        </RevealOnScroll>
-      ))}
-    </div>
+    <RevealOnScroll direction="up">
+      <div className="max-w-3xl mx-auto w-full flex flex-col gap-12">
+        
+        {/* PODIUM */}
+        <div className="grid grid-cols-3 items-end gap-2 sm:gap-4 w-full pt-8 px-2 sm:px-12">
+          {podiumPrizes.map((prize) => {
+            const isFirst = prize.rank === '1ST'
+            const num = prize.rank.replace('ST', '').replace('ND', '').replace('RD', '')
+            return (
+              <div key={prize.rank} className="flex flex-col items-center">
+                <div className="flex flex-col items-center mb-4 text-center">
+                  <span className="font-mono text-gamefest mb-2" style={{ fontSize: '10px', letterSpacing: '2px' }}>
+                    {prize.rank}
+                  </span>
+                  {renderAmount(prize.amount, isFirst, true)}
+                  <span className="font-body text-text-muted mt-2" style={{ fontSize: '13px' }}>
+                    {prize.label}
+                  </span>
+                </div>
+                
+                <div 
+                  className="w-full relative flex justify-center items-center overflow-hidden rounded-t-sm"
+                  style={getPodiumStyles(prize.rank)}
+                >
+                  <span 
+                    className="absolute inset-0 flex items-center justify-center leading-none select-none pointer-events-none"
+                    style={{
+                      fontFamily: "'Orbitron', sans-serif",
+                      fontWeight: 900,
+                      fontSize: isFirst ? '90px' : prize.rank === '2ND' ? '60px' : '40px',
+                      color: '#ffb830',
+                      opacity: 0.18,
+                      zIndex: 0
+                    }}
+                  >
+                    {num}
+                  </span>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* DETAIL STRIP */}
+        <div 
+          className="w-full flex flex-col rounded-sm"
+          style={{
+            border: '1px solid rgba(255,184,48,0.15)',
+            backgroundColor: 'rgba(255,184,48,0.02)'
+          }}
+        >
+          {prizes.map((prize, i) => {
+            const isFirst = prize.rank === '1ST'
+            const borderColor = isFirst ? '#ffb830' : prize.rank === '2ND' ? 'rgba(255,184,48,0.4)' : 'rgba(255,184,48,0.2)'
+            const isLast = i === prizes.length - 1
+
+            return (
+              <div 
+                key={prize.rank}
+                className="grid grid-cols-[60px_1fr_1fr] items-center px-6 py-4 transition-colors duration-200"
+                style={{
+                  borderLeft: `2px solid ${borderColor}`,
+                  borderBottom: isLast ? 'none' : '1px solid rgba(255,184,48,0.08)',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.05)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+              >
+                <span className="font-mono text-gamefest" style={{ fontSize: '10px', letterSpacing: '3px' }}>
+                  {prize.rank}
+                </span>
+                <span className="font-display font-semibold" style={{ fontSize: '15px', color: '#e8e4d4' }}>
+                  {prize.label}
+                </span>
+                <div className="text-right flex justify-end">
+                  {renderAmount(prize.amount, isFirst, false)}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+      </div>
+    </RevealOnScroll>
   )
 }
 
