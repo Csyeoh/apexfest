@@ -338,47 +338,42 @@ function TimelineTab() {
    RULES TAB
    ======================================== */
 
-const rules: string[] = [
-  'All participants must present a valid student ID upon check-in. Non-students may participate as wildcard entries subject to slot availability.',
-  'Any form of cheating, exploiting, or use of unauthorized third-party software is strictly prohibited and will result in immediate disqualification.',
-  'All decisions made by judges and referees are final. Disputes must be raised through the official channel within 15 minutes of the match.',
-  'Participants must attend their scheduled match on time. A 10-minute grace period is granted — after which the match is forfeited.',
-  'GDGoC USM reserves the right to disqualify any participant or team for unsportsmanlike conduct, harassment, or violation of event policies.',
-  'Game-specific rules, settings, and ban/pick formats will be announced one week before the qualifier rounds via the official Discord server.',
-]
-
 function RulesTab() {
   return (
     <RevealOnScroll direction="up">
       <div
-        className="max-w-3xl p-8"
+        className="max-w-4xl p-2 sm:p-4"
         style={{
           border: '1px solid rgba(255,184,48,0.25)',
           backgroundColor: 'rgba(255,184,48,0.02)',
         }}
       >
-        <p
-          className="font-mono text-gamefest mb-6"
-          style={{ fontSize: '10px', letterSpacing: '3px' }}
-        >
-          // GENERAL RULES
-        </p>
+        <div className="flex justify-between items-center mb-4 px-2">
+          <p
+            className="font-mono text-gamefest"
+            style={{ fontSize: '10px', letterSpacing: '3px' }}
+          >
+            // OFFICIAL RULEBOOK
+          </p>
+          <a
+            href="https://drive.google.com/file/d/1Q9bbf7vlQU3li_KKyfKkcCDRLuHTAghY/view?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-text-muted hover:text-gamefest transition-colors"
+            style={{ fontSize: '10px', letterSpacing: '1px' }}
+          >
+            [ OPEN IN NEW TAB ]
+          </a>
+        </div>
 
-        <ol className="space-y-5">
-          {rules.map((rule, i) => (
-            <li key={i} className="flex gap-4">
-              <span
-                className="font-mono text-gamefest flex-shrink-0 mt-0.5"
-                style={{ fontSize: '13px', letterSpacing: '1px' }}
-              >
-                {String(i + 1).padStart(2, '0')}.
-              </span>
-              <p className="font-body text-text-muted text-base leading-relaxed">
-                {rule}
-              </p>
-            </li>
-          ))}
-        </ol>
+        <div className="w-full aspect-[1/1.4] md:aspect-video relative overflow-hidden rounded">
+          <iframe
+            src="https://drive.google.com/file/d/1Q9bbf7vlQU3li_KKyfKkcCDRLuHTAghY/preview"
+            className="absolute top-0 left-0 w-full h-full border-none"
+            allow="autoplay"
+            title="GameFest Official Rulebook"
+          ></iframe>
+        </div>
       </div>
     </RevealOnScroll>
   )
