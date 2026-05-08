@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
+import gfqr from '../assets/qr/gfqr.png'
 
 type GameFestTab = 'about' | 'timeline' | 'rules' | 'prizepool' | 'register'
 
@@ -446,190 +447,52 @@ interface FormData {
 }
 
 function RegisterTab() {
-  const [form, setForm] = useState<FormData>({
-    fullName: '',
-    studentId: '',
-    email: '',
-    gameCategory: '',
-  })
-
-  const [submitted, setSubmitted] = useState(false)
-
-  const handleChange = (field: keyof FormData, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setSubmitted(true)
-  }
-
-  if (submitted) {
-    return (
+  return (
+    <RevealOnScroll direction="up">
       <div
-        className="max-w-xl p-10 text-center"
+        className="max-w-xl p-10 text-center flex flex-col items-center mx-auto"
         style={{
-          border: '1px solid rgba(255,184,48,0.3)',
-          backgroundColor: 'rgba(255,184,48,0.03)',
+          border: '1px solid rgba(255,184,48,0.25)',
+          backgroundColor: 'rgba(255,184,48,0.02)',
         }}
       >
         <p
-          className="font-mono text-gamefest mb-3"
+          className="font-mono text-gamefest mb-6"
           style={{ fontSize: '10px', letterSpacing: '3px' }}
         >
-          // REGISTRATION CONFIRMED
+          // SCAN TO REGISTER
         </p>
-        <h3 className="font-display font-bold text-text-base text-xl mb-2">
-          You're In, {form.fullName}.
-        </h3>
-        <p className="font-body text-text-muted text-base">
-          Check your email for confirmation details and next steps.
-        </p>
-      </div>
-    )
-  }
 
-  const inputStyle: React.CSSProperties = {
-    border: 'none',
-    borderBottom: '1px solid rgba(255,184,48,0.3)',
-    backgroundColor: 'transparent',
-    outline: 'none',
-    width: '100%',
-    padding: '10px 0',
-    fontFamily: "'Rajdhani', sans-serif",
-    fontSize: '16px',
-    color: '#e8e4d4',
-  }
-
-  const inputFocusHandler = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
-    e.currentTarget.style.borderBottomColor = '#ffb830'
-    e.currentTarget.style.boxShadow = '0 1px 0 0 #ffb830'
-  }
-
-  const inputBlurHandler = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
-    e.currentTarget.style.borderBottomColor = 'rgba(255,184,48,0.3)'
-    e.currentTarget.style.boxShadow = 'none'
-  }
-
-  return (
-    <RevealOnScroll direction="right">
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-xl p-8"
-        style={{
-          border: '1px solid rgba(255,184,48,0.25)',
-        }}
-      >
-        <div className="space-y-8">
-          {/* Full Name */}
-          <div>
-            <label
-              className="font-mono text-text-muted uppercase block mb-2"
-              style={{ fontSize: '10px', letterSpacing: '3px' }}
-            >
-              Full Name
-            </label>
-            <input
-              type="text"
-              required
-              value={form.fullName}
-              onChange={(e) => handleChange('fullName', e.target.value)}
-              placeholder="Enter your full name"
-              style={inputStyle}
-              onFocus={inputFocusHandler}
-              onBlur={inputBlurHandler}
-            />
-          </div>
-
-          {/* Student ID */}
-          <div>
-            <label
-              className="font-mono text-text-muted uppercase block mb-2"
-              style={{ fontSize: '10px', letterSpacing: '3px' }}
-            >
-              Student ID
-            </label>
-            <input
-              type="text"
-              required
-              value={form.studentId}
-              onChange={(e) => handleChange('studentId', e.target.value)}
-              placeholder="e.g. 123456"
-              style={inputStyle}
-              onFocus={inputFocusHandler}
-              onBlur={inputBlurHandler}
-            />
-          </div>
-
-          {/* Email */}
-          <div>
-            <label
-              className="font-mono text-text-muted uppercase block mb-2"
-              style={{ fontSize: '10px', letterSpacing: '3px' }}
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              required
-              value={form.email}
-              onChange={(e) => handleChange('email', e.target.value)}
-              placeholder="you@student.usm.my"
-              style={inputStyle}
-              onFocus={inputFocusHandler}
-              onBlur={inputBlurHandler}
-            />
-          </div>
-
-          {/* Game Category */}
-          <div>
-            <label
-              className="font-mono text-text-muted uppercase block mb-2"
-              style={{ fontSize: '10px', letterSpacing: '3px' }}
-            >
-              Game Category
-            </label>
-            <select
-              required
-              value={form.gameCategory}
-              onChange={(e) => handleChange('gameCategory', e.target.value)}
-              style={{
-                ...inputStyle,
-                cursor: 'pointer',
-                appearance: 'none',
-                WebkitAppearance: 'none',
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23ffb830' stroke-width='1.5'/%3E%3C/svg%3E")`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'right 4px center',
-              }}
-              onFocus={inputFocusHandler}
-              onBlur={inputBlurHandler}
-            >
-              <option value="" disabled>Select a category</option>
-              <option value="fps">FPS</option>
-              <option value="moba">MOBA</option>
-              <option value="fighting">Fighting</option>
-              <option value="card-game">Card Game</option>
-            </select>
-          </div>
+        <div className="w-64 h-64 bg-white p-3 rounded-lg mb-8 shadow-[0_0_30px_rgba(255,184,48,0.15)] transition-transform duration-300 hover:scale-105">
+          <img 
+            src={gfqr} 
+            alt="GameFest Registration QR Code" 
+            className="w-full h-full object-contain"
+            draggable="false"
+          />
         </div>
 
-        {/* Submit */}
-        <button
-          type="submit"
-          aria-label="Submit registration form"
-          className="w-full mt-10 py-3.5 font-display font-bold uppercase tracking-widest cursor-pointer transition-opacity duration-150 hover:opacity-90"
+        <p className="font-body text-text-muted text-base mb-8 max-w-sm mx-auto leading-relaxed">
+          Ready to join the action? Scan the QR code above or click the button below to fill out the official registration form.
+        </p>
+
+        <a
+          href="https://forms.gle/8adxFEuoF28uA3bV7"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full sm:w-auto px-10 py-4 font-display font-bold uppercase tracking-widest cursor-pointer transition-transform duration-200 hover:-translate-y-1 inline-block text-center rounded-sm"
           style={{
             backgroundColor: '#ffb830',
             color: '#0a0a0f',
-            fontSize: '12px',
+            fontSize: '13px',
             letterSpacing: '3px',
-            border: 'none',
+            textDecoration: 'none',
+            boxShadow: '0 4px 15px rgba(255,184,48,0.2)',
           }}
         >
-          Submit Registration
-        </button>
-      </form>
+          Open Form Link
+        </a>
+      </div>
     </RevealOnScroll>
   )
 }
