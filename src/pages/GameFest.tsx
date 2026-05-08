@@ -210,6 +210,7 @@ const timelineEvents: TimelineEvent[] = [
       { time: '04:00 PM', event: 'Grand Finals - Top 2 Championship Match Bo5', location: 'Auditorium', isMatch: true },
       { time: '04:45 PM', event: 'Prize Ceremony & Photography', location: 'Auditorium', sectionHeader: 'Closing' },
       { time: '05:15 PM', event: 'Teardown & Event Adjourned', location: 'Auditorium' },
+      { time: '06:00 PM', event: 'End', location: 'Auditorium' },
     ]
   },
 ]
