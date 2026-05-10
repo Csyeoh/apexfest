@@ -2,8 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import QRCode from 'qrcode'
+import { doc, getDoc } from 'firebase/firestore'
+import { signInAnonymously, onAuthStateChanged } from 'firebase/auth'
+import { db, auth } from '../lib/firebase'
 import { getBoothById } from '../lib/booths'
 import { generateToken, encodeBoothQr, getTokenRemainingSeconds } from '../lib/token'
+import PinEntry from '../components/PinEntry'
 
 export default function BoothDisplay() {
   const { boothId } = useParams<{ boothId: string }>()
@@ -13,7 +17,43 @@ export default function BoothDisplay() {
   const [refreshKey, setRefreshKey] = useState(0)
   const prevCountdownRef = useRef(getTokenRemainingSeconds())
 
+  const [unlocked, setUnlocked] = useState(() => sessionStorage.getItem('booth_unlocked') === 'true')
+  const [pinError, setPinError] = useState('')
+
+  // Sign in anonymously only if no user is already signed in
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (!user) signInAnonymously(auth).catch(() => {})
+      unsub()
+    })
+    return unsub
+  }, [])
+
+  async function handlePin(pin: string) {
+    try {
+      const configDoc = await getDoc(doc(db, 'config', 'staff'))
+      if (!configDoc.exists()) {
+        setPinError('Staff config not found')
+        return
+      }
+      const storedPin = configDoc.data().pin as string
+      if (pin === storedPin) {
+        sessionStorage.setItem('booth_unlocked', 'true')
+        setUnlocked(true)
+        setPinError('')
+      } else {
+        setPinError('Incorrect PIN')
+      }
+    } catch {
+      setPinError('Failed to verify PIN')
+    }
+  }
+
   const accent = booth?.event === 'techfest' ? '#00dcc0' : '#ffb830'
+
+  if (!unlocked) {
+    return <PinEntry onSubmit={handlePin} error={pinError} />
+  }
 
   // Generate QR code as data URL
   async function updateQr() {
@@ -32,13 +72,14 @@ export default function BoothDisplay() {
     setRefreshKey((k) => k + 1)
   }
 
-  // Generate QR on mount
+  // Generate QR on mount / unlock
   useEffect(() => {
-    if (booth) updateQr()
-  }, [booth]) // eslint-disable-line react-hooks/exhaustive-deps
+    if (booth && unlocked) updateQr()
+  }, [booth, unlocked]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Single timer: countdown + refresh QR when period wraps
   useEffect(() => {
+    if (!unlocked) return
     const interval = setInterval(() => {
       const remaining = getTokenRemainingSeconds()
       setCountdown(remaining)
@@ -49,7 +90,7 @@ export default function BoothDisplay() {
       prevCountdownRef.current = remaining
     }, 1000)
     return () => clearInterval(interval)
-  }, [booth]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [booth, unlocked]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!booth) {
     return (

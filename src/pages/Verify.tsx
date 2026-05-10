@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Html5Qrcode } from 'html5-qrcode'
 import { doc, getDoc } from 'firebase/firestore'
-import { signInAnonymously } from 'firebase/auth'
+import { signInAnonymously, onAuthStateChanged } from 'firebase/auth'
 import { db, auth } from '../lib/firebase'
-import { booths, techfestBooths, gamefestBooths } from '../lib/booths'
+import { techfestBooths, gamefestBooths } from '../lib/booths'
 import PinEntry from '../components/PinEntry'
 
 interface UserData {
@@ -16,15 +16,19 @@ interface UserData {
 export default function Verify() {
   const [unlocked, setUnlocked] = useState(() => sessionStorage.getItem('verify_unlocked') === 'true')
   const [pinError, setPinError] = useState('')
-  const [scanning, setScanning] = useState(false)
+  const [scanning, setScanning] = useState(() => sessionStorage.getItem('verify_unlocked') === 'true')
   const [userData, setUserData] = useState<UserData | null>(null)
   const [scanError, setScanError] = useState('')
   const processingRef = useRef(false)
   const scannerRef = useRef<Html5Qrcode | null>(null)
 
-  // Sign in anonymously for Firestore reads
+  // Sign in anonymously only if no user is already signed in
   useEffect(() => {
-    signInAnonymously(auth).catch(() => {})
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (!user) signInAnonymously(auth).catch(() => {})
+      unsub()
+    })
+    return unsub
   }, [])
 
   async function handlePin(pin: string) {
@@ -39,6 +43,7 @@ export default function Verify() {
         sessionStorage.setItem('verify_unlocked', 'true')
         setUnlocked(true)
         setPinError('')
+        setScanning(true)
       } else {
         setPinError('Incorrect PIN')
       }
@@ -102,14 +107,18 @@ export default function Verify() {
     setUserData(null)
     setScanError('')
     processingRef.current = false
+    setScanning(true)
   }
 
   if (!unlocked) {
     return <PinEntry onSubmit={handlePin} error={pinError} />
   }
 
-  const allStamps = booths.filter((b) => userData?.stamps?.[b.id])
-  const isEligible = allStamps.length === booths.length
+  const techfestStamps = techfestBooths.filter((b) => userData?.stamps?.[b.id])
+  const gamefestStamps = gamefestBooths.filter((b) => userData?.stamps?.[b.id])
+  const techfestDone = techfestStamps.length === techfestBooths.length
+  const gamefestDone = gamefestStamps.length === gamefestBooths.length
+  const bothDone = techfestDone && gamefestDone
 
   return (
     <div
@@ -138,38 +147,37 @@ export default function Verify() {
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-10">
-        {!userData && !scanning && (
+        {!userData && !scanning && scanError && (
           <motion.div
             className="text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            {scanError && (
-              <p
-                className="font-mono mb-4"
-                style={{ fontSize: '11px', color: '#ff4444', letterSpacing: '0.5px' }}
-              >
-                {scanError}
-              </p>
-            )}
+            <p
+              className="font-mono mb-4"
+              style={{ fontSize: '11px', color: '#ff4444', letterSpacing: '0.5px' }}
+            >
+              {scanError}
+            </p>
             <motion.button
               type="button"
               onClick={() => {
                 setScanError('')
+                processingRef.current = false
                 setScanning(true)
               }}
               className="px-8 py-4 font-mono uppercase cursor-pointer"
               style={{
                 fontSize: '13px',
                 letterSpacing: '4px',
-                backgroundColor: '#00dcc0',
-                color: '#0a0a0f',
-                border: 'none',
+                backgroundColor: 'transparent',
+                color: '#e8e4d4',
+                border: '1px solid rgba(232,228,212,0.3)',
               }}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ borderColor: '#00dcc0', color: '#00dcc0' }}
               whileTap={{ scale: 0.98 }}
             >
-              SCAN USER QR
+              TRY AGAIN
             </motion.button>
           </motion.div>
         )}
@@ -306,36 +314,93 @@ export default function Verify() {
               </div>
 
               {/* Eligibility status */}
-              <div
-                className="p-6 text-center"
-                style={{
-                  backgroundColor: isEligible ? 'rgba(0,220,192,0.08)' : 'rgba(255,68,68,0.08)',
-                  border: `2px solid ${isEligible ? '#00dcc0' : '#ff4444'}`,
-                  boxShadow: isEligible ? '0 0 30px rgba(0,220,192,0.15)' : 'none',
-                }}
-              >
-                <span
-                  className="block font-display font-bold uppercase tracking-wider mb-1"
-                  style={{ fontSize: '20px', color: isEligible ? '#00dcc0' : '#ff4444' }}
+              <div className="flex flex-col gap-3">
+                {/* TechFest */}
+                <div
+                  className="p-4 flex items-center justify-between"
+                  style={{
+                    backgroundColor: techfestDone ? 'rgba(0,220,192,0.08)' : 'rgba(255,68,68,0.05)',
+                    border: `1px solid ${techfestDone ? 'rgba(0,220,192,0.4)' : 'rgba(255,68,68,0.2)'}`,
+                  }}
                 >
-                  {isEligible ? 'ELIGIBLE' : 'NOT ELIGIBLE'}
-                </span>
-                <span
-                  className="font-mono"
-                  style={{ fontSize: '12px', letterSpacing: '2px', color: 'rgba(232,228,212,0.5)' }}
-                >
-                  {allStamps.length}/{booths.length} STAMPS
-                </span>
-                {isEligible && (
-                  <motion.p
-                    className="mt-3 font-mono uppercase"
-                    style={{ fontSize: '11px', letterSpacing: '2px', color: '#00dcc0' }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
+                  <div>
+                    <span
+                      className="font-mono uppercase block"
+                      style={{ fontSize: '11px', letterSpacing: '2px', color: '#00dcc0' }}
+                    >
+                      TECHFEST
+                    </span>
+                    <span
+                      className="font-mono"
+                      style={{ fontSize: '10px', letterSpacing: '1px', color: 'rgba(232,228,212,0.4)' }}
+                    >
+                      {techfestStamps.length}/{techfestBooths.length} stamps
+                    </span>
+                  </div>
+                  <span
+                    className="font-display font-bold uppercase tracking-wider"
+                    style={{ fontSize: '14px', color: techfestDone ? '#00dcc0' : '#ff4444' }}
                   >
-                    Gift can be issued
-                  </motion.p>
+                    {techfestDone ? 'STICKER' : 'INCOMPLETE'}
+                  </span>
+                </div>
+
+                {/* GameFest */}
+                <div
+                  className="p-4 flex items-center justify-between"
+                  style={{
+                    backgroundColor: gamefestDone ? 'rgba(255,184,48,0.08)' : 'rgba(255,68,68,0.05)',
+                    border: `1px solid ${gamefestDone ? 'rgba(255,184,48,0.4)' : 'rgba(255,68,68,0.2)'}`,
+                  }}
+                >
+                  <div>
+                    <span
+                      className="font-mono uppercase block"
+                      style={{ fontSize: '11px', letterSpacing: '2px', color: '#ffb830' }}
+                    >
+                      GAMEFEST
+                    </span>
+                    <span
+                      className="font-mono"
+                      style={{ fontSize: '10px', letterSpacing: '1px', color: 'rgba(232,228,212,0.4)' }}
+                    >
+                      {gamefestStamps.length}/{gamefestBooths.length} stamps
+                    </span>
+                  </div>
+                  <span
+                    className="font-display font-bold uppercase tracking-wider"
+                    style={{ fontSize: '14px', color: gamefestDone ? '#ffb830' : '#ff4444' }}
+                  >
+                    {gamefestDone ? 'STICKER' : 'INCOMPLETE'}
+                  </span>
+                </div>
+
+                {/* Both complete */}
+                {bothDone && (
+                  <motion.div
+                    className="p-4 text-center"
+                    style={{
+                      backgroundColor: 'rgba(0,220,192,0.1)',
+                      border: '2px solid #00dcc0',
+                      boxShadow: '0 0 30px rgba(0,220,192,0.15)',
+                    }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <span
+                      className="block font-display font-bold uppercase tracking-wider"
+                      style={{ fontSize: '18px', color: '#00dcc0' }}
+                    >
+                      KEYCAPS
+                    </span>
+                    <span
+                      className="font-mono"
+                      style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(232,228,212,0.5)' }}
+                    >
+                      ALL EVENTS COMPLETED
+                    </span>
+                  </motion.div>
                 )}
               </div>
 
