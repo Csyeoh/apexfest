@@ -13,6 +13,7 @@ const Login = lazy(() => import('./pages/Login'))
 const Stamps = lazy(() => import('./pages/Stamps'))
 const BoothDisplay = lazy(() => import('./pages/BoothDisplay'))
 const Verify = lazy(() => import('./pages/Verify'))
+const Settings = lazy(() => import('./pages/Settings'))
 
 function LoadingFallback() {
   return (
@@ -59,6 +60,14 @@ function App() {
             element={
               <ProtectedRoute>
                 {lazyLoad(Stamps)}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                {lazyLoad(Settings)}
               </ProtectedRoute>
             }
           />
