@@ -9,11 +9,107 @@ import StampCard from '../components/StampCard'
 import StampScanner from '../components/StampScanner'
 import QrDisplay from '../components/QrDisplay'
 
+/* ========================================
+   CARD FACE — shared layout for each side
+   ======================================== */
+
+interface CardFaceProps {
+  title: string
+  subtitle: string
+  accent: string
+  accentDim: string
+  booths: typeof gamefestBooths
+  stamps: Record<string, unknown>
+  count: number
+  total: number
+}
+
+function CardFace({ title, subtitle, accent, accentDim, booths: faceBooths, stamps, count, total }: CardFaceProps) {
+  const isComplete = count === total
+
+  return (
+    <div
+      className="absolute inset-0 flex flex-col items-center justify-center px-6 py-8"
+      style={{
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+        backgroundColor: 'rgba(11,14,23,0.97)',
+        border: `1px solid ${accentDim}`,
+      }}
+    >
+      {/* Event label */}
+      <p
+        className="font-mono uppercase mb-1"
+        style={{ fontSize: '9px', letterSpacing: '3px', color: accent, opacity: 0.7 }}
+      >
+        {subtitle}
+      </p>
+      <h2
+        className="font-display font-bold uppercase tracking-wider mb-8"
+        style={{ fontSize: '20px', color: '#d7fdff' }}
+      >
+        {title}
+      </h2>
+
+      {/* Stamp boxes */}
+      <div
+        className="flex flex-wrap justify-center gap-4 mb-8"
+        style={{ maxWidth: faceBooths.length > 3 ? '320px' : '300px' }}
+      >
+        {faceBooths.map((booth, i) => (
+          <StampCard
+            key={booth.id}
+            booth={booth}
+            isStamped={!!stamps[booth.id]}
+            index={i}
+          />
+        ))}
+      </div>
+
+      {/* Progress */}
+      <div className="flex items-center gap-3">
+        <div
+          className="h-[1px] flex-1"
+          style={{ backgroundColor: accentDim, minWidth: '30px' }}
+        />
+        <span
+          className="font-mono"
+          style={{ fontSize: '11px', letterSpacing: '2px', color: isComplete ? accent : 'rgba(215,253,255,0.35)' }}
+        >
+          {count}/{total}
+        </span>
+        <div
+          className="h-[1px] flex-1"
+          style={{ backgroundColor: accentDim, minWidth: '30px' }}
+        />
+      </div>
+
+      {/* Complete badge */}
+      {isComplete && (
+        <motion.p
+          className="mt-4 font-mono uppercase text-center"
+          style={{ fontSize: '9px', letterSpacing: '3px', color: accent }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          ALL COLLECTED
+        </motion.p>
+      )}
+    </div>
+  )
+}
+
+/* ========================================
+   STAMPS PAGE
+   ======================================== */
+
 export default function Stamps() {
   const { user } = useAuth()
   const [stamps, setStamps] = useState<Record<string, unknown>>({})
   const [scannerOpen, setScannerOpen] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [flipped, setFlipped] = useState(false)
 
   useEffect(() => {
     if (!user) return
@@ -27,18 +123,13 @@ export default function Stamps() {
   }, [user])
 
   const handleStamped = useCallback((boothId: string) => {
-    // The onSnapshot listener will update stamps automatically
     void boothId
   }, [])
 
   const techfestCount = techfestBooths.filter((b) => stamps[b.id]).length
   const gamefestCount = gamefestBooths.filter((b) => stamps[b.id]).length
   const totalCount = booths.filter((b) => stamps[b.id]).length
-  const allTechfest = techfestCount === techfestBooths.length
-  const allGamefest = gamefestCount === gamefestBooths.length
   const allComplete = totalCount === booths.length
-
-  const accent = allComplete ? '#46f4ff' : 'rgba(215,253,255,0.5)'
 
   if (loading) {
     return (
@@ -57,50 +148,47 @@ export default function Stamps() {
 
   return (
     <PageWrapper>
-      <section className="max-w-4xl mx-auto px-6 py-16">
+      <section className="max-w-4xl mx-auto px-6 py-16 flex flex-col items-center">
         {/* Header */}
-        <div className="mb-10">
+        <div className="mb-10 text-center">
           <p
-            className="eyebrow font-mono uppercase mb-3"
+            className="font-mono uppercase mb-3"
             style={{ fontSize: '10px', letterSpacing: '4px', color: '#46f4ff' }}
           >
             // STAMP CARD
           </p>
           <h1
-            className="font-display font-bold tracking-wider"
+            className="font-display font-bold tracking-wider mb-2"
             style={{ fontSize: '28px', color: '#d7fdff' }}
           >
             YOUR STAMPS
           </h1>
-          <hr className="hr-techfest mt-4" style={{ maxWidth: '120px' }} />
+          <div className="w-24 h-[1px] bg-techfest mx-auto" />
         </div>
 
-        {/* Progress */}
-        <div
-          className="mb-10 p-6"
-          style={{
-            backgroundColor: 'rgba(15,15,26,0.6)',
-            border: `1px solid ${accent}`,
-            boxShadow: allComplete ? `0 0 30px ${accent}22` : 'none',
-          }}
-        >
-          <div className="flex items-center justify-between mb-3">
+        {/* Total progress bar */}
+        <div className="w-full max-w-sm mb-10">
+          <div className="flex items-center justify-between mb-2">
             <span
               className="font-mono uppercase"
-              style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(215,253,255,0.5)' }}
+              style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(215,253,255,0.4)' }}
             >
-              TOTAL PROGRESS
+              TOTAL
             </span>
             <span
               className="font-mono"
-              style={{ fontSize: '14px', letterSpacing: '2px', color: accent }}
+              style={{
+                fontSize: '12px',
+                letterSpacing: '2px',
+                color: allComplete ? '#46f4ff' : 'rgba(215,253,255,0.4)',
+              }}
             >
               {totalCount}/{booths.length}
             </span>
           </div>
           <div
             className="w-full h-1"
-            style={{ backgroundColor: 'rgba(215,253,255,0.1)' }}
+            style={{ backgroundColor: 'rgba(215,253,255,0.08)' }}
           >
             <motion.div
               className="h-full"
@@ -110,81 +198,99 @@ export default function Stamps() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
             />
           </div>
+        </div>
 
-          {allComplete && (
-            <motion.p
-              className="mt-4 font-mono text-center uppercase"
-              style={{ fontSize: '12px', letterSpacing: '3px', color: '#46f4ff' }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
+        {/* All complete banner */}
+        {allComplete && (
+          <motion.div
+            className="w-full max-w-sm mb-8 p-4 text-center"
+            style={{
+              border: '1px solid rgba(70,244,255,0.3)',
+              backgroundColor: 'rgba(70,244,255,0.05)',
+            }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <p
+              className="font-mono uppercase"
+              style={{ fontSize: '11px', letterSpacing: '3px', color: '#46f4ff' }}
             >
               ALL STAMPS COLLECTED — GO TO CLAIM STATION
-            </motion.p>
-          )}
-        </div>
+            </p>
+          </motion.div>
+        )}
 
-        {/* TechFest Stamps */}
-        <div className="mb-10">
-          <div className="flex items-center justify-between mb-4">
-            <h2
-              className="font-mono uppercase"
-              style={{ fontSize: '12px', letterSpacing: '3px', color: '#46f4ff' }}
+        {/* Flip hint */}
+        <p
+          className="font-mono mb-4 flex items-center gap-2"
+          style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(215,253,255,0.25)' }}
+        >
+          <motion.span
+            className="inline-block"
+            animate={{ rotate: [0, 180, 360] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ fontSize: '14px' }}
+          >
+            ⟳
+          </motion.span>
+          TAP TO FLIP
+        </p>
+
+        {/* Flip card */}
+        <motion.div
+          className="relative cursor-pointer"
+          style={{
+            width: '100%',
+            maxWidth: '400px',
+            height: '380px',
+            perspective: '1200px',
+          }}
+          onClick={() => setFlipped((f) => !f)}
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <motion.div
+            className="relative w-full h-full"
+            style={{ transformStyle: 'preserve-3d' }}
+            animate={{ rotateY: flipped ? 180 : 0 }}
+            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          >
+            {/* Front: GameFest */}
+            <CardFace
+              title="Game Fest"
+              subtitle="DAY 1 · MAY 23"
+              accent="#ff007f"
+              accentDim="rgba(255,0,127,0.15)"
+              booths={gamefestBooths}
+              stamps={stamps}
+              count={gamefestCount}
+              total={gamefestBooths.length}
+            />
+
+            {/* Back: TechFest */}
+            <div
+              className="absolute inset-0"
+              style={{ transform: 'rotateY(180deg)', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
             >
-              TECHFEST
-            </h2>
-            <span
-              className="font-mono"
-              style={{ fontSize: '11px', letterSpacing: '2px', color: allTechfest ? '#46f4ff' : 'rgba(215,253,255,0.3)' }}
-            >
-              {techfestCount}/{techfestBooths.length}
-            </span>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-            {techfestBooths.map((booth, i) => (
-              <StampCard
-                key={booth.id}
-                booth={booth}
-                isStamped={!!stamps[booth.id]}
-                index={i}
+              <CardFace
+                title="TechFest 2.0"
+                subtitle="DAY 2 · MAY 24"
+                accent="#46f4ff"
+                accentDim="rgba(70,244,255,0.15)"
+                booths={techfestBooths}
+                stamps={stamps}
+                count={techfestCount}
+                total={techfestBooths.length}
               />
-            ))}
-          </div>
-        </div>
+            </div>
+          </motion.div>
+        </motion.div>
 
-        {/* GameFest Stamps */}
-        <div className="mb-10">
-          <div className="flex items-center justify-between mb-4">
-            <h2
-              className="font-mono uppercase"
-              style={{ fontSize: '12px', letterSpacing: '3px', color: '#ff007f' }}
-            >
-              GAMEFEST
-            </h2>
-            <span
-              className="font-mono"
-              style={{ fontSize: '11px', letterSpacing: '2px', color: allGamefest ? '#ff007f' : 'rgba(215,253,255,0.3)' }}
-            >
-              {gamefestCount}/{gamefestBooths.length}
-            </span>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {gamefestBooths.map((booth, i) => (
-              <StampCard
-                key={booth.id}
-                booth={booth}
-                isStamped={!!stamps[booth.id]}
-                index={i}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Scan Button */}
+        {/* Scan button */}
         <motion.button
           type="button"
           onClick={() => setScannerOpen(true)}
-          className="w-full py-4 font-mono uppercase cursor-pointer"
+          className="mt-10 w-full max-w-sm py-4 font-mono uppercase cursor-pointer"
           style={{
             fontSize: '13px',
             letterSpacing: '4px',
