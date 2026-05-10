@@ -157,101 +157,6 @@ function AboutSlideshow() {
 }
 
 /* ========================================
-   MISSION STATEMENT
-   ======================================== */
-
-function MissionStatement() {
-  return (
-    <motion.section
-      className="mt-20 mb-16"
-      initial={{ opacity: 0, x: -24 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.55, ease: 'easeOut', delay: 0.6 }}
-    >
-      <div className="flex gap-6">
-        <div className="w-[2px] flex-shrink-0 bg-gamefest" />
-        <div>
-          <p
-            className="font-mono text-text-muted mb-3"
-            style={{ fontSize: '10px', letterSpacing: '3px' }}
-          >
-            OUR MISSION
-          </p>
-          <p
-            className="font-body text-text-base"
-            style={{ fontSize: '18px', lineHeight: 1.7 }}
-          >
-            To build a thriving community of student developers, gamers, and innovators
-            at USM through events that inspire, challenge, and connect.
-          </p>
-        </div>
-      </div>
-    </motion.section>
-  )
-}
-
-/* ========================================
-   GDGoC BADGE
-   ======================================== */
-
-function GDGoCBadge() {
-  return (
-    <motion.div
-      className="flex justify-center"
-      initial={{ opacity: 0, scale: 0 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{
-        type: 'spring',
-        stiffness: 300,
-        damping: 20,
-        delay: 0.2,
-      }}
-    >
-      <div
-        className="inline-flex items-center gap-3 px-6 py-3"
-        style={{ border: '1px solid rgba(0,220,192,0.3)' }}
-      >
-        <div
-          className="flex items-center justify-center px-3 py-1"
-          style={{ border: '1px solid rgba(0,220,192,0.4)' }}
-        >
-          <span
-            className="font-display font-bold text-techfest"
-            style={{ fontSize: '11px', letterSpacing: '2px' }}
-          >
-            GDGoC
-          </span>
-        </div>
-        <div className="flex flex-col">
-          <span
-            className="font-mono text-text-base"
-            style={{ fontSize: '11px', letterSpacing: '1px' }}
-          >
-            Universiti Sains Malaysia
-          </span>
-          <span
-            className="font-mono text-text-muted"
-            style={{ fontSize: '9px', letterSpacing: '2px' }}
-          >
-            CAMPUS CHAPTER // VERIFIED
-          </span>
-        </div>
-        <span
-          className="w-[8px] h-[8px] flex-shrink-0"
-          style={{
-            backgroundColor: '#00dcc0',
-            borderRadius: '50%',
-            boxShadow: '0 0 6px rgba(0,220,192,0.5)',
-          }}
-        />
-      </div>
-    </motion.div>
-  )
-}
-
-/* ========================================
    PAGE COMPONENT
    ======================================== */
 
@@ -268,9 +173,6 @@ export default function About() {
           <AboutSlideshow />
         </div>
       </div>
-
-      {/* <MissionStatement /> */}
-      {/* <GDGoCBadge /> */}
     </section>
   )
 }

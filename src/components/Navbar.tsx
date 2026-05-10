@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useAuth } from '../contexts/AuthContext'
 
 interface NavItem {
   to: string
@@ -12,6 +13,7 @@ const navLinks: NavItem[] = [
   { to: '/#about', label: 'About' },
   { to: '/gamefest', label: 'GameFest' },
   { to: '/techfest', label: 'TechFest' },
+  { to: '/stamps', label: 'Stamps' },
   { to: '/#sponsors', label: 'Sponsors' },
   { to: '/#faq', label: 'FAQ' },
 ]
@@ -70,8 +72,20 @@ function NavLinkItem({ link }: { link: NavItem }) {
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
+  const { user, signOut } = useAuth()
 
   const closeMenu = () => setMenuOpen(false)
+
+  async function handleAuth() {
+    if (user) {
+      await signOut()
+      navigate('/')
+    } else {
+      navigate('/login')
+    }
+    closeMenu()
+  }
 
   return (
     <nav
@@ -99,11 +113,28 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav Links */}
-        <ul className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <NavLinkItem key={link.to} link={link} />
-          ))}
-        </ul>
+        <div className="hidden md:flex items-center gap-8">
+          <ul className="flex items-center gap-8">
+            {navLinks.map((link) => (
+              <NavLinkItem key={link.to} link={link} />
+            ))}
+          </ul>
+          <button
+            type="button"
+            onClick={handleAuth}
+            className="font-mono uppercase cursor-pointer transition-colors duration-200"
+            style={{
+              fontSize: '10px',
+              letterSpacing: '3px',
+              backgroundColor: 'transparent',
+              border: '1px solid rgba(255,184,48,0.4)',
+              color: user ? '#ff4444' : '#ffb830',
+              padding: '4px 12px',
+            }}
+          >
+            {user ? 'LOGOUT' : 'LOGIN'}
+          </button>
+        </div>
 
         {/* Hamburger — mobile only */}
         <button
@@ -156,7 +187,7 @@ export default function Navbar() {
                 const isHashLink = link.to.includes('#')
                 const targetHash = isHashLink ? link.to.split('#')[1] : ''
                 const currentHash = location.hash.replace('#', '')
-                
+
                 let isActive = false
                 if (isHashLink) {
                   if (location.pathname === '/') {
@@ -185,6 +216,22 @@ export default function Navbar() {
                   </li>
                 )
               })}
+              <li>
+                <button
+                  type="button"
+                  onClick={handleAuth}
+                  className="block w-full text-left py-3 font-mono uppercase cursor-pointer transition-colors duration-150"
+                  style={{
+                    fontSize: '11px',
+                    letterSpacing: '3px',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    color: user ? '#ff4444' : '#ffb830',
+                  }}
+                >
+                  {user ? 'LOGOUT' : 'LOGIN'}
+                </button>
+              </li>
             </ul>
           </motion.div>
         )}

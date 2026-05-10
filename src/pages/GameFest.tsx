@@ -548,13 +548,6 @@ function PrizepoolTab() {
    REGISTER TAB
    ======================================== */
 
-interface FormData {
-  fullName: string
-  studentId: string
-  email: string
-  gameCategory: string
-}
-
 function RegisterTab() {
   return (
     <RevealOnScroll direction="up">

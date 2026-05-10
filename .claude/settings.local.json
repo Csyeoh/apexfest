@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(ipconfig)",
+      "Bash(findstr /i \"IPv4\")",
+      "Bash(Select-String \"IPv4\")",
+      "Bash(where openssl *)",
+      "Bash(mkdir -p .cert)",
+      "Bash(openssl req *)"
+    ]
+  }
+}
