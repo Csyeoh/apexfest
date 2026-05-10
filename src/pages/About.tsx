@@ -122,7 +122,7 @@ function AboutSlideshow() {
         <div
           className="rounded-xl overflow-hidden"
           style={{
-            border: '1px solid rgba(0, 220, 192, 0.2)',
+            border: '1px solid rgba(70, 244, 255, 0.2)',
             boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.5)',
           }}
         >

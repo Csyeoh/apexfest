@@ -1,24 +1,24 @@
 export default function Footer() {
   return (
     <footer
-      className="bg-surface py-5"
-      style={{ borderTop: '1px solid rgba(0,220,192,0.15)' }}
+      className="py-6"
+      style={{
+        backgroundColor: 'rgba(11,14,23,0.8)',
+        borderTop: '1px solid rgba(70,244,255,0.08)',
+      }}
       aria-label="Site footer"
     >
       <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-        {/* Left */}
         <p
-          className="font-mono text-text-muted tracking-widest"
-          style={{ fontSize: '10px' }}
+          className="font-mono"
+          style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(215,253,255,0.3)' }}
         >
           GDGoC_USM // APEXFEST
         </p>
 
-
-        {/* Right */}
         <p
-          className="font-mono text-text-muted tracking-widest"
-          style={{ fontSize: '10px' }}
+          className="font-mono"
+          style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(215,253,255,0.3)' }}
         >
           © 2026 GDGoC USM
         </p>

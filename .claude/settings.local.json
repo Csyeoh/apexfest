@@ -9,7 +9,15 @@
       "Bash(Select-String \"IPv4\")",
       "Bash(where openssl *)",
       "Bash(mkdir -p .cert)",
-      "Bash(openssl req *)"
+      "Bash(openssl req *)",
+      "Bash(git checkout *)",
+      "Bash(git merge *)",
+      "Bash(git stash *)",
+      "Bash(npx vercel *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(xargs grep -l '#00dcc0\\\\|#ffb830\\\\|rgba\\(0,220,192\\\\|rgba\\(255,184,48\\\\|#e8e4d4\\\\|#0a0a0f\\\\|#0b0906')"
     ]
   }
 }

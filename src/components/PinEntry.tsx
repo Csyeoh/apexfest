@@ -17,7 +17,7 @@ export default function PinEntry({ onSubmit, error }: PinEntryProps) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6" style={{ backgroundColor: '#0a0a0f' }}>
+    <div className="min-h-screen flex items-center justify-center px-6" style={{ backgroundColor: '#081120' }}>
       <motion.div
         className="w-full max-w-sm text-center"
         initial={{ opacity: 0, y: 20 }}
@@ -26,19 +26,19 @@ export default function PinEntry({ onSubmit, error }: PinEntryProps) {
       >
         <span
           className="block font-mono uppercase mb-3"
-          style={{ fontSize: '10px', letterSpacing: '4px', color: '#00dcc0' }}
+          style={{ fontSize: '10px', letterSpacing: '4px', color: '#46f4ff' }}
         >
           // VERIFICATION STATION
         </span>
         <h1
           className="font-display font-bold tracking-wider mb-2"
-          style={{ fontSize: '24px', color: '#e8e4d4' }}
+          style={{ fontSize: '24px', color: '#d7fdff' }}
         >
           ENTER PIN
         </h1>
         <p
           className="font-mono mb-8"
-          style={{ fontSize: '11px', letterSpacing: '1px', color: 'rgba(232,228,212,0.4)' }}
+          style={{ fontSize: '11px', letterSpacing: '1px', color: 'rgba(215,253,255,0.4)' }}
         >
           Staff access only
         </p>
@@ -55,8 +55,8 @@ export default function PinEntry({ onSubmit, error }: PinEntryProps) {
               fontSize: '24px',
               letterSpacing: '12px',
               backgroundColor: 'rgba(15,15,26,0.8)',
-              border: `1px solid ${error ? '#ff4444' : 'rgba(0,220,192,0.3)'}`,
-              color: '#e8e4d4',
+              border: `1px solid ${error ? '#ff4444' : 'rgba(70,244,255,0.3)'}`,
+              color: '#d7fdff',
             }}
           />
 
@@ -75,8 +75,8 @@ export default function PinEntry({ onSubmit, error }: PinEntryProps) {
             style={{
               fontSize: '12px',
               letterSpacing: '3px',
-              backgroundColor: '#00dcc0',
-              color: '#0a0a0f',
+              backgroundColor: '#46f4ff',
+              color: '#081120',
               border: 'none',
             }}
             whileHover={{ scale: 1.02 }}

@@ -2,7 +2,7 @@ export default function StatusBar() {
   return (
     <div
       className="bg-bg px-6 py-2 flex items-center gap-3"
-      style={{ borderTop: '1px solid rgba(0,220,192,0.1)' }}
+      style={{ borderTop: '1px solid rgba(70,244,255,0.1)' }}
       role="status"
       aria-label="System status bar"
     >

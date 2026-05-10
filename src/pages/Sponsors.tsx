@@ -81,7 +81,7 @@ export default function Sponsors() {
                   className="flex flex-col space-y-8 items-center justify-start rounded-2xl pt-8 pb-6 px-6 h-full transition-all duration-300"
                   style={{
                     backgroundColor: 'rgba(19, 22, 26, 0.95)',
-                    border: '1px solid rgba(0, 220, 192, 0.15)',
+                    border: '1px solid rgba(70, 244, 255, 0.15)',
                     boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
                     willChange: 'transform'
                   }}
@@ -100,7 +100,7 @@ export default function Sponsors() {
                   <p 
                     className="text-center font-display font-semibold tracking-wide text-xl"
                     style={{
-                      color: sponsor.role.includes('Main') ? '#ffb830' : '#00dcc0'
+                      color: sponsor.role.includes('Main') ? '#ff007f' : '#46f4ff'
                     }}
                   >
                     {sponsor.role}

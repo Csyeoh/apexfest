@@ -13,16 +13,16 @@ interface Particle {
 }
 
 function generateParticles(): Particle[] {
+  const colors = ['#46f4ff', '#ff007f', '#be6bff', '#44a5ff']
   const particles: Particle[] = []
-  for (let i = 0; i < 12; i++) {
-    const isAmber = i % 2 === 0
+  for (let i = 0; i < 14; i++) {
     particles.push({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      color: isAmber ? '#ffb830' : '#00dcc0',
-      opacity: isAmber ? 0.12 : 0.10,
-      duration: 20 + Math.random() * 20,
+      color: colors[i % colors.length],
+      opacity: 0.08 + Math.random() * 0.06,
+      duration: 20 + Math.random() * 25,
       driftX: (Math.random() - 0.5) * 60,
       driftY: (Math.random() - 0.5) * 100,
     })
@@ -41,7 +41,6 @@ function BackgroundEffects() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
-  // Disable particles on mobile for performance
   if (isMobile) return null
 
   return (
@@ -53,14 +52,15 @@ function BackgroundEffects() {
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute"
+          className="absolute rounded-full"
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
-            width: 4,
-            height: 4,
+            width: 3,
+            height: 3,
             backgroundColor: p.color,
             opacity: p.opacity,
+            boxShadow: `0 0 6px ${p.color}`,
             willChange: 'transform',
           }}
           animate={{

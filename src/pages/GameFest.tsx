@@ -51,7 +51,7 @@ function TabBar({ activeTab, onTabChange }: TabBarProps) {
     <RevealOnScroll direction="up" delay={0.1}>
       <div
         className="flex w-fit mb-12 overflow-x-auto max-w-full"
-        style={{ border: '1px solid rgba(255,184,48,0.3)' }}
+        style={{ border: '1px solid rgba(255,0,127,0.3)' }}
         role="tablist"
         aria-label="GameFest sections"
       >
@@ -70,20 +70,20 @@ function TabBar({ activeTab, onTabChange }: TabBarProps) {
                 fontSize: '11px',
                 letterSpacing: '2px',
                 padding: '10px 22px',
-                backgroundColor: isActive ? '#ffb830' : 'transparent',
-                color: isActive ? '#0a0a0f' : 'rgba(232,228,212,0.5)',
+                backgroundColor: isActive ? '#ff007f' : 'transparent',
+                color: isActive ? '#0a0a0f' : 'rgba(215,253,255,0.5)',
                 fontWeight: isActive ? 700 : 400,
-                borderRight: i < tabs.length - 1 ? '1px solid rgba(255,184,48,0.2)' : 'none',
+                borderRight: i < tabs.length - 1 ? '1px solid rgba(255,0,127,0.2)' : 'none',
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.color = '#ffb830'
-                  e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.06)'
+                  e.currentTarget.style.color = '#ff007f'
+                  e.currentTarget.style.backgroundColor = 'rgba(255,0,127,0.06)'
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.color = 'rgba(232,228,212,0.5)'
+                  e.currentTarget.style.color = 'rgba(215,253,255,0.5)'
                   e.currentTarget.style.backgroundColor = 'transparent'
                 }
               }}
@@ -223,7 +223,7 @@ function TimelineTab() {
   return (
     <div className="max-w-3xl">
       {/* TAB SWITCHER */}
-      <div className="flex w-full mb-10" style={{ border: '1px solid rgba(255,184,48,0.3)' }}>
+      <div className="flex w-full mb-10" style={{ border: '1px solid rgba(255,0,127,0.3)' }}>
         {timelineEvents.map((evt) => {
           const isActive = activeDay === evt.id
           return (
@@ -233,21 +233,21 @@ function TimelineTab() {
               className="flex-1 font-display uppercase transition-colors duration-200 cursor-pointer"
               style={{
                 padding: '12px 0',
-                backgroundColor: isActive ? '#ffb830' : 'transparent',
-                color: isActive ? '#0b0906' : 'rgba(232,228,212,0.5)',
+                backgroundColor: isActive ? '#ff007f' : 'transparent',
+                color: isActive ? '#081120' : 'rgba(215,253,255,0.5)',
                 fontWeight: isActive ? 700 : 400,
                 fontSize: '14px',
                 letterSpacing: '2px',
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.color = '#ffb830'
-                  e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.06)'
+                  e.currentTarget.style.color = '#ff007f'
+                  e.currentTarget.style.backgroundColor = 'rgba(255,0,127,0.06)'
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.color = 'rgba(232,228,212,0.5)'
+                  e.currentTarget.style.color = 'rgba(215,253,255,0.5)'
                   e.currentTarget.style.backgroundColor = 'transparent'
                 }
               }}
@@ -261,12 +261,12 @@ function TimelineTab() {
       {/* DAY PANEL */}
       <RevealOnScroll key={activeDay} direction="up">
         <div className="mb-8 flex items-start sm:items-center gap-4">
-          <div className="w-[8px] h-[8px] bg-[#ffb830] rounded-sm flex-shrink-0 mt-2 sm:mt-0" />
+          <div className="w-[8px] h-[8px] bg-[#ff007f] rounded-sm flex-shrink-0 mt-2 sm:mt-0" />
           <div>
             <h2 className="font-display font-bold text-text-base text-xl sm:text-2xl uppercase tracking-wide">
               {currentEvent.date} // {currentEvent.title}
             </h2>
-            <p className="font-mono text-[#ffb830] opacity-80 mt-1" style={{ fontSize: '11px', letterSpacing: '1px' }}>
+            <p className="font-mono text-[#ff007f] opacity-80 mt-1" style={{ fontSize: '11px', letterSpacing: '1px' }}>
               {currentEvent.description}
             </p>
           </div>
@@ -279,7 +279,7 @@ function TimelineTab() {
               {/* Section Label */}
               {row.sectionHeader && (
                 <div className={`mb-2 ${idx !== 0 ? 'mt-8' : ''}`}>
-                  <span className="font-mono text-[#ffb830] opacity-50 uppercase" style={{ fontSize: '9px', letterSpacing: '3px' }}>
+                  <span className="font-mono text-[#ff007f] opacity-50 uppercase" style={{ fontSize: '9px', letterSpacing: '3px' }}>
                     // {row.sectionHeader}
                   </span>
                 </div>
@@ -289,36 +289,36 @@ function TimelineTab() {
               <div 
                 className="flex items-stretch transition-colors duration-200"
                 style={{
-                  border: row.isMatch ? '1px solid rgba(255,184,48,0.35)' : '1px solid rgba(255,184,48,0.1)',
-                  backgroundColor: row.isMatch ? 'rgba(255,184,48,0.06)' : 'transparent',
+                  border: row.isMatch ? '1px solid rgba(255,0,127,0.35)' : '1px solid rgba(255,0,127,0.1)',
+                  backgroundColor: row.isMatch ? 'rgba(255,0,127,0.06)' : 'transparent',
                   marginBottom: '8px',
                 }}
                 onMouseEnter={(e) => {
                   if (!row.isMatch) {
-                    e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.05)'
-                    e.currentTarget.style.borderColor = 'rgba(255,184,48,0.3)'
+                    e.currentTarget.style.backgroundColor = 'rgba(255,0,127,0.05)'
+                    e.currentTarget.style.borderColor = 'rgba(255,0,127,0.3)'
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!row.isMatch) {
                     e.currentTarget.style.backgroundColor = 'transparent'
-                    e.currentTarget.style.borderColor = 'rgba(255,184,48,0.1)'
+                    e.currentTarget.style.borderColor = 'rgba(255,0,127,0.1)'
                   }
                 }}
               >
                 {/* Time Column */}
                 <div 
                   className="w-[90px] flex-shrink-0 flex items-center justify-center p-3"
-                  style={{ borderRight: '1px solid rgba(255,184,48,0.12)' }}
+                  style={{ borderRight: '1px solid rgba(255,0,127,0.12)' }}
                 >
-                  <span className="font-mono font-bold text-[#ffb830] text-center" style={{ fontSize: '12px', letterSpacing: '1px' }}>
+                  <span className="font-mono font-bold text-[#ff007f] text-center" style={{ fontSize: '12px', letterSpacing: '1px' }}>
                     {row.time}
                   </span>
                 </div>
 
                 {/* Event Column */}
                 <div className="flex-1 flex flex-col justify-center p-3 pl-4">
-                  <span className="font-display text-[#e8e4d4]" style={{ fontSize: '14px', fontWeight: row.isMatch ? 700 : 400, letterSpacing: '0.5px' }}>
+                  <span className="font-display text-[#d7fdff]" style={{ fontSize: '14px', fontWeight: row.isMatch ? 700 : 400, letterSpacing: '0.5px' }}>
                     {row.event}
                   </span>
                   {row.location && (
@@ -346,8 +346,8 @@ function RulesTab() {
       <div
         className="max-w-4xl p-2 sm:p-4"
         style={{
-          border: '1px solid rgba(255,184,48,0.25)',
-          backgroundColor: 'rgba(255,184,48,0.02)',
+          border: '1px solid rgba(255,0,127,0.25)',
+          backgroundColor: 'rgba(255,0,127,0.02)',
         }}
       >
         <div className="flex justify-between items-center mb-4 px-2">
@@ -405,28 +405,28 @@ function PrizepoolTab() {
     if (rank === '1ST') {
       return {
         height: '110px',
-        borderTop: '2px solid #ffb830',
-        borderLeft: '1px solid #ffb830',
-        borderRight: '1px solid #ffb830',
+        borderTop: '2px solid #ff007f',
+        borderLeft: '1px solid #ff007f',
+        borderRight: '1px solid #ff007f',
         borderBottom: 'none',
-        backgroundColor: 'rgba(255,184,48,0.06)'
+        backgroundColor: 'rgba(255,0,127,0.06)'
       }
     }
     if (rank === '2ND') {
       return {
         height: '75px',
-        borderTop: '2px solid rgba(255,184,48,0.35)',
-        borderLeft: '1px solid rgba(255,184,48,0.35)',
-        borderRight: '1px solid rgba(255,184,48,0.35)',
+        borderTop: '2px solid rgba(255,0,127,0.35)',
+        borderLeft: '1px solid rgba(255,0,127,0.35)',
+        borderRight: '1px solid rgba(255,0,127,0.35)',
         borderBottom: 'none',
-        backgroundColor: 'rgba(255,184,48,0.03)'
+        backgroundColor: 'rgba(255,0,127,0.03)'
       }
     }
     return {
       height: '50px',
-      borderTop: '2px solid rgba(255,184,48,0.2)',
-      borderLeft: '1px solid rgba(255,184,48,0.2)',
-      borderRight: '1px solid rgba(255,184,48,0.2)',
+      borderTop: '2px solid rgba(255,0,127,0.2)',
+      borderLeft: '1px solid rgba(255,0,127,0.2)',
+      borderRight: '1px solid rgba(255,0,127,0.2)',
       borderBottom: 'none',
       backgroundColor: 'transparent'
     }
@@ -446,10 +446,10 @@ function PrizepoolTab() {
     return (
       <span 
         style={{ 
-          fontFamily: "'Orbitron', sans-serif", 
+          fontFamily: "'Oxanium', sans-serif", 
           fontWeight: 900,
           fontSize: isPodium ? (isFirst ? '26px' : '20px') : (isFirst ? '16px' : '14px'),
-          color: isFirst ? '#ffb830' : (isPodium ? '#e8e4d4' : 'rgba(232, 228, 212, 0.6)')
+          color: isFirst ? '#ff007f' : (isPodium ? '#d7fdff' : 'rgba(232, 228, 212, 0.6)')
         }}
       >
         {amount}
@@ -485,10 +485,10 @@ function PrizepoolTab() {
                   <span 
                     className="absolute inset-0 flex items-center justify-center leading-none select-none pointer-events-none"
                     style={{
-                      fontFamily: "'Orbitron', sans-serif",
+                      fontFamily: "'Oxanium', sans-serif",
                       fontWeight: 900,
                       fontSize: isFirst ? '90px' : prize.rank === '2ND' ? '60px' : '40px',
-                      color: '#ffb830',
+                      color: '#ff007f',
                       opacity: 0.18,
                       zIndex: 0
                     }}
@@ -505,13 +505,13 @@ function PrizepoolTab() {
         <div 
           className="w-full flex flex-col rounded-sm"
           style={{
-            border: '1px solid rgba(255,184,48,0.15)',
-            backgroundColor: 'rgba(255,184,48,0.02)'
+            border: '1px solid rgba(255,0,127,0.15)',
+            backgroundColor: 'rgba(255,0,127,0.02)'
           }}
         >
           {prizes.map((prize, i) => {
             const isFirst = prize.rank === '1ST'
-            const borderColor = isFirst ? '#ffb830' : prize.rank === '2ND' ? 'rgba(255,184,48,0.4)' : 'rgba(255,184,48,0.2)'
+            const borderColor = isFirst ? '#ff007f' : prize.rank === '2ND' ? 'rgba(255,0,127,0.4)' : 'rgba(255,0,127,0.2)'
             const isLast = i === prizes.length - 1
 
             return (
@@ -520,15 +520,15 @@ function PrizepoolTab() {
                 className="grid grid-cols-[60px_1fr_1fr] items-center px-6 py-4 transition-colors duration-200"
                 style={{
                   borderLeft: `2px solid ${borderColor}`,
-                  borderBottom: isLast ? 'none' : '1px solid rgba(255,184,48,0.08)',
+                  borderBottom: isLast ? 'none' : '1px solid rgba(255,0,127,0.08)',
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.05)'}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,0,127,0.05)'}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
               >
                 <span className="font-mono text-gamefest" style={{ fontSize: '10px', letterSpacing: '3px' }}>
                   {prize.rank}
                 </span>
-                <span className="font-display font-semibold" style={{ fontSize: '15px', color: '#e8e4d4' }}>
+                <span className="font-display font-semibold" style={{ fontSize: '15px', color: '#d7fdff' }}>
                   {prize.label}
                 </span>
                 <div className="text-right flex justify-end">
@@ -554,8 +554,8 @@ function RegisterTab() {
       <div
         className="max-w-xl p-10 text-center flex flex-col items-center mx-auto"
         style={{
-          border: '1px solid rgba(255,184,48,0.25)',
-          backgroundColor: 'rgba(255,184,48,0.02)',
+          border: '1px solid rgba(255,0,127,0.25)',
+          backgroundColor: 'rgba(255,0,127,0.02)',
         }}
       >
         <p
@@ -565,7 +565,7 @@ function RegisterTab() {
           // SCAN TO REGISTER
         </p>
 
-        <div className="w-64 h-64 bg-white p-3 rounded-lg mb-8 shadow-[0_0_30px_rgba(255,184,48,0.15)] transition-transform duration-300 hover:scale-105">
+        <div className="w-64 h-64 bg-white p-3 rounded-lg mb-8 shadow-[0_0_30px_rgba(255,0,127,0.15)] transition-transform duration-300 hover:scale-105">
           <img 
             src={gfqr} 
             alt="GameFest Registration QR Code" 
@@ -584,12 +584,12 @@ function RegisterTab() {
           rel="noopener noreferrer"
           className="w-full sm:w-auto px-10 py-4 font-display font-bold uppercase tracking-widest cursor-pointer transition-transform duration-200 hover:-translate-y-1 inline-block text-center rounded-sm"
           style={{
-            backgroundColor: '#ffb830',
+            backgroundColor: '#ff007f',
             color: '#0a0a0f',
             fontSize: '13px',
             letterSpacing: '3px',
             textDecoration: 'none',
-            boxShadow: '0 4px 15px rgba(255,184,48,0.2)',
+            boxShadow: '0 4px 15px rgba(255,0,127,0.2)',
           }}
         >
           Open Form Link

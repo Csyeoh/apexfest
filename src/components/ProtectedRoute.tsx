@@ -10,7 +10,7 @@ export default function ProtectedRoute({ children }: { children: ReactNode }) {
       <div className="min-h-screen flex items-center justify-center">
         <span
           className="font-mono animate-pulse"
-          style={{ fontSize: '12px', letterSpacing: '4px', color: '#00dcc0' }}
+          style={{ fontSize: '12px', letterSpacing: '4px', color: '#46f4ff' }}
         >
           LOADING...
         </span>

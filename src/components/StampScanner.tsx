@@ -107,12 +107,12 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
 
   const isSuccess = state === 'success'
   const isError = state === 'error'
-  const accent = isSuccess ? '#00dcc0' : isError ? '#ff4444' : '#00dcc0'
+  const accent = isSuccess ? '#46f4ff' : isError ? '#ff4444' : '#46f4ff'
 
   return (
     <motion.div
       className="fixed inset-0 z-50 flex flex-col"
-      style={{ backgroundColor: '#0a0a0f' }}
+      style={{ backgroundColor: '#081120' }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -129,7 +129,7 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
           type="button"
           onClick={onClose}
           className="font-mono uppercase cursor-pointer bg-transparent border-none"
-          style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(232,228,212,0.5)' }}
+          style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(215,253,255,0.5)' }}
         >
           CLOSE
         </button>
@@ -150,8 +150,8 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
                 fontSize: '11px',
                 letterSpacing: '3px',
                 backgroundColor: 'transparent',
-                color: '#e8e4d4',
-                border: '1px solid rgba(232,228,212,0.2)',
+                color: '#d7fdff',
+                border: '1px solid rgba(215,253,255,0.2)',
               }}
             >
               GO BACK
@@ -205,9 +205,9 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
                     <div className="text-center">
                       <div
                         className="w-8 h-8 border-2 rounded-full animate-spin mx-auto mb-3"
-                        style={{ borderColor: 'rgba(0,220,192,0.3)', borderTopColor: '#00dcc0' }}
+                        style={{ borderColor: 'rgba(70,244,255,0.3)', borderTopColor: '#46f4ff' }}
                       />
-                      <span className="font-mono" style={{ fontSize: '11px', letterSpacing: '3px', color: '#00dcc0' }}>
+                      <span className="font-mono" style={{ fontSize: '11px', letterSpacing: '3px', color: '#46f4ff' }}>
                         VALIDATING...
                       </span>
                     </div>
@@ -231,13 +231,13 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
                       transition={{ type: 'spring', stiffness: 300, damping: 15, delay: 0.1 }}
                     >
                       <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
-                        <circle cx="12" cy="12" r="10" stroke="#00dcc0" strokeWidth="2" />
-                        <path d="M8 12l2.5 2.5L16 9" stroke="#00dcc0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <circle cx="12" cy="12" r="10" stroke="#46f4ff" strokeWidth="2" />
+                        <path d="M8 12l2.5 2.5L16 9" stroke="#46f4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </motion.div>
                     <motion.span
                       className="font-display font-bold uppercase tracking-wider mt-4"
-                      style={{ fontSize: '20px', color: '#00dcc0' }}
+                      style={{ fontSize: '20px', color: '#46f4ff' }}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
@@ -246,7 +246,7 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
                     </motion.span>
                     <motion.span
                       className="font-mono mt-2"
-                      style={{ fontSize: '12px', letterSpacing: '1px', color: 'rgba(232,228,212,0.6)' }}
+                      style={{ fontSize: '12px', letterSpacing: '1px', color: 'rgba(215,253,255,0.6)' }}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.35 }}
@@ -288,7 +288,7 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
                     </motion.span>
                     <motion.span
                       className="font-mono mt-2 text-center"
-                      style={{ fontSize: '12px', letterSpacing: '1px', color: 'rgba(232,228,212,0.6)' }}
+                      style={{ fontSize: '12px', letterSpacing: '1px', color: 'rgba(215,253,255,0.6)' }}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.35 }}
@@ -309,8 +309,8 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
                 style={{
                   fontSize: '11px',
                   letterSpacing: '3px',
-                  backgroundColor: isSuccess ? '#00dcc0' : 'transparent',
-                  color: isSuccess ? '#0a0a0f' : '#e8e4d4',
+                  backgroundColor: isSuccess ? '#46f4ff' : 'transparent',
+                  color: isSuccess ? '#081120' : '#d7fdff',
                   border: isSuccess ? 'none' : '1px solid rgba(255,68,68,0.4)',
                 }}
                 initial={{ opacity: 0, y: 10 }}
@@ -327,7 +327,7 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
             {state === 'scanning' && (
               <p
                 className="font-mono mt-6 text-center"
-                style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(232,228,212,0.3)' }}
+                style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(215,253,255,0.3)' }}
               >
                 Point camera at booth QR code
               </p>
@@ -339,7 +339,7 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
       {/* Hide all html5-qrcode UI elements — show only the raw video */}
       <style>{`
         #stamp-scanner-region {
-          background: #0a0a0f !important;
+          background: #081120 !important;
         }
         #stamp-scanner-region video {
           width: 280px !important;

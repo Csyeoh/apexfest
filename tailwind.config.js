@@ -7,17 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: '#0a0a0f',
-        surface: '#0f0f1a',
-        'text-base': '#e8e4d4',
-        'text-muted': 'rgba(232,228,212,0.5)',
-        gamefest: '#ffb830',
-        techfest: '#00dcc0',
+        bg: '#081120',
+        surface: '#0b0e17',
+        'text-base': '#d7fdff',
+        'text-muted': 'rgba(215,253,255,0.5)',
+        gamefest: '#ff007f',
+        'gamefest-secondary': '#be6bff',
+        techfest: '#46f4ff',
+        accent: '#44a5ff',
       },
       fontFamily: {
-        display: ['Orbitron', 'sans-serif'],
+        display: ['Oxanium', 'sans-serif'],
         mono: ['Share Tech Mono', 'monospace'],
-        body: ['Rajdhani', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        ui: ['Rajdhani', 'sans-serif'],
       },
       borderWidth: {
         'half': '0.5px',

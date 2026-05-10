@@ -123,13 +123,13 @@ export default function Verify() {
   return (
     <div
       className="min-h-screen flex flex-col"
-      style={{ backgroundColor: '#0a0a0f' }}
+      style={{ backgroundColor: '#081120' }}
     >
       {/* Header */}
-      <div className="px-6 py-4 flex items-center justify-between" style={{ borderBottom: '1px solid rgba(0,220,192,0.2)' }}>
+      <div className="px-6 py-4 flex items-center justify-between" style={{ borderBottom: '1px solid rgba(70,244,255,0.2)' }}>
         <span
           className="font-mono uppercase"
-          style={{ fontSize: '11px', letterSpacing: '3px', color: '#00dcc0' }}
+          style={{ fontSize: '11px', letterSpacing: '3px', color: '#46f4ff' }}
         >
           // VERIFICATION STATION
         </span>
@@ -140,7 +140,7 @@ export default function Verify() {
             setUnlocked(false)
           }}
           className="font-mono uppercase cursor-pointer bg-transparent border-none"
-          style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(232,228,212,0.3)' }}
+          style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(215,253,255,0.3)' }}
         >
           LOCK
         </button>
@@ -171,10 +171,10 @@ export default function Verify() {
                 fontSize: '13px',
                 letterSpacing: '4px',
                 backgroundColor: 'transparent',
-                color: '#e8e4d4',
-                border: '1px solid rgba(232,228,212,0.3)',
+                color: '#d7fdff',
+                border: '1px solid rgba(215,253,255,0.3)',
               }}
-              whileHover={{ borderColor: '#00dcc0', color: '#00dcc0' }}
+              whileHover={{ borderColor: '#46f4ff', color: '#46f4ff' }}
               whileTap={{ scale: 0.98 }}
             >
               TRY AGAIN
@@ -183,7 +183,7 @@ export default function Verify() {
         )}
 
         {scanning && (
-          <div className="w-full max-w-sm" style={{ border: '2px solid rgba(0,220,192,0.3)' }}>
+          <div className="w-full max-w-sm" style={{ border: '2px solid rgba(70,244,255,0.3)' }}>
             <div id="verify-scanner-region" className="w-full" />
           </div>
         )}
@@ -201,13 +201,13 @@ export default function Verify() {
               <div className="text-center mb-8">
                 <h2
                   className="font-display font-bold tracking-wider"
-                  style={{ fontSize: '22px', color: '#e8e4d4' }}
+                  style={{ fontSize: '22px', color: '#d7fdff' }}
                 >
                   {userData.displayName || 'Unknown User'}
                 </h2>
                 <p
                   className="font-mono mt-1"
-                  style={{ fontSize: '11px', color: 'rgba(232,228,212,0.4)' }}
+                  style={{ fontSize: '11px', color: 'rgba(215,253,255,0.4)' }}
                 >
                   {userData.email}
                 </p>
@@ -217,7 +217,7 @@ export default function Verify() {
               <div className="mb-6">
                 <h3
                   className="font-mono uppercase mb-3"
-                  style={{ fontSize: '11px', letterSpacing: '3px', color: '#00dcc0' }}
+                  style={{ fontSize: '11px', letterSpacing: '3px', color: '#46f4ff' }}
                 >
                   TECHFEST STAMPS
                 </h3>
@@ -227,14 +227,14 @@ export default function Verify() {
                     <div
                       key={booth.id}
                       className="flex items-center justify-between py-2"
-                      style={{ borderBottom: '1px solid rgba(0,220,192,0.06)' }}
+                      style={{ borderBottom: '1px solid rgba(70,244,255,0.06)' }}
                     >
                       <span className="flex items-center gap-3">
                         <span
                           className="font-mono"
                           style={{
                             fontSize: '12px',
-                            color: stamped ? '#00dcc0' : 'rgba(232,228,212,0.2)',
+                            color: stamped ? '#46f4ff' : 'rgba(215,253,255,0.2)',
                           }}
                         >
                           {stamped ? '[X]' : '[ ]'}
@@ -244,7 +244,7 @@ export default function Verify() {
                           style={{
                             fontSize: '12px',
                             letterSpacing: '0.5px',
-                            color: stamped ? '#e8e4d4' : 'rgba(232,228,212,0.3)',
+                            color: stamped ? '#d7fdff' : 'rgba(215,253,255,0.3)',
                           }}
                         >
                           {booth.code} - {booth.name}
@@ -267,7 +267,7 @@ export default function Verify() {
               <div className="mb-8">
                 <h3
                   className="font-mono uppercase mb-3"
-                  style={{ fontSize: '11px', letterSpacing: '3px', color: '#ffb830' }}
+                  style={{ fontSize: '11px', letterSpacing: '3px', color: '#ff007f' }}
                 >
                   GAMEFEST STAMPS
                 </h3>
@@ -277,14 +277,14 @@ export default function Verify() {
                     <div
                       key={booth.id}
                       className="flex items-center justify-between py-2"
-                      style={{ borderBottom: '1px solid rgba(255,184,48,0.06)' }}
+                      style={{ borderBottom: '1px solid rgba(255,0,127,0.06)' }}
                     >
                       <span className="flex items-center gap-3">
                         <span
                           className="font-mono"
                           style={{
                             fontSize: '12px',
-                            color: stamped ? '#ffb830' : 'rgba(232,228,212,0.2)',
+                            color: stamped ? '#ff007f' : 'rgba(215,253,255,0.2)',
                           }}
                         >
                           {stamped ? '[X]' : '[ ]'}
@@ -294,7 +294,7 @@ export default function Verify() {
                           style={{
                             fontSize: '12px',
                             letterSpacing: '0.5px',
-                            color: stamped ? '#e8e4d4' : 'rgba(232,228,212,0.3)',
+                            color: stamped ? '#d7fdff' : 'rgba(215,253,255,0.3)',
                           }}
                         >
                           {booth.code} - {booth.name}
@@ -319,27 +319,27 @@ export default function Verify() {
                 <div
                   className="p-4 flex items-center justify-between"
                   style={{
-                    backgroundColor: techfestDone ? 'rgba(0,220,192,0.08)' : 'rgba(255,68,68,0.05)',
-                    border: `1px solid ${techfestDone ? 'rgba(0,220,192,0.4)' : 'rgba(255,68,68,0.2)'}`,
+                    backgroundColor: techfestDone ? 'rgba(70,244,255,0.08)' : 'rgba(255,68,68,0.05)',
+                    border: `1px solid ${techfestDone ? 'rgba(70,244,255,0.4)' : 'rgba(255,68,68,0.2)'}`,
                   }}
                 >
                   <div>
                     <span
                       className="font-mono uppercase block"
-                      style={{ fontSize: '11px', letterSpacing: '2px', color: '#00dcc0' }}
+                      style={{ fontSize: '11px', letterSpacing: '2px', color: '#46f4ff' }}
                     >
                       TECHFEST
                     </span>
                     <span
                       className="font-mono"
-                      style={{ fontSize: '10px', letterSpacing: '1px', color: 'rgba(232,228,212,0.4)' }}
+                      style={{ fontSize: '10px', letterSpacing: '1px', color: 'rgba(215,253,255,0.4)' }}
                     >
                       {techfestStamps.length}/{techfestBooths.length} stamps
                     </span>
                   </div>
                   <span
                     className="font-display font-bold uppercase tracking-wider"
-                    style={{ fontSize: '14px', color: techfestDone ? '#00dcc0' : '#ff4444' }}
+                    style={{ fontSize: '14px', color: techfestDone ? '#46f4ff' : '#ff4444' }}
                   >
                     {techfestDone ? 'STICKER' : 'INCOMPLETE'}
                   </span>
@@ -349,27 +349,27 @@ export default function Verify() {
                 <div
                   className="p-4 flex items-center justify-between"
                   style={{
-                    backgroundColor: gamefestDone ? 'rgba(255,184,48,0.08)' : 'rgba(255,68,68,0.05)',
-                    border: `1px solid ${gamefestDone ? 'rgba(255,184,48,0.4)' : 'rgba(255,68,68,0.2)'}`,
+                    backgroundColor: gamefestDone ? 'rgba(255,0,127,0.08)' : 'rgba(255,68,68,0.05)',
+                    border: `1px solid ${gamefestDone ? 'rgba(255,0,127,0.4)' : 'rgba(255,68,68,0.2)'}`,
                   }}
                 >
                   <div>
                     <span
                       className="font-mono uppercase block"
-                      style={{ fontSize: '11px', letterSpacing: '2px', color: '#ffb830' }}
+                      style={{ fontSize: '11px', letterSpacing: '2px', color: '#ff007f' }}
                     >
                       GAMEFEST
                     </span>
                     <span
                       className="font-mono"
-                      style={{ fontSize: '10px', letterSpacing: '1px', color: 'rgba(232,228,212,0.4)' }}
+                      style={{ fontSize: '10px', letterSpacing: '1px', color: 'rgba(215,253,255,0.4)' }}
                     >
                       {gamefestStamps.length}/{gamefestBooths.length} stamps
                     </span>
                   </div>
                   <span
                     className="font-display font-bold uppercase tracking-wider"
-                    style={{ fontSize: '14px', color: gamefestDone ? '#ffb830' : '#ff4444' }}
+                    style={{ fontSize: '14px', color: gamefestDone ? '#ff007f' : '#ff4444' }}
                   >
                     {gamefestDone ? 'STICKER' : 'INCOMPLETE'}
                   </span>
@@ -380,9 +380,9 @@ export default function Verify() {
                   <motion.div
                     className="p-4 text-center"
                     style={{
-                      backgroundColor: 'rgba(0,220,192,0.1)',
-                      border: '2px solid #00dcc0',
-                      boxShadow: '0 0 30px rgba(0,220,192,0.15)',
+                      backgroundColor: 'rgba(70,244,255,0.1)',
+                      border: '2px solid #46f4ff',
+                      boxShadow: '0 0 30px rgba(70,244,255,0.15)',
                     }}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -390,13 +390,13 @@ export default function Verify() {
                   >
                     <span
                       className="block font-display font-bold uppercase tracking-wider"
-                      style={{ fontSize: '18px', color: '#00dcc0' }}
+                      style={{ fontSize: '18px', color: '#46f4ff' }}
                     >
                       KEYCAPS
                     </span>
                     <span
                       className="font-mono"
-                      style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(232,228,212,0.5)' }}
+                      style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(215,253,255,0.5)' }}
                     >
                       ALL EVENTS COMPLETED
                     </span>
@@ -413,10 +413,10 @@ export default function Verify() {
                   fontSize: '11px',
                   letterSpacing: '3px',
                   backgroundColor: 'transparent',
-                  color: 'rgba(232,228,212,0.5)',
-                  border: '1px solid rgba(232,228,212,0.15)',
+                  color: 'rgba(215,253,255,0.5)',
+                  border: '1px solid rgba(215,253,255,0.15)',
                 }}
-                whileHover={{ borderColor: '#00dcc0', color: '#00dcc0' }}
+                whileHover={{ borderColor: '#46f4ff', color: '#46f4ff' }}
                 whileTap={{ scale: 0.98 }}
               >
                 SCAN ANOTHER

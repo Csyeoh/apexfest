@@ -38,7 +38,7 @@ export default function Stamps() {
   const allGamefest = gamefestCount === gamefestBooths.length
   const allComplete = totalCount === booths.length
 
-  const accent = allComplete ? '#00dcc0' : 'rgba(232,228,212,0.5)'
+  const accent = allComplete ? '#46f4ff' : 'rgba(215,253,255,0.5)'
 
   if (loading) {
     return (
@@ -46,7 +46,7 @@ export default function Stamps() {
         <div className="min-h-[80vh] flex items-center justify-center">
           <span
             className="font-mono animate-pulse"
-            style={{ fontSize: '12px', letterSpacing: '4px', color: '#00dcc0' }}
+            style={{ fontSize: '12px', letterSpacing: '4px', color: '#46f4ff' }}
           >
             LOADING STAMPS...
           </span>
@@ -62,13 +62,13 @@ export default function Stamps() {
         <div className="mb-10">
           <p
             className="eyebrow font-mono uppercase mb-3"
-            style={{ fontSize: '10px', letterSpacing: '4px', color: '#00dcc0' }}
+            style={{ fontSize: '10px', letterSpacing: '4px', color: '#46f4ff' }}
           >
             // STAMP CARD
           </p>
           <h1
             className="font-display font-bold tracking-wider"
-            style={{ fontSize: '28px', color: '#e8e4d4' }}
+            style={{ fontSize: '28px', color: '#d7fdff' }}
           >
             YOUR STAMPS
           </h1>
@@ -87,7 +87,7 @@ export default function Stamps() {
           <div className="flex items-center justify-between mb-3">
             <span
               className="font-mono uppercase"
-              style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(232,228,212,0.5)' }}
+              style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(215,253,255,0.5)' }}
             >
               TOTAL PROGRESS
             </span>
@@ -100,11 +100,11 @@ export default function Stamps() {
           </div>
           <div
             className="w-full h-1"
-            style={{ backgroundColor: 'rgba(232,228,212,0.1)' }}
+            style={{ backgroundColor: 'rgba(215,253,255,0.1)' }}
           >
             <motion.div
               className="h-full"
-              style={{ backgroundColor: '#00dcc0' }}
+              style={{ backgroundColor: '#46f4ff' }}
               initial={{ width: 0 }}
               animate={{ width: `${(totalCount / booths.length) * 100}%` }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -114,7 +114,7 @@ export default function Stamps() {
           {allComplete && (
             <motion.p
               className="mt-4 font-mono text-center uppercase"
-              style={{ fontSize: '12px', letterSpacing: '3px', color: '#00dcc0' }}
+              style={{ fontSize: '12px', letterSpacing: '3px', color: '#46f4ff' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
@@ -129,13 +129,13 @@ export default function Stamps() {
           <div className="flex items-center justify-between mb-4">
             <h2
               className="font-mono uppercase"
-              style={{ fontSize: '12px', letterSpacing: '3px', color: '#00dcc0' }}
+              style={{ fontSize: '12px', letterSpacing: '3px', color: '#46f4ff' }}
             >
               TECHFEST
             </h2>
             <span
               className="font-mono"
-              style={{ fontSize: '11px', letterSpacing: '2px', color: allTechfest ? '#00dcc0' : 'rgba(232,228,212,0.3)' }}
+              style={{ fontSize: '11px', letterSpacing: '2px', color: allTechfest ? '#46f4ff' : 'rgba(215,253,255,0.3)' }}
             >
               {techfestCount}/{techfestBooths.length}
             </span>
@@ -157,13 +157,13 @@ export default function Stamps() {
           <div className="flex items-center justify-between mb-4">
             <h2
               className="font-mono uppercase"
-              style={{ fontSize: '12px', letterSpacing: '3px', color: '#ffb830' }}
+              style={{ fontSize: '12px', letterSpacing: '3px', color: '#ff007f' }}
             >
               GAMEFEST
             </h2>
             <span
               className="font-mono"
-              style={{ fontSize: '11px', letterSpacing: '2px', color: allGamefest ? '#ffb830' : 'rgba(232,228,212,0.3)' }}
+              style={{ fontSize: '11px', letterSpacing: '2px', color: allGamefest ? '#ff007f' : 'rgba(215,253,255,0.3)' }}
             >
               {gamefestCount}/{gamefestBooths.length}
             </span>
@@ -188,8 +188,8 @@ export default function Stamps() {
           style={{
             fontSize: '13px',
             letterSpacing: '4px',
-            backgroundColor: '#00dcc0',
-            color: '#0a0a0f',
+            backgroundColor: '#46f4ff',
+            color: '#081120',
             border: 'none',
           }}
           whileHover={{ scale: 1.01 }}
@@ -202,13 +202,13 @@ export default function Stamps() {
         <div className="mt-14 text-center">
           <p
             className="font-mono uppercase mb-2"
-            style={{ fontSize: '10px', letterSpacing: '4px', color: 'rgba(232,228,212,0.4)' }}
+            style={{ fontSize: '10px', letterSpacing: '4px', color: 'rgba(215,253,255,0.4)' }}
           >
             YOUR VERIFICATION CODE
           </p>
           <p
             className="font-mono mb-6"
-            style={{ fontSize: '11px', color: 'rgba(232,228,212,0.3)' }}
+            style={{ fontSize: '11px', color: 'rgba(215,253,255,0.3)' }}
           >
             Show this to the claim station
           </p>

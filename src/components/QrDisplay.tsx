@@ -16,7 +16,7 @@ export default function QrDisplay({ data, size = 200 }: QrDisplayProps) {
       width: size,
       margin: 2,
       color: {
-        dark: '#e8e4d4',
+        dark: '#d7fdff',
         light: '#0f0f1a',
       },
     }).then((url) => {
@@ -31,7 +31,7 @@ export default function QrDisplay({ data, size = 200 }: QrDisplayProps) {
     <div
       className="inline-block p-3"
       style={{
-        border: '1px solid rgba(0,220,192,0.2)',
+        border: '1px solid rgba(70,244,255,0.2)',
         backgroundColor: '#0f0f1a',
       }}
     >

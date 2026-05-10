@@ -17,7 +17,7 @@ function CornerBracketTopLeft() {
       {/* Horizontal bar */}
       <motion.div
         className="absolute top-0 left-0 h-[2px]"
-        style={{ backgroundColor: '#ffb830' }}
+        style={{ backgroundColor: '#ff007f' }}
         initial={{ width: 0 }}
         animate={{ width: 20 }}
         transition={{ duration: 0.3, delay: 1.2, ease: 'easeOut' }}
@@ -25,7 +25,7 @@ function CornerBracketTopLeft() {
       {/* Vertical bar */}
       <motion.div
         className="absolute top-0 left-0 w-[2px]"
-        style={{ backgroundColor: '#ffb830' }}
+        style={{ backgroundColor: '#ff007f' }}
         initial={{ height: 0 }}
         animate={{ height: 20 }}
         transition={{ duration: 0.3, delay: 1.3, ease: 'easeOut' }}
@@ -83,7 +83,7 @@ function HeroStatusBar() {
   return (
     <motion.div
       className="absolute bottom-0 left-0 right-0 bg-surface/80 px-6 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 z-10"
-      style={{ borderTop: '1px solid rgba(0,220,192,0.1)' }}
+      style={{ borderTop: '1px solid rgba(70,244,255,0.1)' }}
       role="status"
       aria-label="Event status"
       initial={{ opacity: 0 }}
@@ -138,11 +138,11 @@ function EventCard({ accent, tag, title, description, metaItems, to, delay }: Ev
   }, [delay])
 
   const isAmber = accent === 'gamefest'
-  const accentColor = isAmber ? '#ffb830' : '#00dcc0'
-  const accentColorMuted = isAmber ? 'rgba(255,184,48,0.15)' : 'rgba(0,220,192,0.15)'
-  const borderMuted = isAmber ? 'rgba(255,184,48,0.25)' : 'rgba(0,220,192,0.25)'
-  const borderHover = isAmber ? 'rgba(255,184,48,0.6)' : 'rgba(0,220,192,0.6)'
-  const bgHover = isAmber ? 'rgba(255,184,48,0.04)' : 'rgba(0,220,192,0.04)'
+  const accentColor = isAmber ? '#ff007f' : '#00dcc0'
+  const accentColorMuted = isAmber ? 'rgba(255,0,127,0.15)' : 'rgba(70,244,255,0.15)'
+  const borderMuted = isAmber ? 'rgba(255,0,127,0.25)' : 'rgba(70,244,255,0.25)'
+  const borderHover = isAmber ? 'rgba(255,0,127,0.6)' : 'rgba(70,244,255,0.6)'
+  const bgHover = isAmber ? 'rgba(255,0,127,0.04)' : 'rgba(70,244,255,0.04)'
 
   return (
     <motion.button
@@ -168,23 +168,10 @@ function EventCard({ accent, tag, title, description, metaItems, to, delay }: Ev
       }}
       aria-label={`View ${title} details`}
     >
-      {/* Top accent line — scales in on hover */}
-      <motion.div
-        className="w-full h-[2px]"
-        style={{ backgroundColor: accentColor, transformOrigin: 'left' }}
-        initial={{ scaleX: 1 }}
-        whileHover={{ scaleX: 1 }}
-        aria-hidden="true"
-      />
-      {/* Hidden hover-triggered accent that scales from left */}
-      <motion.div
-        className="absolute top-0 left-0 w-full h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-        style={{
-          backgroundColor: accentColor,
-          transformOrigin: 'left',
-          filter: `drop-shadow(0 0 4px ${accentColor})`,
-        }}
-        initial={false}
+      {/* Top accent line — positioned at top edge */}
+      <div
+        className="absolute left-0 right-0 h-[2px]"
+        style={{ top: '-1px', backgroundColor: accentColor }}
         aria-hidden="true"
       />
 
@@ -360,17 +347,17 @@ export default function Home() {
             style={{
               fontSize: '10px',
               letterSpacing: '3px',
-              border: '1px solid rgba(255,184,48,0.5)',
+              border: '1px solid rgba(255,0,127,0.5)',
               backgroundColor: 'transparent',
               padding: '12px 28px',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(255,184,48,0.08)'
-              e.currentTarget.style.borderColor = '#ffb830'
+              e.currentTarget.style.backgroundColor = 'rgba(255,0,127,0.08)'
+              e.currentTarget.style.borderColor = '#ff007f'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent'
-              e.currentTarget.style.borderColor = 'rgba(255,184,48,0.5)'
+              e.currentTarget.style.borderColor = 'rgba(255,0,127,0.5)'
             }}
             aria-label="Register for GameFest"
           >
@@ -384,17 +371,17 @@ export default function Home() {
             style={{
               fontSize: '10px',
               letterSpacing: '3px',
-              border: '1px solid rgba(0,220,192,0.5)',
+              border: '1px solid rgba(70,244,255,0.5)',
               backgroundColor: 'transparent',
               padding: '12px 28px',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.08)'
+              e.currentTarget.style.backgroundColor = 'rgba(70,244,255,0.08)'
               e.currentTarget.style.borderColor = '#00dcc0'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent'
-              e.currentTarget.style.borderColor = 'rgba(0,220,192,0.5)'
+              e.currentTarget.style.borderColor = 'rgba(70,244,255,0.5)'
             }}
             aria-label="Explore TechFest"
           >

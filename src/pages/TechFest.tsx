@@ -56,7 +56,7 @@ function TabBar({ activeTab, onTabChange }: TabBarProps) {
     <RevealOnScroll direction="up" delay={0.1}>
       <div
         className="flex w-fit mb-12 overflow-x-auto max-w-full"
-        style={{ border: '1px solid rgba(0,220,192,0.3)' }}
+        style={{ border: '1px solid rgba(70,244,255,0.3)' }}
         role="tablist"
         aria-label="TechFest sections"
       >
@@ -75,20 +75,20 @@ function TabBar({ activeTab, onTabChange }: TabBarProps) {
                 fontSize: '11px',
                 letterSpacing: '2px',
                 padding: '10px 22px',
-                backgroundColor: isActive ? '#00dcc0' : 'transparent',
-                color: isActive ? '#0a0a0f' : 'rgba(232,228,212,0.5)',
+                backgroundColor: isActive ? '#46f4ff' : 'transparent',
+                color: isActive ? '#0a0a0f' : 'rgba(215,253,255,0.5)',
                 fontWeight: isActive ? 700 : 400,
-                borderRight: i < tabs.length - 1 ? '1px solid rgba(0,220,192,0.2)' : 'none',
+                borderRight: i < tabs.length - 1 ? '1px solid rgba(70,244,255,0.2)' : 'none',
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.color = '#00dcc0'
-                  e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.06)'
+                  e.currentTarget.style.color = '#46f4ff'
+                  e.currentTarget.style.backgroundColor = 'rgba(70,244,255,0.06)'
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.color = 'rgba(232,228,212,0.5)'
+                  e.currentTarget.style.color = 'rgba(215,253,255,0.5)'
                   e.currentTarget.style.backgroundColor = 'transparent'
                 }
               }}
@@ -181,12 +181,12 @@ function TimelineTab() {
       {/* DAY PANEL */}
       <RevealOnScroll direction="up">
         <div className="mb-8 flex items-start sm:items-center gap-4">
-          <div className="w-[8px] h-[8px] bg-[#00dcc0] rounded-sm flex-shrink-0 mt-2 sm:mt-0" />
+          <div className="w-[8px] h-[8px] bg-[#46f4ff] rounded-sm flex-shrink-0 mt-2 sm:mt-0" />
           <div>
             <h2 className="font-display font-bold text-text-base text-xl sm:text-2xl uppercase tracking-wide">
               MAY 24, 2026 // TechFest 2.0
             </h2>
-            <p className="font-mono text-[#00dcc0] opacity-80 mt-1" style={{ fontSize: '11px', letterSpacing: '1px' }}>
+            <p className="font-mono text-[#46f4ff] opacity-80 mt-1" style={{ fontSize: '11px', letterSpacing: '1px' }}>
               Venue: Universiti Sains Malaysia Main Campus
             </p>
           </div>
@@ -199,36 +199,36 @@ function TimelineTab() {
               key={idx}
               className="flex items-stretch transition-colors duration-200"
               style={{
-                border: row.isHighlight ? '1px solid rgba(0,220,192,0.35)' : '1px solid rgba(0,220,192,0.1)',
-                backgroundColor: row.isHighlight ? 'rgba(0,220,192,0.06)' : 'transparent',
+                border: row.isHighlight ? '1px solid rgba(70,244,255,0.35)' : '1px solid rgba(70,244,255,0.1)',
+                backgroundColor: row.isHighlight ? 'rgba(70,244,255,0.06)' : 'transparent',
                 marginBottom: '8px',
               }}
               onMouseEnter={(e) => {
                 if (!row.isHighlight) {
-                  e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.05)'
-                  e.currentTarget.style.borderColor = 'rgba(0,220,192,0.3)'
+                  e.currentTarget.style.backgroundColor = 'rgba(70,244,255,0.05)'
+                  e.currentTarget.style.borderColor = 'rgba(70,244,255,0.3)'
                 }
               }}
               onMouseLeave={(e) => {
                 if (!row.isHighlight) {
                   e.currentTarget.style.backgroundColor = 'transparent'
-                  e.currentTarget.style.borderColor = 'rgba(0,220,192,0.1)'
+                  e.currentTarget.style.borderColor = 'rgba(70,244,255,0.1)'
                 }
               }}
             >
               {/* Time Column */}
               <div 
                 className="w-[90px] flex-shrink-0 flex items-center justify-center p-3"
-                style={{ borderRight: '1px solid rgba(0,220,192,0.12)' }}
+                style={{ borderRight: '1px solid rgba(70,244,255,0.12)' }}
               >
-                <span className="font-mono font-bold text-[#00dcc0] text-center" style={{ fontSize: '12px', letterSpacing: '1px' }}>
+                <span className="font-mono font-bold text-[#46f4ff] text-center" style={{ fontSize: '12px', letterSpacing: '1px' }}>
                   {row.time}
                 </span>
               </div>
 
               {/* Event Column */}
               <div className="flex-1 flex flex-col justify-center p-3 pl-4">
-                <span className="font-display text-[#e8e4d4]" style={{ fontSize: '14px', fontWeight: row.isHighlight ? 700 : 400, letterSpacing: '0.5px' }}>
+                <span className="font-display text-[#d7fdff]" style={{ fontSize: '14px', fontWeight: row.isHighlight ? 700 : 400, letterSpacing: '0.5px' }}>
                   {row.event}
                 </span>
               </div>
@@ -265,11 +265,11 @@ function SpeakersTab() {
       {speakers.map((speaker, i) => (
         <RevealOnScroll key={speaker.id} direction="up" delay={i * 0.15}>
           <div
-            className="group"
-            style={{ border: '1px solid rgba(0,220,192,0.2)' }}
+            className="group relative"
+            style={{ border: '1px solid rgba(70,244,255,0.2)' }}
           >
-            {/* Top accent line */}
-            <div className="w-full h-[2px]" style={{ backgroundColor: '#00dcc0' }} />
+            {/* Top accent line — positioned at top edge */}
+            <div className="absolute left-0 right-0 h-[2px]" style={{ top: '-1px', backgroundColor: '#46f4ff' }} />
 
             <div className="p-6">
               {/* ID tag */}
@@ -283,7 +283,7 @@ function SpeakersTab() {
               {/* Avatar placeholder / image */}
               <div
                 className="w-20 h-20 flex items-center justify-center mb-5 mx-auto overflow-hidden"
-                style={{ border: '1px solid rgba(0,220,192,0.4)' }}
+                style={{ border: '1px solid rgba(70,244,255,0.4)' }}
               >
                 {speaker.image ? (
                   <img src={speaker.image} alt={speaker.name} className="w-full h-full object-cover" />
@@ -352,16 +352,16 @@ function TopicItem({ topic, delay }: { topic: Topic; delay: number }) {
       <div
         className="flex items-center gap-5 py-4 px-5 transition-all duration-200 cursor-default"
         style={{
-          borderLeft: '2px solid rgba(0,220,192,0.2)',
-          backgroundColor: 'rgba(0,220,192,0.02)',
+          borderLeft: '2px solid rgba(70,244,255,0.2)',
+          backgroundColor: 'rgba(70,244,255,0.02)',
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.borderLeftColor = '#00dcc0'
-          e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.06)'
+          e.currentTarget.style.borderLeftColor = '#46f4ff'
+          e.currentTarget.style.backgroundColor = 'rgba(70,244,255,0.06)'
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.borderLeftColor = 'rgba(0,220,192,0.2)'
-          e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.02)'
+          e.currentTarget.style.borderLeftColor = 'rgba(70,244,255,0.2)'
+          e.currentTarget.style.backgroundColor = 'rgba(70,244,255,0.02)'
         }}
       >
         <span

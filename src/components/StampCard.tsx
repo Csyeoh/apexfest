@@ -8,14 +8,14 @@ interface StampCardProps {
 }
 
 export default function StampCard({ booth, isStamped, index }: StampCardProps) {
-  const accent = booth.event === 'techfest' ? '#00dcc0' : '#ffb830'
+  const accent = booth.event === 'techfest' ? '#46f4ff' : '#ff007f'
 
   return (
     <motion.div
       className="relative flex flex-col items-center justify-center p-4 aspect-square"
       style={{
         backgroundColor: isStamped ? 'rgba(15,15,26,0.95)' : 'rgba(15,15,26,0.5)',
-        border: isStamped ? `2px solid ${accent}` : '2px dashed rgba(232,228,212,0.15)',
+        border: isStamped ? `2px solid ${accent}` : '2px dashed rgba(215,253,255,0.15)',
         boxShadow: isStamped ? `0 0 20px ${accent}22, inset 0 0 30px ${accent}08` : 'none',
       }}
       initial={{ opacity: 0, scale: 0.8 }}
@@ -33,7 +33,7 @@ export default function StampCard({ booth, isStamped, index }: StampCardProps) {
       {/* Booth name */}
       <span
         className="font-display text-center mt-1 font-semibold uppercase"
-        style={{ fontSize: '13px', letterSpacing: '1px', color: isStamped ? '#e8e4d4' : 'rgba(232,228,212,0.3)' }}
+        style={{ fontSize: '13px', letterSpacing: '1px', color: isStamped ? '#d7fdff' : 'rgba(215,253,255,0.3)' }}
       >
         {booth.name}
       </span>
@@ -63,7 +63,7 @@ export default function StampCard({ booth, isStamped, index }: StampCardProps) {
               cx="12"
               cy="12"
               r="10"
-              stroke="rgba(232,228,212,0.15)"
+              stroke="rgba(215,253,255,0.15)"
               strokeWidth="2"
               strokeDasharray="4 4"
             />

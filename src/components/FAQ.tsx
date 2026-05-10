@@ -50,8 +50,8 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const isAmber = activeEvent === 'gamefest'
-  const accentColor = isAmber ? '#ffb830' : '#00dcc0'
-  const borderColor = isAmber ? 'rgba(255,184,48,0.15)' : 'rgba(0,220,192,0.15)'
+  const accentColor = isAmber ? '#ff007f' : '#46f4ff'
+  const borderColor = isAmber ? 'rgba(255,0,127,0.15)' : 'rgba(70,244,255,0.15)'
   const items = isAmber ? gameFestFaqItems : techFestFaqItems
 
   const toggleAccordion = (index: number) => {
@@ -92,10 +92,10 @@ export default function FAQ() {
         <div className="flex gap-4 mb-10">
           <button
             onClick={() => handleToggle('gamefest')}
-            className={`font-mono px-6 py-2 transition-all duration-300 ${isAmber ? 'text-[#ffb830]' : 'text-text-muted hover:text-text-base'}`}
+            className={`font-mono px-6 py-2 transition-all duration-300 ${isAmber ? 'text-[#ff007f]' : 'text-text-muted hover:text-text-base'}`}
             style={{
-              border: isAmber ? '1px solid rgba(255,184,48,0.5)' : '1px solid rgba(255,255,255,0.1)',
-              backgroundColor: isAmber ? 'rgba(255,184,48,0.05)' : 'transparent',
+              border: isAmber ? '1px solid rgba(255,0,127,0.5)' : '1px solid rgba(255,255,255,0.1)',
+              backgroundColor: isAmber ? 'rgba(255,0,127,0.05)' : 'transparent',
               fontSize: '12px',
               letterSpacing: '2px'
             }}
@@ -104,10 +104,10 @@ export default function FAQ() {
           </button>
           <button
             onClick={() => handleToggle('techfest')}
-            className={`font-mono px-6 py-2 transition-all duration-300 ${!isAmber ? 'text-[#00dcc0]' : 'text-text-muted hover:text-text-base'}`}
+            className={`font-mono px-6 py-2 transition-all duration-300 ${!isAmber ? 'text-[#46f4ff]' : 'text-text-muted hover:text-text-base'}`}
             style={{
-              border: !isAmber ? '1px solid rgba(0,220,192,0.5)' : '1px solid rgba(255,255,255,0.1)',
-              backgroundColor: !isAmber ? 'rgba(0,220,192,0.05)' : 'transparent',
+              border: !isAmber ? '1px solid rgba(70,244,255,0.5)' : '1px solid rgba(255,255,255,0.1)',
+              backgroundColor: !isAmber ? 'rgba(70,244,255,0.05)' : 'transparent',
               fontSize: '12px',
               letterSpacing: '2px'
             }}
@@ -143,7 +143,7 @@ export default function FAQ() {
                     onClick={() => toggleAccordion(i)}
                     className="w-full py-5 px-4 text-left flex justify-between items-center group focus:outline-none transition-colors duration-150"
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = isAmber ? 'rgba(255,184,48,0.03)' : 'rgba(0,220,192,0.03)'
+                      e.currentTarget.style.backgroundColor = isAmber ? 'rgba(255,0,127,0.03)' : 'rgba(70,244,255,0.03)'
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = 'transparent'
@@ -151,7 +151,7 @@ export default function FAQ() {
                   >
                     <span
                       className="font-display font-medium text-lg tracking-wide transition-colors duration-200"
-                      style={{ color: isOpen ? accentColor : '#e8e4d4' }}
+                      style={{ color: isOpen ? accentColor : '#d7fdff' }}
                     >
                       {item.question}
                     </span>
@@ -159,7 +159,7 @@ export default function FAQ() {
                       <motion.span
                         animate={{ rotate: isOpen ? 45 : 0 }}
                         className="font-mono flex-shrink-0"
-                        style={{ fontSize: '20px', lineHeight: 1, color: isOpen ? accentColor : 'rgba(232,228,212,0.5)' }}
+                        style={{ fontSize: '20px', lineHeight: 1, color: isOpen ? accentColor : 'rgba(215,253,255,0.5)' }}
                       >
                         +
                       </motion.span>

@@ -27,7 +27,7 @@ function LoadingFallback() {
         style={{
           fontSize: '12px',
           letterSpacing: '4px',
-          color: '#00dcc0',
+          color: '#46f4ff',
         }}
       >
         LOADING...

@@ -49,7 +49,7 @@ export default function BoothDisplay() {
     }
   }
 
-  const accent = booth?.event === 'techfest' ? '#00dcc0' : '#ffb830'
+  const accent = booth?.event === 'techfest' ? '#46f4ff' : '#ff007f'
 
   if (!unlocked) {
     return <PinEntry onSubmit={handlePin} error={pinError} />
@@ -64,7 +64,7 @@ export default function BoothDisplay() {
       width: 300,
       margin: 3,
       color: {
-        dark: '#e8e4d4',
+        dark: '#d7fdff',
         light: '#0f0f1a',
       },
     })
@@ -96,7 +96,7 @@ export default function BoothDisplay() {
     return (
       <div
         className="min-h-screen flex items-center justify-center"
-        style={{ backgroundColor: '#0a0a0f' }}
+        style={{ backgroundColor: '#081120' }}
       >
         <span
           className="font-mono"
@@ -114,12 +114,12 @@ export default function BoothDisplay() {
     <div
       className="min-h-screen flex flex-col items-center justify-center px-6"
       style={{
-        backgroundColor: '#0a0a0f',
+        backgroundColor: '#081120',
         background: `
           radial-gradient(ellipse at 50% 50%, ${accent}08 0%, transparent 70%),
-          linear-gradient(rgba(0,220,192,0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0,220,192,0.03) 1px, transparent 1px),
-          #0a0a0f
+          linear-gradient(rgba(70,244,255,0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(70,244,255,0.03) 1px, transparent 1px),
+          #081120
         `,
         backgroundSize: '100% 100%, 40px 40px, 40px 40px, 100% 100%',
       }}
@@ -139,7 +139,7 @@ export default function BoothDisplay() {
         </span>
         <h1
           className="font-display font-bold uppercase tracking-wider mt-2"
-          style={{ fontSize: '32px', color: '#e8e4d4' }}
+          style={{ fontSize: '32px', color: '#d7fdff' }}
         >
           {booth.name}
         </h1>
@@ -178,7 +178,7 @@ export default function BoothDisplay() {
       {/* Instructions */}
       <p
         className="font-mono uppercase mt-8 mb-6"
-        style={{ fontSize: '12px', letterSpacing: '4px', color: 'rgba(232,228,212,0.4)' }}
+        style={{ fontSize: '12px', letterSpacing: '4px', color: 'rgba(215,253,255,0.4)' }}
       >
         Scan to collect stamp
       </p>
@@ -187,13 +187,13 @@ export default function BoothDisplay() {
       <div className="flex flex-col items-center gap-3">
         <span
           className="font-mono"
-          style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(232,228,212,0.3)' }}
+          style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(215,253,255,0.3)' }}
         >
           Refreshing in {countdown}s
         </span>
         <div
           className="w-48 h-1"
-          style={{ backgroundColor: 'rgba(232,228,212,0.1)' }}
+          style={{ backgroundColor: 'rgba(215,253,255,0.1)' }}
         >
           <motion.div
             className="h-full"

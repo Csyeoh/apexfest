@@ -38,14 +38,14 @@ function NavLinkItem({ link }: { link: NavItem }) {
     <li>
       <Link
         to={link.to}
-        className={`relative inline-block font-mono uppercase transition-colors duration-200 ${
+        className={`relative inline-block font-ui font-semibold uppercase transition-colors duration-200 ${
           isActive
             ? 'text-techfest'
             : 'text-text-muted hover:text-text-base'
         }`}
         style={{
-          fontSize: '10px',
-          letterSpacing: '3px',
+          fontSize: '12px',
+          letterSpacing: '2px',
         }}
         aria-label={`Navigate to ${link.label}`}
         onMouseEnter={() => setHovered(true)}
@@ -55,7 +55,7 @@ function NavLinkItem({ link }: { link: NavItem }) {
         <motion.span
           className="absolute bottom-[-4px] left-0 w-full h-[1px]"
           style={{
-            backgroundColor: '#00dcc0',
+            backgroundColor: '#46f4ff',
             transformOrigin: 'left',
           }}
           initial={false}
@@ -74,7 +74,6 @@ function ProfileDropdown({ onClose }: { onClose?: () => void }) {
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
 
-  // Close on outside click
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -106,14 +105,22 @@ function ProfileDropdown({ onClose }: { onClose?: () => void }) {
           navigate('/login')
           onClose?.()
         }}
-        className="font-mono uppercase cursor-pointer transition-colors duration-200"
+        className="font-ui font-semibold uppercase cursor-pointer transition-all duration-200"
         style={{
-          fontSize: '10px',
-          letterSpacing: '3px',
+          fontSize: '12px',
+          letterSpacing: '2px',
           backgroundColor: 'transparent',
-          border: '1px solid rgba(255,184,48,0.4)',
-          color: '#ffb830',
-          padding: '4px 12px',
+          border: '1px solid rgba(255,0,127,0.4)',
+          color: '#ff007f',
+          padding: '5px 14px',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = '#ff007f'
+          e.currentTarget.style.boxShadow = '0 0 12px rgba(255,0,127,0.2)'
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = 'rgba(255,0,127,0.4)'
+          e.currentTarget.style.boxShadow = 'none'
         }}
       >
         LOGIN
@@ -143,8 +150,8 @@ function ProfileDropdown({ onClose }: { onClose?: () => void }) {
           width: '32px',
           height: '32px',
           borderRadius: '50%',
-          border: `1px solid ${open ? '#00dcc0' : 'rgba(0,220,192,0.3)'}`,
-          backgroundColor: open ? 'rgba(0,220,192,0.1)' : 'transparent',
+          border: `1px solid ${open ? '#46f4ff' : 'rgba(70,244,255,0.3)'}`,
+          backgroundColor: open ? 'rgba(70,244,255,0.1)' : 'transparent',
           transition: 'all 0.2s',
         }}
         aria-label="Profile menu"
@@ -157,11 +164,11 @@ function ProfileDropdown({ onClose }: { onClose?: () => void }) {
           />
         ) : (
           <span
-            className="font-mono"
+            className="font-display font-bold"
             style={{
               fontSize: '11px',
               letterSpacing: '0',
-              color: '#00dcc0',
+              color: '#46f4ff',
             }}
           >
             {initials}
@@ -176,8 +183,8 @@ function ProfileDropdown({ onClose }: { onClose?: () => void }) {
             className="absolute right-0 top-full mt-2 z-50"
             style={{
               width: '200px',
-              backgroundColor: 'rgba(15,15,26,0.97)',
-              border: '1px solid rgba(0,220,192,0.2)',
+              backgroundColor: 'rgba(8,17,32,0.97)',
+              border: '1px solid rgba(70,244,255,0.15)',
               backdropFilter: 'blur(12px)',
             }}
             initial={{ opacity: 0, y: -4, scale: 0.95 }}
@@ -188,11 +195,11 @@ function ProfileDropdown({ onClose }: { onClose?: () => void }) {
             {/* User info */}
             <div
               className="px-4 py-3"
-              style={{ borderBottom: '1px solid rgba(0,220,192,0.1)' }}
+              style={{ borderBottom: '1px solid rgba(70,244,255,0.08)' }}
             >
               <p
-                className="font-mono truncate"
-                style={{ fontSize: '11px', color: '#e8e4d4', letterSpacing: '0.5px' }}
+                className="font-body truncate"
+                style={{ fontSize: '13px', color: '#d7fdff' }}
               >
                 {user.displayName || user.email}
               </p>
@@ -204,21 +211,21 @@ function ProfileDropdown({ onClose }: { onClose?: () => void }) {
                 key={item.label}
                 type="button"
                 onClick={() => handleNavigate(item.path)}
-                className="w-full text-left px-4 py-3 font-mono uppercase cursor-pointer transition-colors duration-150 block"
+                className="w-full text-left px-4 py-3 font-ui font-semibold uppercase cursor-pointer transition-colors duration-150 block"
                 style={{
-                  fontSize: '10px',
+                  fontSize: '11px',
                   letterSpacing: '2px',
                   backgroundColor: 'transparent',
                   border: 'none',
-                  borderBottom: '1px solid rgba(0,220,192,0.06)',
-                  color: 'rgba(232,228,212,0.6)',
+                  borderBottom: '1px solid rgba(70,244,255,0.04)',
+                  color: 'rgba(215,253,255,0.5)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#00dcc0'
-                  e.currentTarget.style.backgroundColor = 'rgba(0,220,192,0.05)'
+                  e.currentTarget.style.color = '#46f4ff'
+                  e.currentTarget.style.backgroundColor = 'rgba(70,244,255,0.05)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'rgba(232,228,212,0.6)'
+                  e.currentTarget.style.color = 'rgba(215,253,255,0.5)'
                   e.currentTarget.style.backgroundColor = 'transparent'
                 }}
               >
@@ -230,20 +237,20 @@ function ProfileDropdown({ onClose }: { onClose?: () => void }) {
             <button
               type="button"
               onClick={handleLogout}
-              className="w-full text-left px-4 py-3 font-mono uppercase cursor-pointer transition-colors duration-150 block"
+              className="w-full text-left px-4 py-3 font-ui font-semibold uppercase cursor-pointer transition-colors duration-150 block"
               style={{
-                fontSize: '10px',
+                fontSize: '11px',
                 letterSpacing: '2px',
                 backgroundColor: 'transparent',
                 border: 'none',
-                color: 'rgba(255,68,68,0.6)',
+                color: 'rgba(255,0,127,0.5)',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#ff4444'
-                e.currentTarget.style.backgroundColor = 'rgba(255,68,68,0.05)'
+                e.currentTarget.style.color = '#ff007f'
+                e.currentTarget.style.backgroundColor = 'rgba(255,0,127,0.05)'
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'rgba(255,68,68,0.6)'
+                e.currentTarget.style.color = 'rgba(255,0,127,0.5)'
                 e.currentTarget.style.backgroundColor = 'transparent'
               }}
             >
@@ -265,25 +272,27 @@ export default function Navbar() {
     <nav
       className="sticky top-0 z-50"
       style={{
-        backgroundColor: 'rgba(10,10,15,0.9)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(0,220,192,0.2)',
+        backgroundColor: 'rgba(8,17,32,0.92)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        borderBottom: '1px solid rgba(70,244,255,0.12)',
+        height: '80px',
       }}
       aria-label="Main navigation"
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
         {/* Logo */}
         <Link
           to="/#home"
-          className="font-display font-bold text-lg tracking-wider select-none"
+          className="font-display font-bold select-none"
+          style={{ fontSize: '16px', letterSpacing: '0.04em' }}
           aria-label="ApexFest home"
           onClick={closeMenu}
         >
-          <span style={{ color: '#00dcc0' }}>GDGoC</span>{' '}
-          <span style={{ color: '#ffb830' }}>USM</span>{' '}
-          <span style={{ color: '#00dcc0' }}>// APEX</span>
-          <span style={{ color: '#ffb830' }}>FEST</span>
+          <span style={{ color: '#46f4ff' }}>GDGoC</span>{' '}
+          <span style={{ color: '#ff007f' }}>USM</span>{' '}
+          <span style={{ color: '#46f4ff' }}>// APEX</span>
+          <span style={{ color: '#ff007f' }}>FEST</span>
         </Link>
 
         {/* Desktop Nav Links */}
@@ -309,21 +318,21 @@ export default function Navbar() {
             <span
               className="block w-5 h-[1.5px] transition-all duration-200"
               style={{
-                backgroundColor: '#00dcc0',
+                backgroundColor: '#46f4ff',
                 transform: menuOpen ? 'rotate(45deg) translate(2px, 2px)' : 'none',
               }}
             />
             <span
               className="block w-5 h-[1.5px] transition-all duration-200"
               style={{
-                backgroundColor: '#00dcc0',
+                backgroundColor: '#46f4ff',
                 opacity: menuOpen ? 0 : 1,
               }}
             />
             <span
               className="block w-5 h-[1.5px] transition-all duration-200"
               style={{
-                backgroundColor: '#00dcc0',
+                backgroundColor: '#46f4ff',
                 transform: menuOpen ? 'rotate(-45deg) translate(2px, -2px)' : 'none',
               }}
             />
@@ -337,8 +346,8 @@ export default function Navbar() {
           <motion.div
             className="md:hidden overflow-hidden"
             style={{
-              borderTop: '1px solid rgba(0,220,192,0.1)',
-              backgroundColor: 'rgba(10,10,15,0.97)',
+              borderTop: '1px solid rgba(70,244,255,0.08)',
+              backgroundColor: 'rgba(8,17,32,0.97)',
             }}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
@@ -365,12 +374,12 @@ export default function Navbar() {
                     <Link
                       to={link.to}
                       onClick={closeMenu}
-                      className="block py-3 font-mono uppercase transition-colors duration-150"
+                      className="block py-3 font-ui font-semibold uppercase transition-colors duration-150"
                       style={{
-                        fontSize: '11px',
-                        letterSpacing: '3px',
-                        color: isActive ? '#00dcc0' : 'rgba(232,228,212,0.5)',
-                        borderBottom: '1px solid rgba(0,220,192,0.06)',
+                        fontSize: '13px',
+                        letterSpacing: '2px',
+                        color: isActive ? '#46f4ff' : 'rgba(215,253,255,0.5)',
+                        borderBottom: '1px solid rgba(70,244,255,0.04)',
                       }}
                       aria-label={`Navigate to ${link.label}`}
                     >
