@@ -3,7 +3,10 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useLenis } from 'lenis/react'
 import { motion } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { EffectCoverflow, Pagination } from 'swiper/modules'
 import 'swiper/css'
+import 'swiper/css/effect-coverflow'
+import 'swiper/css/pagination'
 import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
 import FAQ from '../components/FAQ'
@@ -735,18 +738,18 @@ function SpeakersSection() {
    ======================================== */
 
 const sponsors = [
-  { name: 'Hilti', image: '/images/Hilti.jpg', role: 'Main Sponsor' },
-  { name: 'Micro Modular System', image: '/images/MMS.png', role: 'Co-Sponsor' },
-  { name: 'Digital Penang', image: '/images/Digital Penang.png', role: 'Co-Sponsor' },
-  { name: 'The Empyrean', image: '/images/Empyrean.jpg', role: 'Co-Sponsor' },
-  { name: 'ZUS Coffee', image: '/images/ZUS.png', role: 'In-Kind Sponsor' },
-  { name: 'Vida', image: '/images/vida.png', role: 'In-Kind Sponsor' },
-  { name: 'Printcious', image: '/images/printcious.jpg', role: 'In-Kind Sponsor' },
+  { name: 'Hilti', image: '/images/Hilti.jpg', role: 'Main Sponsor', imageWidth: 'w-[80%]' },
+  { name: 'Micro Modular System', image: '/images/MMS.png', role: 'Co-Sponsor', imageWidth: 'w-[70%]' },
+  { name: 'Digital Penang', image: '/images/Digital Penang.png', role: 'Co-Sponsor', imageWidth: 'w-[70%]' },
+  { name: 'The Empyrean', image: '/images/Empyrean.jpg', role: 'Co-Sponsor', imageWidth: 'w-[50%]' },
+  { name: 'ZUS Coffee', image: '/images/ZUS.png', role: 'In-Kind Sponsor', imageWidth: 'w-full' },
+  { name: 'Vida', image: '/images/vida.png', role: 'In-Kind Sponsor', imageWidth: 'w-[80%]' },
+  { name: 'Printcious', image: '/images/printcious.jpg', role: 'In-Kind Sponsor', imageWidth: 'w-[85%]' },
 ]
 
 function SponsorsSection() {
   return (
-    <section id="sponsors" className="w-full max-w-7xl mx-auto px-6 py-20">
+    <section id="sponsors" className="w-full max-w-7xl mx-auto px-6 py-20 overflow-hidden">
       <RevealOnScroll direction="up">
         <div
           className="p-8 md:p-12"
@@ -757,7 +760,7 @@ function SponsorsSection() {
             boxShadow: '0 20px 60px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02)',
           }}
         >
-          <div className="text-center mb-12">
+          <div className="text-center mb-10">
             <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
               // PARTNERS &amp; SPONSORS
             </p>
@@ -769,30 +772,56 @@ function SponsorsSection() {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 max-w-4xl mx-auto">
-            {sponsors.map((sponsor, i) => (
-              <RevealOnScroll key={sponsor.name} direction="up" delay={i * 0.05}>
+          <Swiper
+            effect="coverflow"
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView="auto"
+            loop={true}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 100,
+              modifier: 2.5,
+              slideShadows: false,
+            }}
+            pagination={{ clickable: true }}
+            modules={[EffectCoverflow, Pagination]}
+            className="w-full !pb-14"
+          >
+            {sponsors.map((sponsor) => (
+              <SwiperSlide key={sponsor.name} className="!w-[280px] sm:!w-[300px]">
                 <div
-                  className="group flex items-center justify-center transition-all duration-300"
-                  style={{ width: '120px', height: '80px' }}
+                  className="flex flex-col items-center justify-start rounded-2xl pt-8 pb-6 px-6 h-full"
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '1px solid rgba(26,26,46,0.08)',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+                  }}
                 >
-                  <img
-                    src={sponsor.image}
-                    alt={sponsor.name}
-                    className="max-w-full max-h-full object-contain select-none transition-all duration-300"
-                    style={{ filter: 'grayscale(100%) opacity(0.4)' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.filter = 'grayscale(0%) opacity(1)'
+                  <div
+                    className={`h-36 ${sponsor.imageWidth || 'w-[80%]'} flex items-center justify-center overflow-hidden rounded-xl bg-white p-4`}
+                    style={{ border: '1px solid rgba(26,26,46,0.04)' }}
+                  >
+                    <img
+                      alt={sponsor.name}
+                      className="w-full h-full object-contain select-none"
+                      src={sponsor.image}
+                      draggable="false"
+                    />
+                  </div>
+                  <p
+                    className="text-center font-display font-semibold tracking-wide text-lg mt-6"
+                    style={{
+                      color: sponsor.role.includes('Main') ? '#ff007f' : '#00b4d8',
                     }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.filter = 'grayscale(100%) opacity(0.4)'
-                    }}
-                    draggable="false"
-                  />
+                  >
+                    {sponsor.role}
+                  </p>
                 </div>
-              </RevealOnScroll>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </RevealOnScroll>
     </section>
