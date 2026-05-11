@@ -100,7 +100,7 @@ export default function Sponsors() {
                   <p 
                     className="text-center font-display font-semibold tracking-wide text-xl"
                     style={{
-                      color: sponsor.role.includes('Main') ? '#ff007f' : '#46f4ff'
+                      color: sponsor.role.includes('Main') ? '#ff007f' : '#00b4d8'
                     }}
                   >
                     {sponsor.role}

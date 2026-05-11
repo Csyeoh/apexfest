@@ -48,9 +48,9 @@ export default function Login() {
   }
 
   const inputStyle = {
-    backgroundColor: 'rgba(15,15,26,0.8)',
-    border: '1px solid rgba(70,244,255,0.3)',
-    color: '#d7fdff',
+    backgroundColor: 'rgba(248,249,250,0.8)',
+    border: '1px solid rgba(0,180,216,0.3)',
+    color: '#1a1a2e',
     fontFamily: "'Share Tech Mono', monospace",
     fontSize: '13px',
     letterSpacing: '1px',
@@ -69,13 +69,13 @@ export default function Login() {
           <div className="mb-10 text-center">
             <p
               className="eyebrow font-mono uppercase mb-3"
-              style={{ color: '#46f4ff', fontSize: '10px', letterSpacing: '4px' }}
+              style={{ color: '#00b4d8', fontSize: '10px', letterSpacing: '4px' }}
             >
               // AUTHENTICATION
             </p>
             <h1
               className="font-display font-bold tracking-wider"
-              style={{ fontSize: '28px', color: '#d7fdff' }}
+              style={{ fontSize: '28px', color: '#1a1a2e' }}
             >
               {isSignUp ? 'CREATE ACCOUNT' : 'SIGN IN'}
             </h1>
@@ -88,7 +88,7 @@ export default function Login() {
               <div>
                 <label
                   className="block font-mono uppercase mb-1.5"
-                  style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(215,253,255,0.5)' }}
+                  style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(26,26,46,0.5)' }}
                 >
                   Name
                 </label>
@@ -106,7 +106,7 @@ export default function Login() {
             <div>
               <label
                 className="block font-mono uppercase mb-1.5"
-                style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(215,253,255,0.5)' }}
+                style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(26,26,46,0.5)' }}
               >
                 Email
               </label>
@@ -123,7 +123,7 @@ export default function Login() {
             <div>
               <label
                 className="block font-mono uppercase mb-1.5"
-                style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(215,253,255,0.5)' }}
+                style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(26,26,46,0.5)' }}
               >
                 Password
               </label>
@@ -155,8 +155,8 @@ export default function Login() {
               style={{
                 fontSize: '12px',
                 letterSpacing: '3px',
-                backgroundColor: '#46f4ff',
-                color: '#081120',
+                backgroundColor: '#00b4d8',
+                color: '#ffffff',
                 border: 'none',
               }}
               whileHover={{ scale: 1.02 }}
@@ -168,14 +168,14 @@ export default function Login() {
 
           {/* Divider */}
           <div className="flex items-center gap-4 my-6">
-            <div className="flex-1 h-[1px]" style={{ backgroundColor: 'rgba(70,244,255,0.15)' }} />
+            <div className="flex-1 h-[1px]" style={{ backgroundColor: 'rgba(0,180,216,0.15)' }} />
             <span
               className="font-mono uppercase"
-              style={{ fontSize: '9px', letterSpacing: '2px', color: 'rgba(215,253,255,0.3)' }}
+              style={{ fontSize: '9px', letterSpacing: '2px', color: 'rgba(26,26,46,0.3)' }}
             >
               OR
             </span>
-            <div className="flex-1 h-[1px]" style={{ backgroundColor: 'rgba(70,244,255,0.15)' }} />
+            <div className="flex-1 h-[1px]" style={{ backgroundColor: 'rgba(0,180,216,0.15)' }} />
           </div>
 
           {/* Google Sign In */}
@@ -188,7 +188,7 @@ export default function Login() {
               fontSize: '12px',
               letterSpacing: '3px',
               backgroundColor: 'transparent',
-              color: '#d7fdff',
+              color: '#1a1a2e',
               border: '1px solid rgba(255,0,127,0.4)',
             }}
             whileHover={{ borderColor: '#ff007f', color: '#ff007f' }}
@@ -200,7 +200,7 @@ export default function Login() {
           {/* Toggle */}
           <p
             className="text-center mt-6 font-mono"
-            style={{ fontSize: '11px', color: 'rgba(215,253,255,0.5)' }}
+            style={{ fontSize: '11px', color: 'rgba(26,26,46,0.5)' }}
           >
             {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
             <button
@@ -210,7 +210,7 @@ export default function Login() {
                 setError('')
               }}
               className="cursor-pointer bg-transparent border-none font-mono uppercase"
-              style={{ fontSize: '11px', color: '#46f4ff', letterSpacing: '1px' }}
+              style={{ fontSize: '11px', color: '#00b4d8', letterSpacing: '1px' }}
             >
               {isSignUp ? 'Sign In' : 'Sign Up'}
             </button>

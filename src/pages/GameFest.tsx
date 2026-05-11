@@ -71,7 +71,7 @@ function TabBar({ activeTab, onTabChange }: TabBarProps) {
                 letterSpacing: '2px',
                 padding: '10px 22px',
                 backgroundColor: isActive ? '#ff007f' : 'transparent',
-                color: isActive ? '#0a0a0f' : 'rgba(215,253,255,0.5)',
+                color: isActive ? '#ffffff' : 'rgba(26,26,46,0.5)',
                 fontWeight: isActive ? 700 : 400,
                 borderRight: i < tabs.length - 1 ? '1px solid rgba(255,0,127,0.2)' : 'none',
               }}
@@ -83,7 +83,7 @@ function TabBar({ activeTab, onTabChange }: TabBarProps) {
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.color = 'rgba(215,253,255,0.5)'
+                  e.currentTarget.style.color = 'rgba(26,26,46,0.5)'
                   e.currentTarget.style.backgroundColor = 'transparent'
                 }
               }}
@@ -234,7 +234,7 @@ function TimelineTab() {
               style={{
                 padding: '12px 0',
                 backgroundColor: isActive ? '#ff007f' : 'transparent',
-                color: isActive ? '#081120' : 'rgba(215,253,255,0.5)',
+                color: isActive ? '#1a1a2e' : 'rgba(26,26,46,0.5)',
                 fontWeight: isActive ? 700 : 400,
                 fontSize: '14px',
                 letterSpacing: '2px',
@@ -247,7 +247,7 @@ function TimelineTab() {
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.color = 'rgba(215,253,255,0.5)'
+                  e.currentTarget.style.color = 'rgba(26,26,46,0.5)'
                   e.currentTarget.style.backgroundColor = 'transparent'
                 }
               }}
@@ -318,7 +318,7 @@ function TimelineTab() {
 
                 {/* Event Column */}
                 <div className="flex-1 flex flex-col justify-center p-3 pl-4">
-                  <span className="font-display text-[#d7fdff]" style={{ fontSize: '14px', fontWeight: row.isMatch ? 700 : 400, letterSpacing: '0.5px' }}>
+                  <span className="font-display text-[#1a1a2e]" style={{ fontSize: '14px', fontWeight: row.isMatch ? 700 : 400, letterSpacing: '0.5px' }}>
                     {row.event}
                   </span>
                   {row.location && (
@@ -446,10 +446,10 @@ function PrizepoolTab() {
     return (
       <span 
         style={{ 
-          fontFamily: "'Oxanium', sans-serif", 
+          fontFamily: "'Space Grotesk', sans-serif", 
           fontWeight: 900,
           fontSize: isPodium ? (isFirst ? '26px' : '20px') : (isFirst ? '16px' : '14px'),
-          color: isFirst ? '#ff007f' : (isPodium ? '#d7fdff' : 'rgba(232, 228, 212, 0.6)')
+          color: isFirst ? '#ff007f' : (isPodium ? '#1a1a2e' : 'rgba(232, 228, 212, 0.6)')
         }}
       >
         {amount}
@@ -485,7 +485,7 @@ function PrizepoolTab() {
                   <span 
                     className="absolute inset-0 flex items-center justify-center leading-none select-none pointer-events-none"
                     style={{
-                      fontFamily: "'Oxanium', sans-serif",
+                      fontFamily: "'Space Grotesk', sans-serif",
                       fontWeight: 900,
                       fontSize: isFirst ? '90px' : prize.rank === '2ND' ? '60px' : '40px',
                       color: '#ff007f',
@@ -528,7 +528,7 @@ function PrizepoolTab() {
                 <span className="font-mono text-gamefest" style={{ fontSize: '10px', letterSpacing: '3px' }}>
                   {prize.rank}
                 </span>
-                <span className="font-display font-semibold" style={{ fontSize: '15px', color: '#d7fdff' }}>
+                <span className="font-display font-semibold" style={{ fontSize: '15px', color: '#1a1a2e' }}>
                   {prize.label}
                 </span>
                 <div className="text-right flex justify-end">
@@ -585,7 +585,7 @@ function RegisterTab() {
           className="w-full sm:w-auto px-10 py-4 font-display font-bold uppercase tracking-widest cursor-pointer transition-transform duration-200 hover:-translate-y-1 inline-block text-center rounded-sm"
           style={{
             backgroundColor: '#ff007f',
-            color: '#0a0a0f',
+            color: '#ffffff',
             fontSize: '13px',
             letterSpacing: '3px',
             textDecoration: 'none',

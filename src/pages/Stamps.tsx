@@ -33,7 +33,7 @@ function CardFace({ title, subtitle, accent, accentDim, booths: faceBooths, stam
       style={{
         backfaceVisibility: 'hidden',
         WebkitBackfaceVisibility: 'hidden',
-        backgroundColor: 'rgba(11,14,23,0.97)',
+        backgroundColor: 'rgba(255,255,255,0.97)',
         border: `1px solid ${accentDim}`,
       }}
     >
@@ -46,7 +46,7 @@ function CardFace({ title, subtitle, accent, accentDim, booths: faceBooths, stam
       </p>
       <h2
         className="font-display font-bold uppercase tracking-wider mb-8"
-        style={{ fontSize: '20px', color: '#d7fdff' }}
+        style={{ fontSize: '20px', color: '#1a1a2e' }}
       >
         {title}
       </h2>
@@ -74,7 +74,7 @@ function CardFace({ title, subtitle, accent, accentDim, booths: faceBooths, stam
         />
         <span
           className="font-mono"
-          style={{ fontSize: '11px', letterSpacing: '2px', color: isComplete ? accent : 'rgba(215,253,255,0.35)' }}
+          style={{ fontSize: '11px', letterSpacing: '2px', color: isComplete ? accent : 'rgba(26,26,46,0.35)' }}
         >
           {count}/{total}
         </span>
@@ -137,7 +137,7 @@ export default function Stamps() {
         <div className="min-h-[80vh] flex items-center justify-center">
           <span
             className="font-mono animate-pulse"
-            style={{ fontSize: '12px', letterSpacing: '4px', color: '#46f4ff' }}
+            style={{ fontSize: '12px', letterSpacing: '4px', color: '#00b4d8' }}
           >
             LOADING STAMPS...
           </span>
@@ -153,13 +153,13 @@ export default function Stamps() {
         <div className="mb-10 text-center">
           <p
             className="font-mono uppercase mb-3"
-            style={{ fontSize: '10px', letterSpacing: '4px', color: '#46f4ff' }}
+            style={{ fontSize: '10px', letterSpacing: '4px', color: '#00b4d8' }}
           >
             // STAMP CARD
           </p>
           <h1
             className="font-display font-bold tracking-wider mb-2"
-            style={{ fontSize: '28px', color: '#d7fdff' }}
+            style={{ fontSize: '28px', color: '#1a1a2e' }}
           >
             YOUR STAMPS
           </h1>
@@ -171,7 +171,7 @@ export default function Stamps() {
           <div className="flex items-center justify-between mb-2">
             <span
               className="font-mono uppercase"
-              style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(215,253,255,0.4)' }}
+              style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(26,26,46,0.4)' }}
             >
               TOTAL
             </span>
@@ -180,7 +180,7 @@ export default function Stamps() {
               style={{
                 fontSize: '12px',
                 letterSpacing: '2px',
-                color: allComplete ? '#46f4ff' : 'rgba(215,253,255,0.4)',
+                color: allComplete ? '#00b4d8' : 'rgba(26,26,46,0.4)',
               }}
             >
               {totalCount}/{booths.length}
@@ -188,11 +188,11 @@ export default function Stamps() {
           </div>
           <div
             className="w-full h-1"
-            style={{ backgroundColor: 'rgba(215,253,255,0.08)' }}
+            style={{ backgroundColor: 'rgba(26,26,46,0.08)' }}
           >
             <motion.div
               className="h-full"
-              style={{ backgroundColor: '#46f4ff' }}
+              style={{ backgroundColor: '#00b4d8' }}
               initial={{ width: 0 }}
               animate={{ width: `${(totalCount / booths.length) * 100}%` }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -205,15 +205,15 @@ export default function Stamps() {
           <motion.div
             className="w-full max-w-sm mb-8 p-4 text-center"
             style={{
-              border: '1px solid rgba(70,244,255,0.3)',
-              backgroundColor: 'rgba(70,244,255,0.05)',
+              border: '1px solid rgba(0,180,216,0.3)',
+              backgroundColor: 'rgba(0,180,216,0.05)',
             }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
           >
             <p
               className="font-mono uppercase"
-              style={{ fontSize: '11px', letterSpacing: '3px', color: '#46f4ff' }}
+              style={{ fontSize: '11px', letterSpacing: '3px', color: '#00b4d8' }}
             >
               ALL STAMPS COLLECTED — GO TO CLAIM STATION
             </p>
@@ -223,7 +223,7 @@ export default function Stamps() {
         {/* Flip hint */}
         <p
           className="font-mono mb-4 flex items-center gap-2"
-          style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(215,253,255,0.25)' }}
+          style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(26,26,46,0.25)' }}
         >
           <motion.span
             className="inline-block"
@@ -275,8 +275,8 @@ export default function Stamps() {
               <CardFace
                 title="TechFest 2.0"
                 subtitle="DAY 2 · MAY 24"
-                accent="#46f4ff"
-                accentDim="rgba(70,244,255,0.15)"
+                accent="#00b4d8"
+                accentDim="rgba(0,180,216,0.15)"
                 booths={techfestBooths}
                 stamps={stamps}
                 count={techfestCount}
@@ -294,8 +294,8 @@ export default function Stamps() {
           style={{
             fontSize: '13px',
             letterSpacing: '4px',
-            backgroundColor: '#46f4ff',
-            color: '#081120',
+            backgroundColor: '#00b4d8',
+            color: '#1a1a2e',
             border: 'none',
           }}
           whileHover={{ scale: 1.01 }}
@@ -308,13 +308,13 @@ export default function Stamps() {
         <div className="mt-14 text-center">
           <p
             className="font-mono uppercase mb-2"
-            style={{ fontSize: '10px', letterSpacing: '4px', color: 'rgba(215,253,255,0.4)' }}
+            style={{ fontSize: '10px', letterSpacing: '4px', color: 'rgba(26,26,46,0.4)' }}
           >
             YOUR VERIFICATION CODE
           </p>
           <p
             className="font-mono mb-6"
-            style={{ fontSize: '11px', color: 'rgba(215,253,255,0.3)' }}
+            style={{ fontSize: '11px', color: 'rgba(26,26,46,0.3)' }}
           >
             Show this to the claim station
           </p>

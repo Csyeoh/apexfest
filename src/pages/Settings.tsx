@@ -72,9 +72,9 @@ export default function Settings() {
   }
 
   const inputStyle = {
-    backgroundColor: 'rgba(15,15,26,0.8)',
-    border: '1px solid rgba(70,244,255,0.3)',
-    color: '#d7fdff',
+    backgroundColor: 'rgba(248,249,250,0.8)',
+    border: '1px solid rgba(0,180,216,0.3)',
+    color: '#1a1a2e',
     fontFamily: "'Share Tech Mono', monospace",
     fontSize: '13px',
     letterSpacing: '1px',
@@ -83,7 +83,7 @@ export default function Settings() {
   const labelStyle = {
     fontSize: '10px',
     letterSpacing: '2px',
-    color: 'rgba(215,253,255,0.5)',
+    color: 'rgba(26,26,46,0.5)',
   }
 
   return (
@@ -93,13 +93,13 @@ export default function Settings() {
         <div className="mb-10">
           <p
             className="eyebrow font-mono uppercase mb-3"
-            style={{ fontSize: '10px', letterSpacing: '4px', color: '#46f4ff' }}
+            style={{ fontSize: '10px', letterSpacing: '4px', color: '#00b4d8' }}
           >
             // SETTINGS
           </p>
           <h1
             className="font-display font-bold tracking-wider"
-            style={{ fontSize: '28px', color: '#d7fdff' }}
+            style={{ fontSize: '28px', color: '#1a1a2e' }}
           >
             ACCOUNT
           </h1>
@@ -109,14 +109,14 @@ export default function Settings() {
         {/* Profile Section */}
         <motion.div
           className="mb-10 p-6"
-          style={{ backgroundColor: 'rgba(15,15,26,0.6)', border: '1px solid rgba(70,244,255,0.15)' }}
+          style={{ backgroundColor: 'rgba(248,249,250,0.6)', border: '1px solid rgba(0,180,216,0.15)' }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
           <h2
             className="font-mono uppercase mb-6"
-            style={{ fontSize: '11px', letterSpacing: '3px', color: '#46f4ff' }}
+            style={{ fontSize: '11px', letterSpacing: '3px', color: '#00b4d8' }}
           >
             PROFILE
           </h2>
@@ -153,7 +153,7 @@ export default function Settings() {
               />
               <p
                 className="font-mono mt-1"
-                style={{ fontSize: '9px', letterSpacing: '1px', color: 'rgba(215,253,255,0.3)' }}
+                style={{ fontSize: '9px', letterSpacing: '1px', color: 'rgba(26,26,46,0.3)' }}
               >
                 Email cannot be changed
               </p>
@@ -168,9 +168,9 @@ export default function Settings() {
                 style={{
                   fontSize: '11px',
                   letterSpacing: '2px',
-                  color: isGoogleUser ? '#ff007f' : '#46f4ff',
-                  border: `1px solid ${isGoogleUser ? 'rgba(255,0,127,0.3)' : 'rgba(70,244,255,0.3)'}`,
-                  backgroundColor: 'rgba(15,15,26,0.8)',
+                  color: isGoogleUser ? '#ff007f' : '#00b4d8',
+                  border: `1px solid ${isGoogleUser ? 'rgba(255,0,127,0.3)' : 'rgba(0,180,216,0.3)'}`,
+                  backgroundColor: 'rgba(248,249,250,0.8)',
                 }}
               >
                 {isGoogleUser ? 'Google' : 'Email / Password'}
@@ -190,11 +190,11 @@ export default function Settings() {
               style={{
                 fontSize: '11px',
                 letterSpacing: '3px',
-                backgroundColor: nameStatus === 'saved' ? 'rgba(70,244,255,0.2)' : 'rgba(70,244,255,0.1)',
-                color: '#46f4ff',
-                border: '1px solid rgba(70,244,255,0.3)',
+                backgroundColor: nameStatus === 'saved' ? 'rgba(0,180,216,0.2)' : 'rgba(0,180,216,0.1)',
+                color: '#00b4d8',
+                border: '1px solid rgba(0,180,216,0.3)',
               }}
-              whileHover={{ backgroundColor: 'rgba(70,244,255,0.15)' }}
+              whileHover={{ backgroundColor: 'rgba(0,180,216,0.15)' }}
               whileTap={{ scale: 0.98 }}
             >
               {nameStatus === 'saving' ? 'SAVING...' : nameStatus === 'saved' ? 'SAVED' : 'SAVE NAME'}
@@ -206,7 +206,7 @@ export default function Settings() {
         {!isGoogleUser && (
           <motion.div
             className="mb-10 p-6"
-            style={{ backgroundColor: 'rgba(15,15,26,0.6)', border: '1px solid rgba(255,0,127,0.15)' }}
+            style={{ backgroundColor: 'rgba(248,249,250,0.6)', border: '1px solid rgba(255,0,127,0.15)' }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
@@ -295,27 +295,27 @@ export default function Settings() {
         {/* Account Info */}
         <motion.div
           className="p-6"
-          style={{ backgroundColor: 'rgba(15,15,26,0.6)', border: '1px solid rgba(215,253,255,0.08)' }}
+          style={{ backgroundColor: 'rgba(248,249,250,0.6)', border: '1px solid rgba(26,26,46,0.08)' }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
         >
           <h2
             className="font-mono uppercase mb-4"
-            style={{ fontSize: '11px', letterSpacing: '3px', color: 'rgba(215,253,255,0.4)' }}
+            style={{ fontSize: '11px', letterSpacing: '3px', color: 'rgba(26,26,46,0.4)' }}
           >
             ACCOUNT INFO
           </h2>
           <div className="flex flex-col gap-2">
-            <div className="flex items-center justify-between py-2" style={{ borderBottom: '1px solid rgba(215,253,255,0.06)' }}>
+            <div className="flex items-center justify-between py-2" style={{ borderBottom: '1px solid rgba(26,26,46,0.06)' }}>
               <span className="font-mono uppercase" style={{ ...labelStyle }}>User ID</span>
-              <span className="font-mono truncate ml-4" style={{ fontSize: '11px', color: 'rgba(215,253,255,0.3)', maxWidth: '200px' }}>
+              <span className="font-mono truncate ml-4" style={{ fontSize: '11px', color: 'rgba(26,26,46,0.3)', maxWidth: '200px' }}>
                 {user?.uid}
               </span>
             </div>
             <div className="flex items-center justify-between py-2">
               <span className="font-mono uppercase" style={{ ...labelStyle }}>Account Created</span>
-              <span className="font-mono" style={{ fontSize: '11px', color: 'rgba(215,253,255,0.3)' }}>
+              <span className="font-mono" style={{ fontSize: '11px', color: 'rgba(26,26,46,0.3)' }}>
                 {user?.metadata.creationTime ? new Date(user.metadata.creationTime).toLocaleDateString() : 'N/A'}
               </span>
             </div>
