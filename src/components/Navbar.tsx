@@ -273,9 +273,7 @@ export default function Navbar() {
     <nav
       className="sticky top-0 z-50"
       style={{
-        backgroundColor: 'rgba(255,255,255,0.85)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        backgroundColor: 'rgba(255,255,255,0.95)',
         borderBottom: '1px solid rgba(26,26,46,0.06)',
         height: '72px',
         boxShadow: '0 1px 12px rgba(0,0,0,0.04)',

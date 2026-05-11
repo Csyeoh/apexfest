@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useLenis } from 'lenis/react'
 import { motion } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
@@ -21,127 +20,85 @@ import slide4 from '../assets/slideshow/img_1914.webp'
 
 function HeroIllustration() {
   return (
-    <div className="relative w-full h-full min-h-[320px] md:min-h-[420px]">
-      {/* Gradient blob background */}
+    <div className="relative flex items-center justify-center min-h-[320px] md:min-h-[420px]">
+      {/* Main glow */}
       <div
-        className="absolute inset-0 rounded-full blur-3xl opacity-30"
+        className="absolute w-[400px] h-[400px] md:w-[520px] md:h-[520px] rounded-full"
         style={{
-          background: 'radial-gradient(circle at 40% 40%, rgba(255,0,127,0.3), rgba(190,107,255,0.2), rgba(0,180,216,0.2))',
+          background: 'radial-gradient(circle, rgba(255,0,127,0.2) 0%, rgba(190,107,255,0.15) 40%, rgba(0,180,216,0.12) 70%, transparent 100%)',
+          filter: 'blur(60px)',
         }}
       />
 
-      {/* Game controller */}
-      <motion.div
-        className="absolute"
-        style={{ top: '15%', left: '20%' }}
-        animate={{ y: [0, -12, 0], rotate: [-5, 5, -5] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+      {/* Main glass card */}
+      <div
+        className="relative w-[260px] h-[180px] md:w-[320px] md:h-[220px] flex items-center justify-center z-10"
+        style={{
+          borderRadius: '40px',
+          backgroundColor: 'rgba(255,255,255,0.8)',
+          border: '1px solid rgba(255,255,255,0.8)',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03)',
+        }}
       >
-        <svg width="80" height="56" viewBox="0 0 80 56" fill="none">
-          <rect x="8" y="16" width="64" height="28" rx="14" stroke="#ff007f" strokeWidth="2.5" fill="rgba(255,0,127,0.06)" />
-          <circle cx="24" cy="30" r="4" stroke="#ff007f" strokeWidth="1.5" />
-          <line x1="22" y1="30" x2="26" y2="30" stroke="#ff007f" strokeWidth="1" />
-          <line x1="24" y1="28" x2="24" y2="32" stroke="#ff007f" strokeWidth="1" />
-          <circle cx="52" cy="26" r="2.5" fill="#ff007f" opacity="0.6" />
-          <circle cx="58" cy="30" r="2.5" fill="#be6bff" opacity="0.6" />
-          <circle cx="52" cy="34" r="2.5" fill="#ff007f" opacity="0.4" />
-          <circle cx="46" cy="30" r="2.5" fill="#be6bff" opacity="0.4" />
-        </svg>
-      </motion.div>
-
-      {/* Laptop */}
-      <motion.div
-        className="absolute"
-        style={{ top: '50%', right: '15%' }}
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-      >
-        <svg width="90" height="64" viewBox="0 0 90 64" fill="none">
-          <rect x="15" y="8" width="60" height="40" rx="4" stroke="#00b4d8" strokeWidth="2" fill="rgba(0,180,216,0.05)" />
-          <rect x="20" y="13" width="50" height="30" rx="2" fill="rgba(0,180,216,0.08)" />
-          <path d="M8 48 L15 48 L15 48 L75 48 L82 48 L82 52 C82 54 80 56 78 56 L12 56 C10 56 8 54 8 52 Z" stroke="#00b4d8" strokeWidth="2" fill="rgba(0,180,216,0.04)" />
-          {/* Screen content lines */}
-          <line x1="26" y1="20" x2="50" y2="20" stroke="#00b4d8" strokeWidth="1" opacity="0.4" />
-          <line x1="26" y1="25" x2="60" y2="25" stroke="#00b4d8" strokeWidth="1" opacity="0.3" />
-          <line x1="26" y1="30" x2="44" y2="30" stroke="#00b4d8" strokeWidth="1" opacity="0.3" />
-          <rect x="26" y="34" width="16" height="5" rx="2" fill="rgba(0,180,216,0.2)" />
-        </svg>
-      </motion.div>
-
-      {/* Pixel blocks */}
-      {[
-        { x: '65%', y: '10%', color: '#ff007f', size: 16, delay: 0 },
-        { x: '72%', y: '18%', color: '#be6bff', size: 12, delay: 0.3 },
-        { x: '58%', y: '22%', color: '#00b4d8', size: 10, delay: 0.6 },
-        { x: '78%', y: '8%', color: '#44a5ff', size: 8, delay: 0.9 },
-      ].map((block, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-sm"
+        <span
+          className="font-display font-black"
           style={{
-            left: block.x,
-            top: block.y,
-            width: block.size,
-            height: block.size,
-            backgroundColor: block.color,
-            opacity: 0.6,
-            boxShadow: `0 0 8px ${block.color}44`,
+            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            background: 'linear-gradient(135deg, #ff007f, #be6bff, #00b4d8)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
           }}
-          animate={{ y: [0, -6, 0], rotate: [0, 45, 0] }}
-          transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: 'easeInOut', delay: block.delay }}
+        >
+          APEX
+        </span>
+      </div>
+
+      {/* Floating tech tags */}
+      {[
+        { label: 'GameFest', x: '-8%', y: '15%', accent: '#ff007f' },
+        { label: 'TechFest', x: '70%', y: '8%', accent: '#00b4d8' },
+        { label: 'GDGoC', x: '-5%', y: '70%', accent: '#be6bff' },
+      ].map((tag) => (
+        <div
+          key={tag.label}
+          className="absolute z-10 px-5 py-3 rounded-3xl font-display font-semibold"
+          style={{
+            left: tag.x,
+            top: tag.y,
+            fontSize: '14px',
+            color: tag.accent,
+            backgroundColor: 'rgba(255,255,255,0.8)',
+            border: '1px solid rgba(255,255,255,0.8)',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+          }}
+        >
+          {tag.label}
+        </div>
+      ))}
+
+      {/* Floating colored dots */}
+      {[
+        { x: '55%', y: '12%', color: '#ff007f', size: 6 },
+        { x: '80%', y: '45%', color: '#be6bff', size: 5 },
+        { x: '15%', y: '45%', color: '#00b4d8', size: 4 },
+      ].map((dot, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            left: dot.x,
+            top: dot.y,
+            width: dot.size,
+            height: dot.size,
+            backgroundColor: dot.color,
+            opacity: 0.6,
+          }}
         />
       ))}
 
-      {/* Floating card shapes */}
-      <motion.div
-        className="absolute rounded-xl"
-        style={{
-          top: '30%',
-          left: '55%',
-          width: '60px',
-          height: '40px',
-          border: '1.5px solid rgba(190,107,255,0.4)',
-          backgroundColor: 'rgba(190,107,255,0.06)',
-        }}
-        animate={{ y: [0, -10, 0], rotate: [8, 12, 8] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
-      {/* Confetti dots */}
-      {Array.from({ length: 8 }).map((_, i) => {
-        const colors = ['#ff007f', '#00b4d8', '#be6bff', '#44a5ff']
-        return (
-          <motion.div
-            key={`dot-${i}`}
-            className="absolute rounded-full"
-            style={{
-              left: `${15 + Math.random() * 70}%`,
-              top: `${10 + Math.random() * 70}%`,
-              width: 4 + Math.random() * 4,
-              height: 4 + Math.random() * 4,
-              backgroundColor: colors[i % colors.length],
-              opacity: 0.4,
-            }}
-            animate={{ y: [0, -15 - Math.random() * 10, 0], opacity: [0.4, 0.7, 0.4] }}
-            transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, ease: 'easeInOut', delay: i * 0.3 }}
-          />
-        )
-      })}
-
-      {/* 3D cube shape */}
-      <motion.div
-        className="absolute"
-        style={{ bottom: '20%', left: '25%' }}
-        animate={{ y: [0, -8, 0], rotate: [0, 15, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-          <polygon points="24,4 44,16 44,36 24,44 4,36 4,16" stroke="#44a5ff" strokeWidth="1.5" fill="rgba(68,165,255,0.06)" />
-          <line x1="24" y1="4" x2="24" y2="44" stroke="#44a5ff" strokeWidth="1" opacity="0.3" />
-          <line x1="4" y1="16" x2="44" y2="36" stroke="#44a5ff" strokeWidth="1" opacity="0.2" />
-          <line x1="44" y1="16" x2="4" y2="36" stroke="#44a5ff" strokeWidth="1" opacity="0.2" />
-        </svg>
-      </motion.div>
+      {/* Orbital rings */}
+      <div className="absolute inset-0 border border-slate-200/50 rounded-full scale-[1.1]" />
+      <div className="absolute inset-0 border border-slate-200/30 rounded-full scale-[1.25]" />
     </div>
   )
 }
@@ -157,15 +114,22 @@ function HeroSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-center">
         {/* Left: text */}
         <div>
-          <motion.p
-            className="font-mono mb-4"
-            style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}
+          <motion.div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
+            style={{
+              backgroundColor: 'rgba(255,255,255,0.7)',
+              border: '1px solid rgba(26,26,46,0.08)',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+            }}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0 }}
           >
-            GDGoC USM PRESENTS
-          </motion.p>
+            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#00b4d8' }} />
+            <span className="font-body text-sm" style={{ color: 'rgba(26,26,46,0.6)' }}>
+              GDGoC USM presents
+            </span>
+          </motion.div>
 
           <motion.h1
             className="font-display font-bold leading-none mb-3"
@@ -230,17 +194,17 @@ function HeroSection() {
                 letterSpacing: '0.5px',
                 background: 'linear-gradient(135deg, #be6bff, #ff007f)',
                 color: '#ffffff',
-                padding: '12px 28px',
+                padding: '14px 32px',
                 border: 'none',
-                boxShadow: '0 4px 16px rgba(190,107,255,0.3)',
+                boxShadow: '0 8px 24px rgba(190,107,255,0.3)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)'
-                e.currentTarget.style.boxShadow = '0 6px 24px rgba(190,107,255,0.4)'
+                e.currentTarget.style.boxShadow = '0 12px 32px rgba(190,107,255,0.4)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 4px 16px rgba(190,107,255,0.3)'
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(190,107,255,0.3)'
               }}
             >
               Register Now
@@ -252,21 +216,22 @@ function HeroSection() {
               style={{
                 fontSize: '14px',
                 letterSpacing: '0.5px',
-                backgroundColor: 'transparent',
+                backgroundColor: 'rgba(255,255,255,0.7)',
                 color: '#1a1a2e',
-                padding: '12px 28px',
-                border: '1.5px solid rgba(26,26,46,0.15)',
+                padding: '14px 32px',
+                border: '1px solid rgba(26,26,46,0.08)',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#00b4d8'
-                e.currentTarget.style.color = '#00b4d8'
+                e.currentTarget.style.backgroundColor = '#ffffff'
+                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.06)'
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(26,26,46,0.15)'
-                e.currentTarget.style.color = '#1a1a2e'
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.7)'
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)'
               }}
             >
-              Explore Events
+              Learn More
             </button>
           </motion.div>
 
@@ -337,15 +302,15 @@ function CountdownSection() {
   // All events passed
   if (!nextEvent) {
     return (
-      <section className="w-full max-w-7xl mx-auto px-6 py-16">
+      <section className="w-full max-w-7xl mx-auto px-6 py-20">
         <RevealOnScroll direction="up">
           <div
             className="max-w-xl mx-auto text-center p-10 md:p-12"
             style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '24px',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-              border: '1px solid rgba(26,26,46,0.06)',
+              backgroundColor: 'rgba(255,255,255,0.7)',
+              border: '1px solid rgba(255,255,255,0.8)',
+              borderRadius: '40px',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02)',
             }}
           >
             <p
@@ -378,15 +343,15 @@ function CountdownSection() {
   const daysLabel = days === 1 ? 'DAY LEFT' : 'DAYS LEFT'
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-6 py-16">
+    <section className="w-full max-w-7xl mx-auto px-6 py-20">
       <RevealOnScroll direction="up">
         <div
           className="max-w-xl mx-auto text-center p-10 md:p-12"
           style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '24px',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-            border: '1px solid rgba(26,26,46,0.06)',
+            backgroundColor: 'rgba(255,255,255,0.7)',
+            border: '1px solid rgba(255,255,255,0.8)',
+            borderRadius: '40px',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02)',
           }}
         >
           <p
@@ -454,25 +419,28 @@ function CountdownSection() {
 
 const aboutCards = [
   {
-    icon: '\u{1F3AE}',
-    title: 'Play',
-    desc: 'Compete in GameFest tournaments and side quests',
+    title: 'GameFest Tournaments',
+    desc: 'Compete in high-stakes TETR.IO battles and side quests',
+    gradient: 'linear-gradient(135deg, #ff007f22, #be6bff22)',
     accent: '#ff007f',
-    bg: 'rgba(255,0,127,0.04)',
   },
   {
-    icon: '\u{1F4A1}',
-    title: 'Learn',
-    desc: 'Hands-on workshops and talks on emerging tech',
+    title: 'Hands-on Workshops',
+    desc: 'Cloud, AI, cybersecurity, and fullstack development',
+    gradient: 'linear-gradient(135deg, #00b4d822, #44a5ff22)',
     accent: '#00b4d8',
-    bg: 'rgba(0,180,216,0.04)',
   },
   {
-    icon: '\u{1F91D}',
-    title: 'Connect',
-    desc: 'Network with peers, speakers, and industry leaders',
+    title: 'Tech Talks',
+    desc: 'Industry speakers sharing real-world insights',
+    gradient: 'linear-gradient(135deg, #be6bff22, #00b4d822)',
     accent: '#be6bff',
-    bg: 'rgba(190,107,255,0.04)',
+  },
+  {
+    title: 'Networking',
+    desc: 'Connect with peers, mentors, and industry leaders',
+    gradient: 'linear-gradient(135deg, #44a5ff22, #ff007f22)',
+    accent: '#44a5ff',
   },
 ]
 
@@ -480,56 +448,68 @@ function AboutSection() {
   return (
     <section id="about" className="w-full max-w-7xl mx-auto px-6 py-20">
       <RevealOnScroll direction="up">
-        <div className="text-center mb-12">
-          <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
-            // WHO WE ARE
-          </p>
-          <h2 className="font-display font-bold" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#1a1a2e' }}>
-            About <span style={{ color: '#00b4d8' }}>ApexFest</span>
-          </h2>
-        </div>
-      </RevealOnScroll>
-
-      <RevealOnScroll direction="up" delay={0.1}>
-        <p className="font-body text-center max-w-2xl mx-auto mb-14 text-base md:text-lg leading-relaxed" style={{ color: 'rgba(26,26,46,0.6)' }}>
-          ApexFest is a two-day tech and gaming festival organized by GDGoC USM.
-          Whether you want to level up your skills, explore hands-on workshops, or
-          connect with a passionate community — there is something for everyone.
-        </p>
-      </RevealOnScroll>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-3xl mx-auto">
-        {aboutCards.map((card, i) => (
-          <RevealOnScroll key={card.title} direction="up" delay={i * 0.1}>
-            <div
-              className="p-7 transition-all duration-300 cursor-default"
-              style={{
-                backgroundColor: '#ffffff',
-                borderRadius: '24px',
-                boxShadow: '0 2px 16px rgba(0,0,0,0.04)',
-                border: '1px solid rgba(26,26,46,0.06)',
-                borderLeft: `3px solid ${card.accent}`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)'
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.08)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 2px 16px rgba(0,0,0,0.04)'
-              }}
-            >
-              <span className="text-3xl mb-4 block">{card.icon}</span>
-              <h3 className="font-display font-bold text-lg mb-2" style={{ color: '#1a1a2e' }}>
-                {card.title}
-              </h3>
-              <p className="font-body text-sm leading-relaxed" style={{ color: 'rgba(26,26,46,0.5)' }}>
-                {card.desc}
+        <div
+          className="p-8 md:p-12"
+          style={{
+            backgroundColor: 'rgba(255,255,255,0.6)',
+            border: '1px solid rgba(255,255,255,0.8)',
+            borderRadius: '40px',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02)',
+          }}
+        >
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left: text */}
+            <div>
+              <p className="font-mono mb-4" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
+                ABOUT APEXFEST
+              </p>
+              <h2 className="font-display font-bold mb-6" style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', color: '#1a1a2e' }}>
+                A festival built for students.
+              </h2>
+              <p className="font-body text-base md:text-lg leading-relaxed" style={{ color: 'rgba(26,26,46,0.6)' }}>
+                A two-day tech and gaming festival organized by GDGoC USM.
+                Whether you want to compete, learn hands-on, or connect with a
+                passionate community — there is something for everyone.
               </p>
             </div>
-          </RevealOnScroll>
-        ))}
-      </div>
+
+            {/* Right: 2x2 feature cards */}
+            <div className="grid grid-cols-2 gap-4">
+              {aboutCards.map((card) => (
+                <div
+                  key={card.title}
+                  className="p-5 md:p-6 transition-all duration-300 cursor-default"
+                  style={{
+                    backgroundColor: 'rgba(255,255,255,0.7)',
+                    border: '1px solid rgba(26,26,46,0.05)',
+                    borderRadius: '24px',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-4px)'
+                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.06)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)'
+                    e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.03)'
+                  }}
+                >
+                  <div
+                    className="w-12 h-12 rounded-2xl mb-4"
+                    style={{ background: card.gradient }}
+                  />
+                  <h3 className="font-display font-bold text-sm md:text-base mb-1" style={{ color: '#1a1a2e' }}>
+                    {card.title}
+                  </h3>
+                  <p className="font-body text-xs md:text-sm leading-relaxed" style={{ color: 'rgba(26,26,46,0.5)' }}>
+                    {card.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </RevealOnScroll>
     </section>
   )
 }
@@ -558,46 +538,39 @@ function EventsSection() {
         {/* GameFest Card */}
         <RevealOnScroll direction="left">
           <div
-            className="relative p-8 md:p-10 overflow-hidden transition-all duration-300 cursor-pointer group"
+            className="group p-8 md:p-10 transition-all duration-300 cursor-pointer"
             style={{
-              borderRadius: '24px',
-              background: 'linear-gradient(135deg, rgba(255,0,127,0.06), rgba(190,107,255,0.06))',
-              border: '1px solid rgba(255,0,127,0.15)',
+              borderRadius: '32px',
+              backgroundColor: 'rgba(255,255,255,0.7)',
+              border: '1px solid rgba(255,255,255,0.8)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.04)',
             }}
             onClick={() => navigate('/gamefest')}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-6px)'
-              e.currentTarget.style.boxShadow = '0 12px 40px rgba(255,0,127,0.12)'
+              e.currentTarget.style.boxShadow = '0 20px 48px rgba(0,0,0,0.08)'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = 'none'
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.04)'
             }}
           >
-            {/* Pixel decorations */}
-            <div className="absolute top-4 right-4 flex gap-1.5 opacity-40">
-              <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: '#ff007f' }} />
-              <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: '#be6bff' }} />
-              <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: '#ff007f', opacity: 0.5 }} />
-            </div>
-
-            <p className="font-mono mb-4" style={{ fontSize: '10px', letterSpacing: '3px', color: '#ff007f' }}>
-              DAY 1 &middot; MAY 23
+            <div
+              className="w-16 h-16 rounded-3xl mb-6"
+              style={{ background: 'linear-gradient(135deg, #ff007f22, #be6bff22)' }}
+            />
+            <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#ff007f' }}>
+              DAY 1 &middot; MAY 16 &amp; 23
             </p>
             <h3 className="font-display font-bold text-2xl md:text-3xl mb-4" style={{ color: '#1a1a2e' }}>
               GameFest
             </h3>
-            <div className="space-y-2 mb-6">
-              {['Tournament', 'Challenges', 'Prizes'].map((item) => (
-                <div key={item} className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#ff007f' }} />
-                  <span className="font-body text-sm" style={{ color: 'rgba(26,26,46,0.6)' }}>{item}</span>
-                </div>
-              ))}
-            </div>
+            <p className="font-body text-sm leading-relaxed mb-6" style={{ color: 'rgba(26,26,46,0.5)' }}>
+              TETR.IO tournament with online qualifiers and a physical showdown.
+            </p>
             <span
-              className="font-display font-semibold inline-flex items-center gap-1 transition-colors duration-200 group-hover:text-gamefest"
-              style={{ fontSize: '14px', color: 'rgba(26,26,46,0.5)' }}
+              className="font-display font-semibold inline-flex items-center gap-1 transition-all duration-200"
+              style={{ fontSize: '14px', color: '#ff007f' }}
             >
               Explore <span className="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
             </span>
@@ -607,39 +580,39 @@ function EventsSection() {
         {/* TechFest Card */}
         <RevealOnScroll direction="right">
           <div
-            className="relative p-8 md:p-10 overflow-hidden transition-all duration-300 cursor-pointer group"
+            className="group p-8 md:p-10 transition-all duration-300 cursor-pointer"
             style={{
-              borderRadius: '24px',
-              background: 'linear-gradient(135deg, rgba(0,180,216,0.06), rgba(68,165,255,0.06))',
-              border: '1px solid rgba(0,180,216,0.15)',
+              borderRadius: '32px',
+              backgroundColor: 'rgba(255,255,255,0.7)',
+              border: '1px solid rgba(255,255,255,0.8)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.04)',
             }}
             onClick={() => navigate('/techfest')}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-6px)'
-              e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,180,216,0.12)'
+              e.currentTarget.style.boxShadow = '0 20px 48px rgba(0,0,0,0.08)'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = 'none'
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.04)'
             }}
           >
-            <p className="font-mono mb-4" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
+            <div
+              className="w-16 h-16 rounded-3xl mb-6"
+              style={{ background: 'linear-gradient(135deg, #00b4d822, #44a5ff22)' }}
+            />
+            <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
               DAY 2 &middot; MAY 24
             </p>
             <h3 className="font-display font-bold text-2xl md:text-3xl mb-4" style={{ color: '#1a1a2e' }}>
               TechFest 2.0
             </h3>
-            <div className="space-y-2 mb-6">
-              {['Talks', 'Workshops', 'Showcase'].map((item) => (
-                <div key={item} className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#00b4d8' }} />
-                  <span className="font-body text-sm" style={{ color: 'rgba(26,26,46,0.6)' }}>{item}</span>
-                </div>
-              ))}
-            </div>
+            <p className="font-body text-sm leading-relaxed mb-6" style={{ color: 'rgba(26,26,46,0.5)' }}>
+              Hands-on workshops and talks on AI, cloud, cybersecurity, and more.
+            </p>
             <span
-              className="font-display font-semibold inline-flex items-center gap-1 transition-colors duration-200 group-hover:text-techfest"
-              style={{ fontSize: '14px', color: 'rgba(26,26,46,0.5)' }}
+              className="font-display font-semibold inline-flex items-center gap-1 transition-all duration-200"
+              style={{ fontSize: '14px', color: '#00b4d8' }}
             >
               Explore <span className="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
             </span>
@@ -674,76 +647,85 @@ function SpeakersSection() {
   return (
     <section id="speakers" className="w-full max-w-7xl mx-auto px-6 py-20">
       <RevealOnScroll direction="up">
-        <div className="text-center mb-12">
-          <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
-            // MEET THE SPEAKERS
-          </p>
-          <h2 className="font-display font-bold" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#1a1a2e' }}>
-            Our <span style={{ color: '#00b4d8' }}>Speakers</span>
-          </h2>
+        <div
+          className="p-8 md:p-12"
+          style={{
+            backgroundColor: 'rgba(255,255,255,0.6)',
+            border: '1px solid rgba(255,255,255,0.8)',
+            borderRadius: '40px',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02)',
+          }}
+        >
+          <div className="text-center mb-10">
+            <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
+              // MEET THE SPEAKERS
+            </p>
+            <h2 className="font-display font-bold" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#1a1a2e' }}>
+              Our <span style={{ color: '#00b4d8' }}>Speakers</span>
+            </h2>
+          </div>
+
+          <Swiper
+            slidesPerView={1.5}
+            spaceBetween={24}
+            centeredSlides={true}
+            loop={true}
+    
+            breakpoints={{
+              640: { slidesPerView: 2.5 },
+              1024: { slidesPerView: 3.5 },
+            }}
+            className="w-full !pb-4"
+          >
+            {speakers.map((speaker, i) => (
+              <SwiperSlide key={i}>
+                <RevealOnScroll direction="up" delay={i * 0.1}>
+                  <div className="flex flex-col items-center text-center py-6">
+                    {/* Circular avatar */}
+                    <div
+                      className="w-24 h-24 rounded-full flex items-center justify-center mb-4 overflow-hidden"
+                      style={{
+                        border: `2px solid ${speaker.accent}`,
+                        boxShadow: `0 0 20px ${speaker.accent}22`,
+                        backgroundColor: `${speaker.accent}08`,
+                      }}
+                    >
+                      {speaker.image ? (
+                        <img src={speaker.image} alt={speaker.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <span
+                          className="font-display font-bold"
+                          style={{ fontSize: '24px', color: speaker.accent }}
+                        >
+                          {speaker.initials}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="font-display font-semibold text-base mb-1" style={{ color: '#1a1a2e' }}>
+                      {speaker.name}
+                    </h3>
+                    <p className="font-body text-sm mb-1" style={{ color: 'rgba(26,26,46,0.5)' }}>
+                      {speaker.role}
+                    </p>
+                    <span
+                      className="font-mono inline-block px-3 py-1 rounded-full"
+                      style={{
+                        fontSize: '9px',
+                        letterSpacing: '1px',
+                        color: speaker.accent,
+                        backgroundColor: `${speaker.accent}08`,
+                        border: `1px solid ${speaker.accent}20`,
+                      }}
+                    >
+                      {speaker.org}
+                    </span>
+                  </div>
+                </RevealOnScroll>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </RevealOnScroll>
-
-      <Swiper
-        slidesPerView={1.5}
-        spaceBetween={24}
-        centeredSlides={true}
-        loop={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        breakpoints={{
-          640: { slidesPerView: 2.5 },
-          1024: { slidesPerView: 3.5 },
-        }}
-        modules={[Autoplay]}
-        className="w-full !pb-8"
-      >
-        {speakers.map((speaker, i) => (
-          <SwiperSlide key={i}>
-            <RevealOnScroll direction="up" delay={i * 0.1}>
-              <div className="flex flex-col items-center text-center py-6">
-                {/* Circular avatar */}
-                <div
-                  className="w-24 h-24 rounded-full flex items-center justify-center mb-4 overflow-hidden"
-                  style={{
-                    border: `2px solid ${speaker.accent}`,
-                    boxShadow: `0 0 20px ${speaker.accent}22`,
-                    backgroundColor: `${speaker.accent}08`,
-                  }}
-                >
-                  {speaker.image ? (
-                    <img src={speaker.image} alt={speaker.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <span
-                      className="font-display font-bold"
-                      style={{ fontSize: '24px', color: speaker.accent }}
-                    >
-                      {speaker.initials}
-                    </span>
-                  )}
-                </div>
-                <h3 className="font-display font-semibold text-base mb-1" style={{ color: '#1a1a2e' }}>
-                  {speaker.name}
-                </h3>
-                <p className="font-body text-sm mb-1" style={{ color: 'rgba(26,26,46,0.5)' }}>
-                  {speaker.role}
-                </p>
-                <span
-                  className="font-mono inline-block px-3 py-1 rounded-full"
-                  style={{
-                    fontSize: '9px',
-                    letterSpacing: '1px',
-                    color: speaker.accent,
-                    backgroundColor: `${speaker.accent}08`,
-                    border: `1px solid ${speaker.accent}20`,
-                  }}
-                >
-                  {speaker.org}
-                </span>
-              </div>
-            </RevealOnScroll>
-          </SwiperSlide>
-        ))}
-      </Swiper>
     </section>
   )
 }
@@ -766,43 +748,53 @@ function SponsorsSection() {
   return (
     <section id="sponsors" className="w-full max-w-7xl mx-auto px-6 py-20">
       <RevealOnScroll direction="up">
-        <div className="text-center mb-12">
-          <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
-            // PARTNERS &amp; SPONSORS
-          </p>
-          <h2 className="font-display font-bold mb-2" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#1a1a2e' }}>
-            Our <span style={{ color: '#00b4d8' }}>Sponsors</span>
-          </h2>
-          <p className="font-body text-sm" style={{ color: 'rgba(26,26,46,0.4)' }}>
-            Powered by industry leaders
-          </p>
+        <div
+          className="p-8 md:p-12"
+          style={{
+            backgroundColor: 'rgba(255,255,255,0.6)',
+            border: '1px solid rgba(255,255,255,0.8)',
+            borderRadius: '40px',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02)',
+          }}
+        >
+          <div className="text-center mb-12">
+            <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
+              // PARTNERS &amp; SPONSORS
+            </p>
+            <h2 className="font-display font-bold mb-2" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#1a1a2e' }}>
+              Our <span style={{ color: '#00b4d8' }}>Sponsors</span>
+            </h2>
+            <p className="font-body text-sm" style={{ color: 'rgba(26,26,46,0.4)' }}>
+              Powered by industry leaders
+            </p>
+          </div>
+
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 max-w-4xl mx-auto">
+            {sponsors.map((sponsor, i) => (
+              <RevealOnScroll key={sponsor.name} direction="up" delay={i * 0.05}>
+                <div
+                  className="group flex items-center justify-center transition-all duration-300"
+                  style={{ width: '120px', height: '80px' }}
+                >
+                  <img
+                    src={sponsor.image}
+                    alt={sponsor.name}
+                    className="max-w-full max-h-full object-contain select-none transition-all duration-300"
+                    style={{ filter: 'grayscale(100%) opacity(0.4)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.filter = 'grayscale(0%) opacity(1)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.filter = 'grayscale(100%) opacity(0.4)'
+                    }}
+                    draggable="false"
+                  />
+                </div>
+              </RevealOnScroll>
+            ))}
+          </div>
         </div>
       </RevealOnScroll>
-
-      <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 max-w-4xl mx-auto">
-        {sponsors.map((sponsor, i) => (
-          <RevealOnScroll key={sponsor.name} direction="up" delay={i * 0.05}>
-            <div
-              className="group flex items-center justify-center transition-all duration-300"
-              style={{ width: '120px', height: '80px' }}
-            >
-              <img
-                src={sponsor.image}
-                alt={sponsor.name}
-                className="max-w-full max-h-full object-contain select-none transition-all duration-300"
-                style={{ filter: 'grayscale(100%) opacity(0.4)' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.filter = 'grayscale(0%) opacity(1)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.filter = 'grayscale(100%) opacity(0.4)'
-                }}
-                draggable="false"
-              />
-            </div>
-          </RevealOnScroll>
-        ))}
-      </div>
     </section>
   )
 }
@@ -822,40 +814,50 @@ function GallerySection() {
   return (
     <section className="w-full max-w-7xl mx-auto px-6 py-20">
       <RevealOnScroll direction="up">
-        <div className="text-center mb-12">
-          <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
-            // LAST YEAR
-          </p>
-          <h2 className="font-display font-bold" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#1a1a2e' }}>
-            Event <span style={{ color: '#be6bff' }}>Highlights</span>
-          </h2>
+        <div
+          className="p-8 md:p-12"
+          style={{
+            backgroundColor: 'rgba(255,255,255,0.6)',
+            border: '1px solid rgba(255,255,255,0.8)',
+            borderRadius: '40px',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02)',
+          }}
+        >
+          <div className="text-center mb-12">
+            <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
+              // LAST YEAR
+            </p>
+            <h2 className="font-display font-bold" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#1a1a2e' }}>
+              Event <span style={{ color: '#be6bff' }}>Highlights</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
+            {photos.map((photo, i) => (
+              <RevealOnScroll key={i} direction="up" delay={i * 0.1}>
+                <div
+                  className="transition-all duration-300 hover:scale-105 hover:z-10"
+                  style={{
+                    transform: `rotate(${photo.rotation}deg)`,
+                    backgroundColor: '#ffffff',
+                    padding: '8px 8px 28px 8px',
+                    borderRadius: '4px',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+                  }}
+                >
+                  <div className="aspect-square overflow-hidden rounded-sm">
+                    <img
+                      src={photo.src}
+                      alt={`ApexFest highlight ${i + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </RevealOnScroll>
+            ))}
+          </div>
         </div>
       </RevealOnScroll>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
-        {photos.map((photo, i) => (
-          <RevealOnScroll key={i} direction="up" delay={i * 0.1}>
-            <div
-              className="transition-all duration-300 hover:scale-105 hover:z-10"
-              style={{
-                transform: `rotate(${photo.rotation}deg)`,
-                backgroundColor: '#ffffff',
-                padding: '8px 8px 28px 8px',
-                borderRadius: '4px',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-              }}
-            >
-              <div className="aspect-square overflow-hidden rounded-sm">
-                <img
-                  src={photo.src}
-                  alt={`ApexFest highlight ${i + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </RevealOnScroll>
-        ))}
-      </div>
     </section>
   )
 }
@@ -873,7 +875,7 @@ function FinalCtaSection() {
         <div
           className="max-w-4xl mx-auto text-center py-16 md:py-20 px-6"
           style={{
-            borderRadius: '24px',
+            borderRadius: '40px',
             background: 'linear-gradient(135deg, #ff007f, #be6bff, #00b4d8)',
           }}
         >

@@ -225,20 +225,18 @@ export default function Stamps() {
           className="font-mono mb-4 flex items-center gap-2"
           style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(26,26,46,0.25)' }}
         >
-          <motion.span
-            className="inline-block"
-            animate={{ rotate: [0, 180, 360] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          <span
+            className="inline-block spin-slow"
             style={{ fontSize: '14px' }}
           >
             ⟳
-          </motion.span>
+          </span>
           TAP TO FLIP
         </p>
 
         {/* Flip card */}
-        <motion.div
-          className="relative cursor-pointer"
+        <div
+          className="relative cursor-pointer float-gentle"
           style={{
             width: '100%',
             maxWidth: '400px',
@@ -246,8 +244,6 @@ export default function Stamps() {
             perspective: '1200px',
           }}
           onClick={() => setFlipped((f) => !f)}
-          animate={{ y: [0, -6, 0] }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
         >
           <motion.div
             className="relative w-full h-full"
@@ -284,7 +280,7 @@ export default function Stamps() {
               />
             </div>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Scan button */}
         <motion.button

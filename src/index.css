@@ -18,7 +18,7 @@
 
   body {
     font-family: 'Inter', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #FAFBFC;
     color: #1a1a2e;
     min-height: 100vh;
     overflow-x: hidden;
@@ -40,10 +40,8 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-image: radial-gradient(rgba(26, 26, 46, 0.04) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(26, 26, 46, 0.025) 1px, transparent 1px);
   background-size: 24px 24px;
-  will-change: transform;
-  transform: translateZ(0);
 }
 
 #root {
@@ -167,4 +165,23 @@ body::before {
     opacity: 0.4;
     transform: scale(0.85);
   }
+}
+
+/* Stamps page */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.spin-slow {
+  animation: spin-slow 3s ease-in-out infinite;
+}
+
+.float-gentle {
+  animation: float-gentle 3.5s ease-in-out infinite;
 }
