@@ -9,8 +9,8 @@ interface NavItem {
 }
 
 const navLinks: NavItem[] = [
+  { to: '/#home', label: 'Home' },
   { to: '/#about', label: 'About' },
-  { to: '/#events', label: 'Events' },
   { to: '/#speakers', label: 'Speakers' },
   { to: '/#sponsors', label: 'Sponsors' },
   { to: '/#faq', label: 'FAQ' },
@@ -64,6 +64,182 @@ function NavLinkItem({ link }: { link: NavItem }) {
         />
       </Link>
     </li>
+  )
+}
+
+function EventsDropdown({ onClose }: { onClose?: () => void }) {
+  const [open, setOpen] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const isActive = location.pathname === '/gamefest' || location.pathname === '/techfest'
+
+  const items = [
+    { to: '/gamefest', label: 'GameFest', color: '#ff007f' },
+    { to: '/techfest', label: 'TechFest', color: '#00b4d8' },
+  ]
+
+  return (
+    <li
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        onClick={() => {
+          navigate('/#events')
+          onClose?.()
+        }}
+        className={`relative inline-flex items-center gap-1 font-ui font-medium cursor-pointer transition-colors duration-200 ${
+          isActive ? 'text-text-base' : 'text-text-muted hover:text-text-base'
+        }`}
+        style={{
+          fontSize: '14px',
+          letterSpacing: '0.5px',
+          background: 'none',
+          border: 'none',
+        }}
+        aria-label="Events menu"
+      >
+        Events
+        <svg
+          className="w-3 h-3 transition-transform duration-200"
+          style={{ transform: open ? 'rotate(180deg)' : 'rotate(0)' }}
+          fill="none"
+          viewBox="0 0 10 6"
+        >
+          <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <motion.span
+          className="absolute bottom-[-4px] left-0 w-full h-[2px] rounded-full"
+          style={{
+            background: 'linear-gradient(90deg, #ff007f, #be6bff)',
+            transformOrigin: 'left',
+          }}
+          initial={false}
+          animate={{ scaleX: isActive || open ? 1 : 0 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          aria-hidden="true"
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="absolute left-0 top-full mt-2 z-50"
+            style={{
+              width: '180px',
+              backgroundColor: '#ffffff',
+              border: '1px solid rgba(26,26,46,0.08)',
+              borderRadius: '16px',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.08)',
+              overflow: 'hidden',
+            }}
+            initial={{ opacity: 0, y: -4, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -4, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
+          >
+            {items.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                onClick={() => {
+                  setOpen(false)
+                  onClose?.()
+                }}
+                className="flex items-center gap-3 px-4 py-3 font-ui font-medium transition-colors duration-150"
+                style={{
+                  fontSize: '13px',
+                  letterSpacing: '0.5px',
+                  color: location.pathname === item.to ? '#1a1a2e' : 'rgba(26,26,46,0.6)',
+                  textDecoration: 'none',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#1a1a2e'
+                  e.currentTarget.style.backgroundColor = 'rgba(0,180,216,0.05)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = location.pathname === item.to ? '#1a1a2e' : 'rgba(26,26,46,0.6)'
+                  e.currentTarget.style.backgroundColor = 'transparent'
+                }}
+              >
+                <span
+                  className="w-2 h-2 rounded-full"
+                  style={{ backgroundColor: item.color }}
+                />
+                {item.label}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </li>
+  )
+}
+
+function MobileEventsMenu({ closeMenu }: { closeMenu: () => void }) {
+  const [expanded, setExpanded] = useState(false)
+  const location = useLocation()
+
+  const items = [
+    { to: '/gamefest', label: 'GameFest', color: '#ff007f' },
+    { to: '/techfest', label: 'TechFest', color: '#00b4d8' },
+  ]
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => setExpanded(!expanded)}
+        className="w-full flex items-center justify-between py-3 font-ui font-medium cursor-pointer transition-colors duration-150"
+        style={{
+          fontSize: '15px',
+          letterSpacing: '0.5px',
+          color: (location.pathname === '/gamefest' || location.pathname === '/techfest')
+            ? '#1a1a2e' : 'rgba(26,26,46,0.5)',
+          background: 'none',
+          border: 'none',
+          borderBottom: '1px solid rgba(26,26,46,0.04)',
+        }}
+      >
+        Events
+        <svg
+          className="w-3 h-3 transition-transform duration-200"
+          style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0)' }}
+          fill="none"
+          viewBox="0 0 10 6"
+        >
+          <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      {expanded && (
+        <div className="pl-4">
+          {items.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              onClick={closeMenu}
+              className="flex items-center gap-3 py-3 font-ui font-medium transition-colors duration-150"
+              style={{
+                fontSize: '14px',
+                letterSpacing: '0.5px',
+                color: location.pathname === item.to ? '#1a1a2e' : 'rgba(26,26,46,0.5)',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(26,26,46,0.04)',
+              }}
+            >
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: item.color }}
+              />
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -301,6 +477,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <NavLinkItem key={link.to} link={link} />
             ))}
+            <EventsDropdown />
           </ul>
           <ProfileDropdown />
         </div>
@@ -388,6 +565,10 @@ export default function Navbar() {
                   </li>
                 )
               })}
+              {/* Events sub-links */}
+              <li>
+                <MobileEventsMenu closeMenu={closeMenu} />
+              </li>
             </ul>
           </motion.div>
         )}
