@@ -279,7 +279,7 @@ function HeroSection() {
           >
             {[
               { icon: '\u{1F4CD}', label: 'USM Penang' },
-              { icon: '\u{1F4C5}', label: 'May 23-24, 2026' },
+              { icon: '\u{1F4C5}', label: 'May 16-24, 2026' },
               { icon: '\u{1F465}', label: 'Open to all students' },
             ].map((chip) => (
               <span
@@ -318,7 +318,12 @@ function HeroSection() {
    ======================================== */
 
 function CountdownSection() {
-  const eventDate = new Date('2026-05-23T09:00:00')
+  const events = [
+    { date: new Date('2026-05-16T20:00:00'), label: 'GameFest Online Qualifier', accent: '#ff007f' },
+    { date: new Date('2026-05-23T09:00:00'), label: 'GameFest Physical D-Day', accent: '#ff007f' },
+    { date: new Date('2026-05-24T09:00:00'), label: 'TechFest 2.0', accent: '#00b4d8' },
+  ]
+
   const [now, setNow] = useState(new Date())
 
   useEffect(() => {
@@ -326,11 +331,51 @@ function CountdownSection() {
     return () => clearInterval(interval)
   }, [])
 
-  const diff = eventDate.getTime() - now.getTime()
+  // Find the next upcoming event
+  const nextEvent = events.find((e) => e.date.getTime() > now.getTime())
+
+  // All events passed
+  if (!nextEvent) {
+    return (
+      <section className="w-full max-w-7xl mx-auto px-6 py-16">
+        <RevealOnScroll direction="up">
+          <div
+            className="max-w-xl mx-auto text-center p-10 md:p-12"
+            style={{
+              backgroundColor: '#ffffff',
+              borderRadius: '24px',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+              border: '1px solid rgba(26,26,46,0.06)',
+            }}
+          >
+            <p
+              className="font-mono mb-3"
+              style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}
+            >
+              APEXFEST 2026
+            </p>
+            <p
+              className="font-display font-bold mb-2"
+              style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#1a1a2e' }}
+            >
+              Thank You!
+            </p>
+            <p className="font-body text-base" style={{ color: 'rgba(26,26,46,0.5)' }}>
+              ApexFest 2026 has concluded. See you next year!
+            </p>
+          </div>
+        </RevealOnScroll>
+      </section>
+    )
+  }
+
+  const diff = nextEvent.date.getTime() - now.getTime()
   const days = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)))
   const hours = Math.max(0, Math.floor((diff / (1000 * 60 * 60)) % 24))
   const minutes = Math.max(0, Math.floor((diff / (1000 * 60)) % 60))
   const seconds = Math.max(0, Math.floor((diff / 1000) % 60))
+
+  const daysLabel = days === 1 ? 'DAY LEFT' : 'DAYS LEFT'
 
   return (
     <section className="w-full max-w-7xl mx-auto px-6 py-16">
@@ -346,15 +391,21 @@ function CountdownSection() {
         >
           <p
             className="font-mono mb-3"
-            style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}
+            style={{ fontSize: '10px', letterSpacing: '3px', color: nextEvent.accent }}
           >
             COUNTDOWN
           </p>
           <p
-            className="font-display font-bold mb-8"
+            className="font-display font-bold mb-2"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', color: '#1a1a2e' }}
           >
-            {days} <span style={{ fontSize: '0.5em', opacity: 0.5 }}>DAYS LEFT</span>
+            {days} <span style={{ fontSize: '0.5em', opacity: 0.5 }}>{daysLabel}</span>
+          </p>
+          <p
+            className="font-body text-sm mb-8"
+            style={{ color: 'rgba(26,26,46,0.5)' }}
+          >
+            to {nextEvent.label}
           </p>
 
           <div className="flex justify-center gap-3 md:gap-4 mb-6">
