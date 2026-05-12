@@ -208,3 +208,10 @@ body::before {
 .floating-slower {
   animation: hero-float-alt 8s ease-in-out infinite;
 }
+
+.floating-r1 { animation: hero-float 5s ease-in-out infinite; }
+.floating-r2 { animation: hero-float-alt 7s ease-in-out infinite; }
+.floating-r3 { animation: hero-float 9s ease-in-out infinite; }
+.floating-r4 { animation: hero-float-alt 5.5s ease-in-out infinite; }
+.floating-r5 { animation: hero-float 6.5s ease-in-out infinite; }
+.floating-r6 { animation: hero-float-alt 8.5s ease-in-out infinite; }

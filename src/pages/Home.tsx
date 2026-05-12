@@ -91,7 +91,7 @@ function HeroIllustration() {
       <img
         src={firebaseImg}
         alt=""
-        className="absolute select-none floating-slow"
+        className="absolute select-none floating-r1"
         style={{ right: '20%', top: '70%', width: '150px', zIndex: 4 }}
         draggable="false"
       />
@@ -100,7 +100,7 @@ function HeroIllustration() {
       <img
         src={flutterImg}
         alt=""
-        className="absolute select-none floating-slower"
+        className="absolute select-none floating-r2"
         style={{ left: '65%', bottom: '65%', width: '150px', zIndex: 4 }}
         draggable="false"
       />
@@ -109,7 +109,7 @@ function HeroIllustration() {
       <img
         src={geminiImg}
         alt=""
-        className="absolute select-none floating-slow"
+        className="absolute select-none floating-r3"
         style={{ left: '5%', top: '55%', width: '90px', zIndex: 6 }}
         draggable="false"
       />
@@ -118,7 +118,7 @@ function HeroIllustration() {
       <img
         src={yellowdotImg}
         alt=""
-        className="absolute select-none floating-slow"
+        className="absolute select-none floating-r4"
         style={{ left: '28%', top: '70%', width: '55px', zIndex: 3 }}
         draggable="false"
       />
@@ -127,7 +127,7 @@ function HeroIllustration() {
       <img
         src={bluedotImg}
         alt=""
-        className="absolute select-none floating"
+        className="absolute select-none floating-r5"
         style={{ right: '15%', top: '30%', width: '55px', zIndex: 3 }}
         draggable="false"
       />
@@ -136,7 +136,7 @@ function HeroIllustration() {
       <img
         src={lightdotImg}
         alt=""
-        className="absolute select-none floating-slow"
+        className="absolute select-none floating-r6"
         style={{ left: '15%', top: '40%', width: '50px', zIndex: 6 }}
         draggable="false"
       />
