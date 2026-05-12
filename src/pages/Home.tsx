@@ -28,6 +28,7 @@ import firebaseImg from '../assets/home/firebase.png'
 import yellowdotImg from '../assets/home/yellowdot.png'
 import bluedotImg from '../assets/home/bluedot.png'
 import lightdotImg from '../assets/home/lightdot.png'
+import bannerLogo from '../assets/bannerlogo.png'
 
 /* ========================================
    HERO — Split layout + CSS illustrations
@@ -150,7 +151,7 @@ function HeroSection() {
   return (
     <section
       id="home"
-      className="relative w-full max-w-7xl mx-auto px-6 pt-24 pb-28 md:pt-32 md:pb-36"
+      className="relative w-full max-w-7xl mx-auto px-6 pt-10 pb-8 md:pt-12 md:pb-10"
     >
       {/* Gradient wash behind hero */}
       <div
@@ -159,9 +160,9 @@ function HeroSection() {
           background: 'linear-gradient(180deg, rgba(190,107,255,0.03) 0%, rgba(0,180,216,0.02) 50%, transparent 100%)',
         }}
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-center relative z-10">
         {/* Left: text */}
-        <div>
+        <div style={{ marginTop: '-48px' }}>
           <motion.div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
             style={{
@@ -321,6 +322,17 @@ function HeroSection() {
         >
           <HeroIllustration />
         </motion.div>
+      </div>
+
+      {/* Supported by banner */}
+      <div className="flex justify-center mt-2">
+        <img
+          src={bannerLogo}
+          alt="Supported by Universiti Sains Malaysia, Pusat Kreativiti & Inovasi, and Google Developer Group on Campus USM"
+          className="select-none"
+          style={{ height: '50px', transform: 'translateX(8px)' }}
+          draggable="false"
+        />
       </div>
     </section>
   )

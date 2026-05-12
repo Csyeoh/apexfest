@@ -21,7 +21,8 @@
       "Bash(Select-String -Pattern \"SponsorsSection\" -Context 0,80)",
       "PowerShell(cd \"D:\\\\Project\\\\apexfest\"; $content = git show 84ce30e:src/pages/Home.tsx; $lines = $content -split \"`n\"; $start = \\($lines | Select-String \"SponsorsSection\"\\).LineNumber; $lines[\\($start-1\\)..\\($start+80\\)] -join \"`n\")",
       "Bash(node screenshot.cjs)",
-      "Bash(npx playwright *)"
+      "Bash(npx playwright *)",
+      "Bash(timeout 5)"
     ]
   }
 }
