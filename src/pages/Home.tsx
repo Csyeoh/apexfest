@@ -55,7 +55,7 @@ function HeroIllustration() {
       <img
         src={bg1Img}
         alt=""
-        className="absolute select-none floating-slow"
+        className="absolute select-none"
         style={{ left: '15%', top: '20%', width: '280px', zIndex: 2 }}
         draggable="false"
       />
@@ -64,7 +64,7 @@ function HeroIllustration() {
       <img
         src={bg2Img}
         alt=""
-        className="absolute select-none floating-slower"
+        className="absolute select-none"
         style={{ right: '20%', bottom: '20%', width: '300px', zIndex: 2 }}
         draggable="false"
       />
