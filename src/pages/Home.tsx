@@ -17,91 +17,129 @@ import slide2 from '../assets/slideshow/img_1561.webp'
 import slide3 from '../assets/slideshow/img_1574.webp'
 import slide4 from '../assets/slideshow/img_1914.webp'
 
+import logoImg from '../assets/home/logo.png'
+import bg1Img from '../assets/home/bg1.png'
+import bg2Img from '../assets/home/bg2.png'
+import shadow1Img from '../assets/home/shadow1.png'
+import shadow2Img from '../assets/home/shadow2.png'
+import geminiImg from '../assets/home/gemini.png'
+import flutterImg from '../assets/home/flutter.png'
+import firebaseImg from '../assets/home/firebase.png'
+import yellowdotImg from '../assets/home/yellowdot.png'
+import bluedotImg from '../assets/home/bluedot.png'
+import lightdotImg from '../assets/home/lightdot.png'
+
 /* ========================================
    HERO — Split layout + CSS illustrations
    ======================================== */
 
 function HeroIllustration() {
   return (
-    <div className="relative flex items-center justify-center min-h-[320px] md:min-h-[420px]">
-      {/* Main glow */}
-      <div
-        className="absolute w-[400px] h-[400px] md:w-[520px] md:h-[520px] rounded-full"
+    <div className="relative w-full max-w-[520px] mx-auto" style={{ aspectRatio: '1 / 1' }}>
+      {/* Logo — center of canvas */}
+      <img
+        src={logoImg}
+        alt=""
+        className="absolute select-none"
         style={{
-          background: 'radial-gradient(circle, rgba(255,0,127,0.2) 0%, rgba(190,107,255,0.15) 40%, rgba(0,180,216,0.12) 70%, transparent 100%)',
-          filter: 'blur(60px)',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '180px',
+          zIndex: 10,
         }}
+        draggable="false"
       />
 
-      {/* Main glass card */}
-      <div
-        className="relative w-[260px] h-[180px] md:w-[320px] md:h-[220px] flex items-center justify-center z-10"
-        style={{
-          borderRadius: '40px',
-          backgroundColor: 'rgba(255,255,255,0.8)',
-          border: '1px solid rgba(255,255,255,0.8)',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03)',
-        }}
-      >
-        <span
-          className="font-display font-black"
-          style={{
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-            background: 'linear-gradient(135deg, #ff007f, #be6bff, #00b4d8)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
-        >
-          APEX
-        </span>
-      </div>
+      {/* bg1 — ring with flower + dots, upper-left quadrant */}
+      <img
+        src={bg1Img}
+        alt=""
+        className="absolute select-none floating-slow"
+        style={{ left: '15%', top: '20%', width: '280px', zIndex: 2 }}
+        draggable="false"
+      />
 
-      {/* Floating tech tags */}
-      {[
-        { label: 'GameFest', x: '-8%', y: '15%', accent: '#ff007f' },
-        { label: 'TechFest', x: '70%', y: '8%', accent: '#00b4d8' },
-        { label: 'GDGoC', x: '-5%', y: '70%', accent: '#be6bff' },
-      ].map((tag) => (
-        <div
-          key={tag.label}
-          className="absolute z-10 px-5 py-3 rounded-3xl font-display font-semibold"
-          style={{
-            left: tag.x,
-            top: tag.y,
-            fontSize: '14px',
-            color: tag.accent,
-            backgroundColor: 'rgba(255,255,255,0.8)',
-            border: '1px solid rgba(255,255,255,0.8)',
-            boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
-          }}
-        >
-          {tag.label}
-        </div>
-      ))}
+      {/* bg2 — ring with blue blob + dots, lower-right quadrant */}
+      <img
+        src={bg2Img}
+        alt=""
+        className="absolute select-none floating-slower"
+        style={{ right: '20%', bottom: '20%', width: '300px', zIndex: 2 }}
+        draggable="false"
+      />
 
-      {/* Floating colored dots */}
-      {[
-        { x: '55%', y: '12%', color: '#ff007f', size: 6 },
-        { x: '80%', y: '45%', color: '#be6bff', size: 5 },
-        { x: '15%', y: '45%', color: '#00b4d8', size: 4 },
-      ].map((dot, i) => (
-        <div
-          key={i}
-          className="absolute rounded-full"
-          style={{
-            left: dot.x,
-            top: dot.y,
-            width: dot.size,
-            height: dot.size,
-            backgroundColor: dot.color,
-            opacity: 0.6,
-          }}
-        />
-      ))}
+      {/* shadow2 — penguin, upper-right area */}
+      <img
+        src={shadow2Img}
+        alt=""
+        className="absolute select-none floating"
+        style={{ right: '0%', top: '50%', width: '500px', zIndex: 1 }}
+        draggable="false"
+      />
 
-      {/* Orbital rings */}
-      <div className="absolute inset-0 border border-slate-200/50 rounded-full scale-[1.1]" />
-      <div className="absolute inset-0 border border-slate-200/30 rounded-full scale-[1.25]" />
+      {/* shadow1 — Android, lower-left area */}
+      {/* <img
+        src={shadow1Img}
+        alt=""
+        className="absolute select-none floating"
+        style={{ left: '8%', bottom: '8%', width: '500px', zIndex: 5 }}
+        draggable="false"
+      /> */}
+
+      {/* firebase — right side, mid-height */}
+      <img
+        src={firebaseImg}
+        alt=""
+        className="absolute select-none floating-slow"
+        style={{ right: '20%', top: '70%', width: '150px', zIndex: 4 }}
+        draggable="false"
+      />
+
+      {/* flutter — left side, lower area */}
+      <img
+        src={flutterImg}
+        alt=""
+        className="absolute select-none floating-slower"
+        style={{ left: '65%', bottom: '65%', width: '150px', zIndex: 4 }}
+        draggable="false"
+      />
+
+      {/* gemini */}
+      <img
+        src={geminiImg}
+        alt=""
+        className="absolute select-none floating-slow"
+        style={{ left: '5%', top: '55%', width: '90px', zIndex: 6 }}
+        draggable="false"
+      />
+
+      {/* yellow dots */}
+      <img
+        src={yellowdotImg}
+        alt=""
+        className="absolute select-none floating-slow"
+        style={{ left: '28%', top: '70%', width: '55px', zIndex: 3 }}
+        draggable="false"
+      />
+
+      {/* blue dots */}
+      <img
+        src={bluedotImg}
+        alt=""
+        className="absolute select-none floating"
+        style={{ right: '15%', top: '30%', width: '55px', zIndex: 3 }}
+        draggable="false"
+      />
+
+      {/* light dots */}
+      <img
+        src={lightdotImg}
+        alt=""
+        className="absolute select-none floating-slow"
+        style={{ left: '15%', top: '40%', width: '50px', zIndex: 6 }}
+        draggable="false"
+      />
     </div>
   )
 }
@@ -112,8 +150,15 @@ function HeroSection() {
   return (
     <section
       id="home"
-      className="w-full max-w-7xl mx-auto px-6 pt-16 pb-20 md:pt-24 md:pb-28"
+      className="relative w-full max-w-7xl mx-auto px-6 pt-24 pb-28 md:pt-32 md:pb-36"
     >
+      {/* Gradient wash behind hero */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(180deg, rgba(190,107,255,0.03) 0%, rgba(0,180,216,0.02) 50%, transparent 100%)',
+        }}
+      />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-center">
         {/* Left: text */}
         <div>
@@ -305,7 +350,7 @@ function CountdownSection() {
   // All events passed
   if (!nextEvent) {
     return (
-      <section className="w-full max-w-7xl mx-auto px-6 py-20">
+      <section className="w-full max-w-7xl mx-auto px-6 py-20 md:py-24">
         <RevealOnScroll direction="up">
           <div
             className="max-w-xl mx-auto text-center p-10 md:p-12"
@@ -346,7 +391,7 @@ function CountdownSection() {
   const daysLabel = days === 1 ? 'DAY LEFT' : 'DAYS LEFT'
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-6 py-20">
+    <section className="w-full max-w-7xl mx-auto px-6 py-20 md:py-24">
       <RevealOnScroll direction="up">
         <div
           className="max-w-xl mx-auto text-center p-10 md:p-12"
@@ -449,7 +494,7 @@ const aboutCards = [
 
 function AboutSection() {
   return (
-    <section id="about" className="w-full max-w-7xl mx-auto px-6 py-20">
+    <section id="about" className="w-full max-w-7xl mx-auto px-6 py-28 md:py-32">
       <RevealOnScroll direction="up">
         <div
           className="p-8 md:p-12"
@@ -486,11 +531,11 @@ function AboutSection() {
                     backgroundColor: 'rgba(255,255,255,0.7)',
                     border: '1px solid rgba(26,26,46,0.05)',
                     borderRadius: '24px',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
+                    boxShadow: '0 4px 24px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.02)',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-4px)'
-                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.06)'
+                    e.currentTarget.style.transform = 'translateY(-6px)'
+                    e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.06)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)'
@@ -525,7 +570,7 @@ function EventsSection() {
   const navigate = useNavigate()
 
   return (
-    <section id="events" className="w-full max-w-7xl mx-auto px-6 py-20">
+    <section id="events" className="w-full max-w-7xl mx-auto px-6 py-28 md:py-32" style={{ backgroundColor: 'rgba(0,180,216,0.02)' }}>
       <RevealOnScroll direction="up">
         <div className="text-center mb-12">
           <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
@@ -648,7 +693,7 @@ const speakers: Speaker[] = [
 
 function SpeakersSection() {
   return (
-    <section id="speakers" className="w-full max-w-7xl mx-auto px-6 py-20">
+    <section id="speakers" className="w-full max-w-7xl mx-auto px-6 py-28 md:py-32">
       <RevealOnScroll direction="up">
         <div
           className="p-8 md:p-12"
@@ -673,7 +718,7 @@ function SpeakersSection() {
             spaceBetween={24}
             centeredSlides={true}
             loop={true}
-    
+
             breakpoints={{
               640: { slidesPerView: 2.5 },
               1024: { slidesPerView: 3.5 },
@@ -749,7 +794,7 @@ const sponsors = [
 
 function SponsorsSection() {
   return (
-    <section id="sponsors" className="w-full max-w-7xl mx-auto px-6 py-20 overflow-hidden">
+    <section id="sponsors" className="w-full max-w-7xl mx-auto px-6 py-24 md:py-28 overflow-hidden" style={{ backgroundColor: 'rgba(26,26,46,0.015)' }}>
       <RevealOnScroll direction="up">
         <div
           className="p-8 md:p-12"
@@ -841,7 +886,7 @@ function GallerySection() {
   ]
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-6 py-20">
+    <section className="w-full max-w-7xl mx-auto px-6 py-24 md:py-28">
       <RevealOnScroll direction="up">
         <div
           className="p-8 md:p-12"

@@ -19,7 +19,9 @@
       "Bash(git push *)",
       "Bash(xargs grep -l '#00dcc0\\\\|#ffb830\\\\|rgba\\(0,220,192\\\\|rgba\\(255,184,48\\\\|#e8e4d4\\\\|#0a0a0f\\\\|#0b0906')",
       "Bash(Select-String -Pattern \"SponsorsSection\" -Context 0,80)",
-      "PowerShell(cd \"D:\\\\Project\\\\apexfest\"; $content = git show 84ce30e:src/pages/Home.tsx; $lines = $content -split \"`n\"; $start = \\($lines | Select-String \"SponsorsSection\"\\).LineNumber; $lines[\\($start-1\\)..\\($start+80\\)] -join \"`n\")"
+      "PowerShell(cd \"D:\\\\Project\\\\apexfest\"; $content = git show 84ce30e:src/pages/Home.tsx; $lines = $content -split \"`n\"; $start = \\($lines | Select-String \"SponsorsSection\"\\).LineNumber; $lines[\\($start-1\\)..\\($start+80\\)] -join \"`n\")",
+      "Bash(node screenshot.cjs)",
+      "Bash(npx playwright *)"
     ]
   }
 }

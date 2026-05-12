@@ -17,7 +17,7 @@ export default {
         accent: '#44a5ff',
       },
       fontFamily: {
-        display: ['"Space Grotesk"', 'sans-serif'],
+        display: ['"Sora"', 'sans-serif'],
         mono: ['"Share Tech Mono"', 'monospace'],
         body: ['Inter', 'sans-serif'],
         ui: ['"DM Sans"', 'sans-serif'],

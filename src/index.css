@@ -185,3 +185,26 @@ body::before {
 .float-gentle {
   animation: float-gentle 3.5s ease-in-out infinite;
 }
+
+/* Hero floating elements */
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes hero-float-alt {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.floating {
+  animation: hero-float 4s ease-in-out infinite;
+}
+
+.floating-slow {
+  animation: hero-float 6s ease-in-out infinite;
+}
+
+.floating-slower {
+  animation: hero-float-alt 8s ease-in-out infinite;
+}
