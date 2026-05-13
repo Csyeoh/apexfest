@@ -363,8 +363,9 @@ const IconADK = (
 
 const IconGenAI = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}>
-    <circle cx="12" cy="12" r="3" />
-    <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+    <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z" />
+    <path d="M18 14l.75 2.25L21 17l-2.25.75L18 20l-.75-2.25L15 17l2.25-.75z" />
+    <path d="M5 17l.5 1.5L7 19l-1.5.5L5 21l-.5-1.5L3 19l1.5-.5z" />
   </svg>
 )
 
@@ -389,11 +390,22 @@ const IconFullstack = (
 
 const IconML = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}>
-    <circle cx="4" cy="6" r="2" />
-    <circle cx="20" cy="6" r="2" />
-    <circle cx="12" cy="18" r="2" />
-    <line x1="6" y1="6" x2="10" y2="18" />
-    <line x1="18" y1="6" x2="14" y2="18" />
+    {/* Cell body */}
+    <circle cx="9" cy="12" r="3" />
+    {/* Dendrites */}
+    <path d="M6 9L3 6" />
+    <path d="M6 12L2 12" />
+    <path d="M6 15L3 18" />
+    {/* Axon */}
+    <path d="M12 12h4" />
+    <path d="M16 12c1.5 0 3-1 4-3" />
+    <path d="M16 12c1.5 0 3 1 4 3" />
+    {/* Axon terminals */}
+    <circle cx="20" cy="9" r="1" />
+    <circle cx="20" cy="15" r="1" />
+    {/* Dendrite tips */}
+    <circle cx="3" cy="6" r="1" />
+    <circle cx="3" cy="18" r="1" />
   </svg>
 )
 
