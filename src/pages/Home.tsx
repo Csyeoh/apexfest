@@ -12,6 +12,9 @@ import RevealOnScroll from '../components/RevealOnScroll'
 import FAQ from '../components/FAQ'
 
 import msLeongImage from '../assets/speakers/msleong.jpg'
+import zhiyiImage from '../assets/speakers/zhiyi.png'
+import kenichiImage from '../assets/speakers/kenichi.jpg'
+import jeremyImage from '../assets/speakers/jeremy.jpg'
 import slide1 from '../assets/slideshow/img_1556.webp'
 import slide2 from '../assets/slideshow/img_1561.webp'
 import slide3 from '../assets/slideshow/img_1574.webp'
@@ -698,9 +701,9 @@ interface Speaker {
 
 const speakers: Speaker[] = [
   { name: 'Ms. Leong Lai Fong', role: 'Senior AI Engineer', org: 'Guest Speaker', initials: 'LF', image: msLeongImage, accent: '#00b4d8' },
-  { name: 'Ms. Ho Zhi Yi', role: 'Speaker', org: 'Confirmed', initials: 'ZY', accent: '#ff007f' },
-  { name: 'Mr. Kenichi Kambara', role: 'Speaker', org: 'Pending', initials: 'KK', accent: '#be6bff' },
-  { name: 'Mr. Jeremy Lau', role: 'Speaker', org: 'Pending', initials: 'JL', accent: '#44a5ff' },
+  { name: 'Mr. Kenichi Kambara', role: 'Speaker', org: 'Guest Speaker', initials: 'KK', image: kenichiImage, accent: '#be6bff' },
+  { name: 'Mr. Jeremy Lau', role: 'Speaker', org: 'Guest Speaker', initials: 'JL', image: jeremyImage, accent: '#44a5ff' },
+  { name: 'Ms. Ho Zhi Yi', role: 'Speaker', org: 'Guest Speaker', initials: 'ZY', image: zhiyiImage, accent: '#ff007f' },
 ]
 
 function SpeakersSection() {
@@ -725,65 +728,52 @@ function SpeakersSection() {
             </h2>
           </div>
 
-          <Swiper
-            slidesPerView={1.5}
-            spaceBetween={24}
-            centeredSlides={true}
-            loop={true}
-
-            breakpoints={{
-              640: { slidesPerView: 2.5 },
-              1024: { slidesPerView: 3.5 },
-            }}
-            className="w-full !pb-4"
-          >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {speakers.map((speaker, i) => (
-              <SwiperSlide key={i}>
-                <RevealOnScroll direction="up" delay={i * 0.1}>
-                  <div className="flex flex-col items-center text-center py-6">
-                    {/* Circular avatar */}
-                    <div
-                      className="w-24 h-24 rounded-full flex items-center justify-center mb-4 overflow-hidden"
-                      style={{
-                        border: `2px solid ${speaker.accent}`,
-                        boxShadow: `0 0 20px ${speaker.accent}22`,
-                        backgroundColor: `${speaker.accent}08`,
-                      }}
-                    >
-                      {speaker.image ? (
-                        <img src={speaker.image} alt={speaker.name} className="w-full h-full object-cover" />
-                      ) : (
-                        <span
-                          className="font-display font-bold"
-                          style={{ fontSize: '24px', color: speaker.accent }}
-                        >
-                          {speaker.initials}
-                        </span>
-                      )}
-                    </div>
-                    <h3 className="font-display font-semibold text-base mb-1" style={{ color: '#1a1a2e' }}>
-                      {speaker.name}
-                    </h3>
-                    <p className="font-body text-sm mb-1" style={{ color: 'rgba(26,26,46,0.5)' }}>
-                      {speaker.role}
-                    </p>
-                    <span
-                      className="font-mono inline-block px-3 py-1 rounded-full"
-                      style={{
-                        fontSize: '9px',
-                        letterSpacing: '1px',
-                        color: speaker.accent,
-                        backgroundColor: `${speaker.accent}08`,
-                        border: `1px solid ${speaker.accent}20`,
-                      }}
-                    >
-                      {speaker.org}
-                    </span>
+              <RevealOnScroll key={i} direction="up" delay={i * 0.1}>
+                <div className="flex flex-col items-center text-center py-6">
+                  {/* Circular avatar */}
+                  <div
+                    className="w-24 h-24 rounded-full flex items-center justify-center mb-4 overflow-hidden"
+                    style={{
+                      border: `2px solid ${speaker.accent}`,
+                      boxShadow: `0 0 20px ${speaker.accent}22`,
+                      backgroundColor: `${speaker.accent}08`,
+                    }}
+                  >
+                    {speaker.image ? (
+                      <img src={speaker.image} alt={speaker.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <span
+                        className="font-display font-bold"
+                        style={{ fontSize: '24px', color: speaker.accent }}
+                      >
+                        {speaker.initials}
+                      </span>
+                    )}
                   </div>
-                </RevealOnScroll>
-              </SwiperSlide>
+                  <h3 className="font-display font-semibold text-base mb-1" style={{ color: '#1a1a2e' }}>
+                    {speaker.name}
+                  </h3>
+                  <p className="font-body text-sm mb-1" style={{ color: 'rgba(26,26,46,0.5)' }}>
+                    {speaker.role}
+                  </p>
+                  <span
+                    className="font-mono inline-block px-3 py-1 rounded-full"
+                    style={{
+                      fontSize: '9px',
+                      letterSpacing: '1px',
+                      color: speaker.accent,
+                      backgroundColor: `${speaker.accent}08`,
+                      border: `1px solid ${speaker.accent}20`,
+                    }}
+                  >
+                    {speaker.org}
+                  </span>
+                </div>
+              </RevealOnScroll>
             ))}
-          </Swiper>
+          </div>
         </div>
       </RevealOnScroll>
     </section>
