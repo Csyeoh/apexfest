@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
 import msLeongImage from '../assets/speakers/msleong.jpg'
@@ -257,68 +258,78 @@ interface Speaker {
 }
 
 const speakers: Speaker[] = [
-  { id: 'SPEAKER_01', name: 'Ms. Leong Lai Fong', role: 'Senior AI Engineer', org: 'Guest Speaker', initials: 'LF', image: msLeongImage },
-  { id: 'SPEAKER_02', name: 'Mr. Kenichi Kambara', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'KK', image: kenichiImage },
-  { id: 'SPEAKER_03', name: 'Mr. Jeremy Lau', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'JL', image: jeremyImage },
-  { id: 'SPEAKER_04', name: 'Ms. Ho Zhi Yi', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'ZY', image: zhiyiImage },
+  { id: 'SPEAKER_01', name: 'Leong Lai Fong', role: 'Senior AI Engineer', org: 'Guest Speaker', initials: 'LF', image: msLeongImage },
+  { id: 'SPEAKER_02', name: 'Kenichi Kambara', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'KK', image: kenichiImage },
+  { id: 'SPEAKER_03', name: 'Jeremy Lau Wei Han', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'JL', image: jeremyImage },
+  { id: 'SPEAKER_04', name: 'Ho Zhi Yi', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'ZY', image: zhiyiImage },
 ]
 
 function SpeakersTab() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl">
       {speakers.map((speaker, i) => (
         <RevealOnScroll key={speaker.id} direction="up" delay={i * 0.15}>
           <div
-            className="group relative"
-            style={{ border: '1px solid rgba(0,180,216,0.2)' }}
+            className="flex flex-col items-center text-center p-6 transition-all duration-300 hover:-translate-y-1"
+            style={{
+              backgroundColor: 'rgba(255,255,255,0.6)',
+              border: '1px solid rgba(0,180,216,0.15)',
+              borderRadius: '24px',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.03)',
+            }}
           >
-            {/* Top accent line — positioned at top edge */}
-            <div className="absolute left-0 right-0 h-[2px]" style={{ top: '-1px', backgroundColor: '#00b4d8' }} />
+            {/* ID tag */}
+            <p
+              className="font-mono text-techfest mb-5 opacity-60"
+              style={{ fontSize: '9px', letterSpacing: '3px' }}
+            >
+              {speaker.id}
+            </p>
 
-            <div className="p-6">
-              {/* ID tag */}
-              <p
-                className="font-mono text-techfest mb-5"
-                style={{ fontSize: '9px', letterSpacing: '3px' }}
-              >
-                {speaker.id}
-              </p>
-
-              {/* Avatar placeholder / image */}
-              <div
-                className="w-20 h-20 flex items-center justify-center mb-5 mx-auto overflow-hidden"
-                style={{ border: '1px solid rgba(0,180,216,0.4)' }}
-              >
-                {speaker.image ? (
-                  <img src={speaker.image} alt={speaker.name} className="w-full h-full object-cover" />
-                ) : (
-                  <span
-                    className="font-display font-bold text-techfest"
-                    style={{ fontSize: '28px' }}
-                  >
-                    {speaker.initials}
-                  </span>
-                )}
-              </div>
-
-              {/* Name */}
-              <h3 className="font-display font-bold text-text-base text-base text-center mb-1">
-                {speaker.name}
-              </h3>
-
-              {/* Role */}
-              <p className="font-body text-text-muted text-sm text-center mb-2">
-                {speaker.role}
-              </p>
-
-              {/* Org */}
-              <p
-                className="font-mono text-techfest text-center"
-                style={{ fontSize: '10px', letterSpacing: '2px' }}
-              >
-                {speaker.org}
-              </p>
+            {/* Avatar */}
+            <div
+              className="w-24 h-24 rounded-full flex items-center justify-center mb-5 overflow-hidden"
+              style={{
+                border: '2px solid rgba(0,180,216,0.4)',
+                boxShadow: '0 0 20px rgba(0,180,216,0.1)',
+                backgroundColor: 'rgba(0,180,216,0.04)',
+              }}
+            >
+              {speaker.image ? (
+                <img src={speaker.image} alt={speaker.name} className="w-full h-full object-cover" />
+              ) : (
+                <span
+                  className="font-display font-bold text-techfest"
+                  style={{ fontSize: '28px' }}
+                >
+                  {speaker.initials}
+                </span>
+              )}
             </div>
+
+            {/* Name */}
+            <h3 className="font-display font-bold text-text-base text-base mb-1">
+              {speaker.name}
+            </h3>
+
+            {/* Role */}
+            <p className="font-body text-text-muted text-sm mb-3">
+              {speaker.role}
+            </p>
+
+            {/* Org badge */}
+            <span
+              className="font-mono inline-block px-3 py-1 rounded-full"
+              style={{
+                fontSize: '9px',
+                letterSpacing: '1px',
+                color: '#00b4d8',
+                backgroundColor: 'rgba(0,180,216,0.06)',
+                border: '1px solid rgba(0,180,216,0.15)',
+              }}
+            >
+              {speaker.org}
+            </span>
           </div>
         </RevealOnScroll>
       ))}
@@ -333,6 +344,7 @@ function SpeakersTab() {
 interface Topic {
   number: string
   title: string
+  desc?: string
 }
 
 const speakerTopics: Topic[] = [
@@ -343,11 +355,31 @@ const speakerTopics: Topic[] = [
 ]
 
 const boothTopics: Topic[] = [
-  { number: 'B1', title: 'Fullstack Development' },
-  { number: 'B2', title: 'Cloud Computing' },
-  { number: 'B3', title: 'Generative AI' },
-  { number: 'B4', title: 'Machine Learning' },
-  { number: 'B5', title: 'Cybersecurity' },
+  {
+    number: 'B1',
+    title: 'Fullstack Development',
+    desc: 'An introductory session that guides participants through the fundamentals of Full Stack Development using Firebase Studio. Learn how modern web applications are built and deployed through a simple hands-on development workflow.',
+  },
+  {
+    number: 'B2',
+    title: 'Machine Learning',
+    desc: 'A beginner-friendly introduction to Machine Learning with TensorFlow, covering neural networks, AI model training, and real-world applications of intelligent systems in modern technology.',
+  },
+  {
+    number: 'B3',
+    title: 'Generative AI',
+    desc: 'Discover how Generative AI can be integrated into modern applications to create smarter, more personalized user experiences through intelligent recommendations, automation, and multi-agent systems.',
+  },
+  {
+    number: 'B4',
+    title: 'Cloud Computing',
+    desc: 'Explore how autonomous AI agents are built using modern cloud technologies, tool integrations, and AI workflows. This session introduces the fundamentals of agentic AI development and deployment in real-world applications.',
+  },
+  {
+    number: 'B5',
+    title: 'Cybersecurity',
+    desc: 'Test your cybersecurity skills through interactive hacking challenges, phishing simulations, and Mini-CTF activities designed to introduce real-world digital security concepts in a fun and engaging way.',
+  },
 ]
 
 function TopicItem({ topic, delay }: { topic: Topic; delay: number }) {
@@ -382,7 +414,66 @@ function TopicItem({ topic, delay }: { topic: Topic; delay: number }) {
   )
 }
 
+function BoothAccordion({ topic, delay, isOpen, onToggle }: { topic: Topic; delay: number; isOpen: boolean; onToggle: () => void }) {
+
+  return (
+    <RevealOnScroll direction="up" delay={delay}>
+      <div
+        className="transition-colors duration-200"
+        style={{
+          borderBottom: '1px solid rgba(0,180,216,0.12)',
+          backgroundColor: isOpen ? 'rgba(0,180,216,0.02)' : 'transparent',
+        }}
+      >
+        <button
+          type="button"
+          onClick={onToggle}
+          className="w-full py-5 px-5 text-left flex items-center gap-4 group focus:outline-none cursor-pointer transition-colors duration-150"
+        >
+          <span
+            className="font-mono text-techfest flex-shrink-0"
+            style={{ fontSize: '11px', letterSpacing: '2px' }}
+          >
+            {topic.number}
+          </span>
+          <span
+            className="font-display font-medium text-base md:text-lg tracking-wide flex-1 transition-colors duration-200"
+            style={{ color: isOpen ? '#00b4d8' : '#1a1a2e' }}
+          >
+            {topic.title}
+          </span>
+          <motion.span
+            animate={{ rotate: isOpen ? 45 : 0 }}
+            className="font-mono flex-shrink-0"
+            style={{ fontSize: '20px', lineHeight: 1, color: isOpen ? '#00b4d8' : 'rgba(26,26,46,0.3)' }}
+          >
+            +
+          </motion.span>
+        </button>
+
+        <AnimatePresence>
+          {isOpen && topic.desc && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="overflow-hidden"
+            >
+              <div className="px-5 pb-6 pl-[calc(44px+20px)] font-body text-base leading-relaxed" style={{ color: 'rgba(26,26,46,0.6)' }}>
+                {topic.desc}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </RevealOnScroll>
+  )
+}
+
 function TopicsTab() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
   return (
     <div className="max-w-3xl space-y-12">
       <div>
@@ -400,9 +491,15 @@ function TopicsTab() {
         <p className="font-mono text-techfest mb-6 opacity-60 uppercase" style={{ fontSize: '11px', letterSpacing: '3px' }}>
           // Booth Sessions
         </p>
-        <div className="space-y-3">
+        <div>
           {boothTopics.map((topic, i) => (
-            <TopicItem key={topic.number} topic={topic} delay={i * 0.1} />
+            <BoothAccordion
+              key={topic.number}
+              topic={topic}
+              delay={i * 0.1}
+              isOpen={openIndex === i}
+              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+            />
           ))}
         </div>
       </div>
