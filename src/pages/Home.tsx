@@ -15,6 +15,8 @@ import msLeongImage from '../assets/speakers/msleong.jpg'
 import zhiyiImage from '../assets/speakers/zhiyi.png'
 import kenichiImage from '../assets/speakers/kenichi.jpg'
 import jeremyImage from '../assets/speakers/jeremy.jpg'
+import fantechLogo from '../assets/sponsor/fantech.png'
+import mofiiLogo from '../assets/sponsor/mofii.jpg'
 import slide1 from '../assets/slideshow/img_1556.webp'
 import slide2 from '../assets/slideshow/img_1561.webp'
 import slide3 from '../assets/slideshow/img_1574.webp'
@@ -785,13 +787,8 @@ function SpeakersSection() {
    ======================================== */
 
 const sponsors = [
-  { name: 'Hilti', image: '/images/Hilti.jpg', role: 'Main Sponsor', imageWidth: 'w-[80%]' },
-  { name: 'Micro Modular System', image: '/images/MMS.png', role: 'Co-Sponsor', imageWidth: 'w-[70%]' },
-  { name: 'Digital Penang', image: '/images/Digital Penang.png', role: 'Co-Sponsor', imageWidth: 'w-[70%]' },
-  { name: 'The Empyrean', image: '/images/Empyrean.jpg', role: 'Co-Sponsor', imageWidth: 'w-[50%]' },
-  { name: 'ZUS Coffee', image: '/images/ZUS.png', role: 'In-Kind Sponsor', imageWidth: 'w-full' },
-  { name: 'Vida', image: '/images/vida.png', role: 'In-Kind Sponsor', imageWidth: 'w-[80%]' },
-  { name: 'Printcious', image: '/images/printcious.jpg', role: 'In-Kind Sponsor', imageWidth: 'w-[85%]' },
+  { name: 'Fantech', image: fantechLogo, role: 'In-Kind Sponsor', imageWidth: 'w-[80%]' },
+  { name: 'Mofii', image: mofiiLogo, role: 'In-Kind Sponsor', imageWidth: 'w-[80%]' },
 ]
 
 function SponsorsSection() {
@@ -819,56 +816,37 @@ function SponsorsSection() {
             </p>
           </div>
 
-          <Swiper
-            effect="coverflow"
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView="auto"
-            loop={true}
-            coverflowEffect={{
-              rotate: 0,
-              stretch: 0,
-              depth: 100,
-              modifier: 2.5,
-              slideShadows: false,
-            }}
-            pagination={{ clickable: true }}
-            modules={[EffectCoverflow, Pagination]}
-            className="w-full !pb-14"
-          >
+          <div className="flex flex-wrap justify-center gap-6">
             {sponsors.map((sponsor) => (
-              <SwiperSlide key={sponsor.name} className="!w-[280px] sm:!w-[300px]">
+              <div
+                key={sponsor.name}
+                className="flex flex-col items-center justify-start rounded-2xl pt-8 pb-6 px-6 w-[280px] sm:w-[300px]"
+                style={{
+                  backgroundColor: '#ffffff',
+                  border: '1px solid rgba(26,26,46,0.08)',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+                }}
+              >
                 <div
-                  className="flex flex-col items-center justify-start rounded-2xl pt-8 pb-6 px-6 h-full"
-                  style={{
-                    backgroundColor: '#ffffff',
-                    border: '1px solid rgba(26,26,46,0.08)',
-                    boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
-                  }}
+                  className={`h-36 ${sponsor.imageWidth || 'w-[80%]'} flex items-center justify-center overflow-hidden rounded-xl bg-white p-4`}
+                  style={{ border: '1px solid rgba(26,26,46,0.04)' }}
                 >
-                  <div
-                    className={`h-36 ${sponsor.imageWidth || 'w-[80%]'} flex items-center justify-center overflow-hidden rounded-xl bg-white p-4`}
-                    style={{ border: '1px solid rgba(26,26,46,0.04)' }}
-                  >
-                    <img
-                      alt={sponsor.name}
-                      className="w-full h-full object-contain select-none"
-                      src={sponsor.image}
-                      draggable="false"
-                    />
-                  </div>
-                  <p
-                    className="text-center font-display font-semibold tracking-wide text-lg mt-6"
-                    style={{
-                      color: sponsor.role.includes('Main') ? '#ff007f' : '#00b4d8',
-                    }}
-                  >
-                    {sponsor.role}
-                  </p>
+                  <img
+                    alt={sponsor.name}
+                    className="w-full h-full object-contain select-none"
+                    src={sponsor.image}
+                    draggable="false"
+                  />
                 </div>
-              </SwiperSlide>
+                <p
+                  className="text-center font-display font-semibold tracking-wide text-lg mt-6"
+                  style={{ color: '#00b4d8' }}
+                >
+                  {sponsor.role}
+                </p>
+              </div>
             ))}
-          </Swiper>
+          </div>
         </div>
       </RevealOnScroll>
     </section>
