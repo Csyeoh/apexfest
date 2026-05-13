@@ -259,9 +259,9 @@ interface Speaker {
 
 const speakers: Speaker[] = [
   { id: 'SPEAKER_01', name: 'Leong Lai Fong', role: 'Senior AI Engineer', org: 'Guest Speaker', initials: 'LF', image: msLeongImage },
-  { id: 'SPEAKER_02', name: 'Kenichi Kambara', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'KK', image: kenichiImage },
-  { id: 'SPEAKER_03', name: 'Jeremy Lau Wei Han', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'JL', image: jeremyImage },
-  { id: 'SPEAKER_04', name: 'Ho Zhi Yi', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'ZY', image: zhiyiImage },
+  { id: 'SPEAKER_02', name: 'Kenichi Kambara', role: 'Principal Evangelist (Tech) • SekaiPhone Owner', org: 'Guest Speaker', initials: 'KK', image: kenichiImage },
+  { id: 'SPEAKER_03', name: 'Jeremy Lau Wei Han', role: 'Digital Analyst @ Central Bank of Malaysia (BNM)', org: 'Guest Speaker', initials: 'JL', image: jeremyImage },
+  { id: 'SPEAKER_04', name: 'Ho Zhi Yi', role: 'Developer Community Manager for Singapore and Malaysia, Google', org: 'Guest Speaker', initials: 'ZY', image: zhiyiImage },
 ]
 
 function SpeakersTab() {
@@ -313,7 +313,7 @@ function SpeakersTab() {
             </h3>
 
             {/* Role */}
-            <p className="font-body text-text-muted text-sm mb-3">
+            <p className="font-body text-text-muted text-xs mb-3 min-h-[3.5rem]">
               {speaker.role}
             </p>
 
@@ -348,7 +348,11 @@ interface Topic {
 }
 
 const speakerTopics: Topic[] = [
-  { number: 'S1', title: 'Building ADK with Skills and Tools' },
+  {
+    number: 'S1',
+    title: 'Building ADK with Skills and Tools',
+    desc: "Agent Development Kit (ADK)'s SkillToolset enables agents to load domain expertise on demand. With the right skill configuration, your agent can generate entirely new expertise at runtime. In this session, you will first discover how to initialise a new ADK agent project and compose a robust system prompt using structured builder. Next, you will learn adding tools and dynamically load skills into the agent's toolset. After that, you will learn testing the agent's execution locally.",
+  },
   { number: 'S2', title: 'Cloud Computing' },
   { number: 'S3', title: 'Generative AI & Machine Learning' },
   { number: 'S4', title: 'Cybersecurity' },
@@ -472,17 +476,24 @@ function BoothAccordion({ topic, delay, isOpen, onToggle }: { topic: Topic; dela
 }
 
 function TopicsTab() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openSpeaker, setOpenSpeaker] = useState<number | null>(null)
+  const [openBooth, setOpenBooth] = useState<number | null>(null)
 
   return (
     <div className="max-w-3xl space-y-12">
       <div>
         <p className="font-mono text-techfest mb-6 opacity-60 uppercase" style={{ fontSize: '11px', letterSpacing: '3px' }}>
-          // Speaker Sessions
+          // Hands-on Sessions
         </p>
-        <div className="space-y-3">
+        <div>
           {speakerTopics.map((topic, i) => (
-            <TopicItem key={topic.number} topic={topic} delay={i * 0.1} />
+            <BoothAccordion
+              key={topic.number}
+              topic={topic}
+              delay={i * 0.1}
+              isOpen={openSpeaker === i}
+              onToggle={() => setOpenSpeaker(openSpeaker === i ? null : i)}
+            />
           ))}
         </div>
       </div>
@@ -497,8 +508,8 @@ function TopicsTab() {
               key={topic.number}
               topic={topic}
               delay={i * 0.1}
-              isOpen={openIndex === i}
-              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+              isOpen={openBooth === i}
+              onToggle={() => setOpenBooth(openBooth === i ? null : i)}
             />
           ))}
         </div>
