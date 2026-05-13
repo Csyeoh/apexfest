@@ -84,19 +84,19 @@ export default function StampCard({ booth, isStamped, index }: StampCardProps) {
         <div
           className="flex flex-col items-center justify-center w-full h-full"
           style={{
-            border: '2px dashed rgba(26,26,46,0.12)',
-            backgroundColor: 'rgba(248,249,250,0.6)',
+            border: '2px dashed rgba(255,255,255,0.15)',
+            backgroundColor: 'rgba(255,255,255,0.05)',
           }}
         >
           <span
             className="font-mono uppercase"
-            style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(26,26,46,0.2)' }}
+            style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(255,255,255,0.3)' }}
           >
             {booth.code}
           </span>
           <div
             className="w-5 h-5 mt-1 rounded-full"
-            style={{ border: '1.5px dashed rgba(26,26,46,0.1)' }}
+            style={{ border: '1.5px dashed rgba(255,255,255,0.1)' }}
           />
         </div>
       )}

@@ -16,8 +16,8 @@ export default function QrDisplay({ data, size = 200 }: QrDisplayProps) {
       width: size,
       margin: 2,
       color: {
-        dark: '#d7fdff',
-        light: '#0f0f1a',
+        dark: '#1a1a2e',
+        light: '#ffffff',
       },
     }).then((url) => {
       if (!cancelled) setDataUrl(url)
@@ -31,8 +31,9 @@ export default function QrDisplay({ data, size = 200 }: QrDisplayProps) {
     <div
       className="inline-block p-3"
       style={{
-        border: '1px solid rgba(70,244,255,0.2)',
-        backgroundColor: '#0f0f1a',
+        border: '1px solid rgba(26,26,46,0.08)',
+        backgroundColor: '#ffffff',
+        borderRadius: '16px',
       }}
     >
       <img src={dataUrl} alt="QR Code" width={size} height={size} />

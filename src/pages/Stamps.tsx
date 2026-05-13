@@ -33,7 +33,7 @@ function CardFace({ title, subtitle, accent, accentDim, booths: faceBooths, stam
       style={{
         backfaceVisibility: 'hidden',
         WebkitBackfaceVisibility: 'hidden',
-        backgroundColor: 'rgba(255,255,255,0.97)',
+        backgroundColor: 'rgba(26,26,46,0.95)',
         border: `1px solid ${accentDim}`,
       }}
     >
@@ -46,7 +46,7 @@ function CardFace({ title, subtitle, accent, accentDim, booths: faceBooths, stam
       </p>
       <h2
         className="font-display font-bold uppercase tracking-wider mb-8"
-        style={{ fontSize: '20px', color: '#1a1a2e' }}
+        style={{ fontSize: '20px', color: '#ffffff' }}
       >
         {title}
       </h2>
@@ -74,7 +74,7 @@ function CardFace({ title, subtitle, accent, accentDim, booths: faceBooths, stam
         />
         <span
           className="font-mono"
-          style={{ fontSize: '11px', letterSpacing: '2px', color: isComplete ? accent : 'rgba(26,26,46,0.35)' }}
+          style={{ fontSize: '11px', letterSpacing: '2px', color: isComplete ? accent : 'rgba(255,255,255,0.5)' }}
         >
           {count}/{total}
         </span>
