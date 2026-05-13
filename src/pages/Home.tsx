@@ -2,19 +2,10 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useLenis } from 'lenis/react'
 import { motion } from 'framer-motion'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectCoverflow, Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/effect-coverflow'
-import 'swiper/css/pagination'
 import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
 import FAQ from '../components/FAQ'
 
-import msLeongImage from '../assets/speakers/msleong.jpg'
-import zhiyiImage from '../assets/speakers/zhiyi.png'
-import kenichiImage from '../assets/speakers/kenichi.jpg'
-import jeremyImage from '../assets/speakers/jeremy.jpg'
 import fantechLogo from '../assets/sponsor/fantech.png'
 import mofiiLogo from '../assets/sponsor/mofii.jpg'
 import slide1 from '../assets/slideshow/img_1556.webp'
@@ -689,100 +680,6 @@ function EventsSection() {
 }
 
 /* ========================================
-   SPEAKERS — Circular carousel
-   ======================================== */
-
-interface Speaker {
-  name: string
-  role: string
-  org: string
-  initials: string
-  image?: string
-  accent: string
-}
-
-const speakers: Speaker[] = [
-  { name: 'Ms. Leong Lai Fong', role: 'Senior AI Engineer', org: 'Guest Speaker', initials: 'LF', image: msLeongImage, accent: '#00b4d8' },
-  { name: 'Mr. Kenichi Kambara', role: 'Speaker', org: 'Guest Speaker', initials: 'KK', image: kenichiImage, accent: '#be6bff' },
-  { name: 'Mr. Jeremy Lau', role: 'Speaker', org: 'Guest Speaker', initials: 'JL', image: jeremyImage, accent: '#44a5ff' },
-  { name: 'Ms. Ho Zhi Yi', role: 'Speaker', org: 'Guest Speaker', initials: 'ZY', image: zhiyiImage, accent: '#ff007f' },
-]
-
-function SpeakersSection() {
-  return (
-    <section id="speakers" className="w-full max-w-7xl mx-auto px-6 py-28 md:py-32">
-      <RevealOnScroll direction="up">
-        <div
-          className="p-8 md:p-12"
-          style={{
-            backgroundColor: 'rgba(255,255,255,0.6)',
-            border: '1px solid rgba(255,255,255,0.8)',
-            borderRadius: '40px',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02)',
-          }}
-        >
-          <div className="text-center mb-10">
-            <p className="font-mono mb-3" style={{ fontSize: '10px', letterSpacing: '3px', color: '#00b4d8' }}>
-              // MEET THE SPEAKERS
-            </p>
-            <h2 className="font-display font-bold" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#1a1a2e' }}>
-              Our <span style={{ color: '#00b4d8' }}>Speakers</span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {speakers.map((speaker, i) => (
-              <RevealOnScroll key={i} direction="up" delay={i * 0.1}>
-                <div className="flex flex-col items-center text-center py-6">
-                  {/* Circular avatar */}
-                  <div
-                    className="w-24 h-24 rounded-full flex items-center justify-center mb-4 overflow-hidden"
-                    style={{
-                      border: `2px solid ${speaker.accent}`,
-                      boxShadow: `0 0 20px ${speaker.accent}22`,
-                      backgroundColor: `${speaker.accent}08`,
-                    }}
-                  >
-                    {speaker.image ? (
-                      <img src={speaker.image} alt={speaker.name} className="w-full h-full object-cover" />
-                    ) : (
-                      <span
-                        className="font-display font-bold"
-                        style={{ fontSize: '24px', color: speaker.accent }}
-                      >
-                        {speaker.initials}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="font-display font-semibold text-base mb-1" style={{ color: '#1a1a2e' }}>
-                    {speaker.name}
-                  </h3>
-                  <p className="font-body text-sm mb-1" style={{ color: 'rgba(26,26,46,0.5)' }}>
-                    {speaker.role}
-                  </p>
-                  <span
-                    className="font-mono inline-block px-3 py-1 rounded-full"
-                    style={{
-                      fontSize: '9px',
-                      letterSpacing: '1px',
-                      color: speaker.accent,
-                      backgroundColor: `${speaker.accent}08`,
-                      border: `1px solid ${speaker.accent}20`,
-                    }}
-                  >
-                    {speaker.org}
-                  </span>
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
-        </div>
-      </RevealOnScroll>
-    </section>
-  )
-}
-
-/* ========================================
    SPONSORS — Logo wall
    ======================================== */
 
@@ -1004,7 +901,6 @@ export default function Home() {
       <CountdownSection />
       <AboutSection />
       <EventsSection />
-      <SpeakersSection />
       <SponsorsSection />
       <GallerySection />
       <FinalCtaSection />

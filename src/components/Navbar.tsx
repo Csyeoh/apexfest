@@ -11,7 +11,6 @@ interface NavItem {
 const navLinks: NavItem[] = [
   { to: '/#home', label: 'Home' },
   { to: '/#about', label: 'About' },
-  { to: '/#speakers', label: 'Speakers' },
   { to: '/#sponsors', label: 'Sponsors' },
   { to: '/#faq', label: 'FAQ' },
 ]
@@ -474,10 +473,13 @@ export default function Navbar() {
         {/* Desktop Nav Links */}
         <div className="hidden md:flex items-center gap-8">
           <ul className="flex items-center gap-8">
-            {navLinks.map((link) => (
+            {navLinks.slice(0, 2).map((link) => (
               <NavLinkItem key={link.to} link={link} />
             ))}
             <EventsDropdown />
+            {navLinks.slice(2).map((link) => (
+              <NavLinkItem key={link.to} link={link} />
+            ))}
           </ul>
           <ProfileDropdown />
         </div>

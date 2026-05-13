@@ -2,6 +2,9 @@ import { useState } from 'react'
 import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
 import msLeongImage from '../assets/speakers/msleong.jpg'
+import zhiyiImage from '../assets/speakers/zhiyi.png'
+import kenichiImage from '../assets/speakers/kenichi.jpg'
+import jeremyImage from '../assets/speakers/jeremy.jpg'
 
 type TechFestTab = 'about' | 'timeline' | 'speakers' | 'topics'
 
@@ -255,8 +258,9 @@ interface Speaker {
 
 const speakers: Speaker[] = [
   { id: 'SPEAKER_01', name: 'Ms. Leong Lai Fong', role: 'Senior AI Engineer', org: 'Guest Speaker', initials: 'LF', image: msLeongImage },
-  { id: 'SPEAKER_02', name: 'TBA', role: 'Workshop Lead', org: 'To Be Announced', initials: '?' },
-  { id: 'SPEAKER_03', name: 'TBA', role: 'Panelist', org: 'To Be Announced', initials: '?' },
+  { id: 'SPEAKER_02', name: 'Mr. Kenichi Kambara', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'KK', image: kenichiImage },
+  { id: 'SPEAKER_03', name: 'Mr. Jeremy Lau', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'JL', image: jeremyImage },
+  { id: 'SPEAKER_04', name: 'Ms. Ho Zhi Yi', role: 'Guest Speaker', org: 'Guest Speaker', initials: 'ZY', image: zhiyiImage },
 ]
 
 function SpeakersTab() {
