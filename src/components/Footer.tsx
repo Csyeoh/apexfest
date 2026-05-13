@@ -1,3 +1,5 @@
+import bannerLogo from '../assets/bannerlogo.png'
+
 export default function Footer() {
   return (
     <footer
@@ -15,6 +17,14 @@ export default function Footer() {
         >
           GDGoC_USM // APEXFEST
         </p>
+
+        <img
+          src={bannerLogo}
+          alt="Supported by Universiti Sains Malaysia, Pusat Kreativiti & Inovasi, and Google Developer Group on Campus USM"
+          className="select-none"
+          style={{ height: '30px', opacity: 0.8 }}
+          draggable="false"
+        />
 
         <p
           className="font-mono"
