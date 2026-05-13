@@ -6,14 +6,16 @@ import msLeongImage from '../assets/speakers/msleong.jpg'
 import zhiyiImage from '../assets/speakers/zhiyi.png'
 import kenichiImage from '../assets/speakers/kenichi.jpg'
 import jeremyImage from '../assets/speakers/jeremy.jpg'
+import tfqr from '../assets/qr/tfqr.png'
 
-type TechFestTab = 'about' | 'timeline' | 'speakers' | 'topics'
+type TechFestTab = 'about' | 'timeline' | 'speakers' | 'topics' | 'register'
 
 const tabs: { key: TechFestTab; label: string }[] = [
   { key: 'about', label: 'About' },
   { key: 'timeline', label: 'Timeline' },
   { key: 'speakers', label: 'Speakers' },
   { key: 'topics', label: 'Topics' },
+  { key: 'register', label: 'Register' },
 ]
 
 /* ========================================
@@ -523,6 +525,61 @@ function TopicsTab() {
 }
 
 /* ========================================
+   REGISTER TAB
+   ======================================== */
+
+function RegisterTab() {
+  return (
+    <RevealOnScroll direction="up">
+      <div
+        className="max-w-xl p-10 text-center flex flex-col items-center mx-auto"
+        style={{
+          border: '1px solid rgba(0,180,216,0.25)',
+          backgroundColor: 'rgba(0,180,216,0.02)',
+        }}
+      >
+        <p
+          className="font-mono text-techfest mb-6"
+          style={{ fontSize: '10px', letterSpacing: '3px' }}
+        >
+          // SCAN TO REGISTER
+        </p>
+
+        <div className="w-64 h-64 bg-white p-3 rounded-lg mb-8 shadow-[0_0_30px_rgba(0,180,216,0.15)] transition-transform duration-300 hover:scale-105">
+          <img
+            src={tfqr}
+            alt="TechFest Registration QR Code"
+            className="w-full h-full object-contain"
+            draggable="false"
+          />
+        </div>
+
+        <p className="font-body text-text-muted text-base mb-8 max-w-sm mx-auto leading-relaxed">
+          Ready to join the action? Scan the QR code above or click the button below to fill out the official registration form.
+        </p>
+
+        <a
+          href="https://forms.gle/wBMxKnnLFbC7tdBx6"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full sm:w-auto px-10 py-4 font-display font-bold uppercase tracking-widest cursor-pointer transition-transform duration-200 hover:-translate-y-1 inline-block text-center rounded-sm"
+          style={{
+            backgroundColor: '#00b4d8',
+            color: '#ffffff',
+            fontSize: '13px',
+            letterSpacing: '3px',
+            textDecoration: 'none',
+            boxShadow: '0 4px 15px rgba(0,180,216,0.2)',
+          }}
+        >
+          Open Form Link
+        </a>
+      </div>
+    </RevealOnScroll>
+  )
+}
+
+/* ========================================
    PAGE COMPONENT
    ======================================== */
 
@@ -539,6 +596,8 @@ export default function TechFest() {
         return <SpeakersTab />
       case 'topics':
         return <TopicsTab />
+      case 'register':
+        return <RegisterTab />
     }
   }
 
