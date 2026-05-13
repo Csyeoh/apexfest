@@ -353,9 +353,13 @@ const speakerTopics: Topic[] = [
     title: 'Building ADK with Skills and Tools',
     desc: "Agent Development Kit (ADK)'s SkillToolset enables agents to load domain expertise on demand. With the right skill configuration, your agent can generate entirely new expertise at runtime. In this session, you will first discover how to initialise a new ADK agent project and compose a robust system prompt using structured builder. Next, you will learn adding tools and dynamically load skills into the agent's toolset. After that, you will learn testing the agent's execution locally.",
   },
-  { number: 'S2', title: 'Cloud Computing' },
-  { number: 'S3', title: 'Generative AI & Machine Learning' },
-  { number: 'S4', title: 'Cybersecurity' },
+  { number: 'S2', title: 'Generative AI & Machine Learning' },
+  { number: 'S3', title: 'Cybersecurity' },
+  {
+    number: 'S4',
+    title: 'Rapid Prototyping with AI Studio',
+    desc: 'This is an introductory session aims to empower anyone, with or without technical background, to build and deploy an application in less than 30 minutes. If you are not building and shipping application yet, don\'t miss out!',
+  },
 ]
 
 const boothTopics: Topic[] = [
