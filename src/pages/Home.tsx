@@ -16,7 +16,7 @@ import slide4 from '../assets/slideshow/img_1914.webp'
 import logoImg from '../assets/home/logo.png'
 import bg1Img from '../assets/home/bg1.png'
 import bg2Img from '../assets/home/bg2.png'
-import shadow1Img from '../assets/home/shadow1.png'
+import _shadow1Img from '../assets/home/shadow1.png'
 import shadow2Img from '../assets/home/shadow2.png'
 import geminiImg from '../assets/home/gemini.png'
 import flutterImg from '../assets/home/flutter.png'
@@ -77,7 +77,7 @@ function HeroIllustration() {
 
       {/* shadow1 — Android, lower-left area */}
       {/* <img
-        src={shadow1Img}
+        src={_shadow1Img}
         alt=""
         className="absolute select-none floating"
         style={{ left: '8%', bottom: '8%', width: '500px', zIndex: 5 }}
@@ -479,24 +479,55 @@ const aboutCards = [
     desc: 'Compete in high-stakes TETR.IO battles and side quests',
     gradient: 'linear-gradient(135deg, #ff007f22, #be6bff22)',
     accent: '#ff007f',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 22, height: 22 }}>
+        <path d="M6 9H4.5a2.5 2.5 0 010-5H6" />
+        <path d="M18 9h1.5a2.5 2.5 0 000-5H18" />
+        <path d="M4 22h16" />
+        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22" />
+        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22" />
+        <path d="M18 2H6v7a6 6 0 1012 0V2z" />
+      </svg>
+    ),
   },
   {
     title: 'Hands-on Workshops',
     desc: 'Cloud, AI, cybersecurity, and fullstack development',
     gradient: 'linear-gradient(135deg, #00b4d822, #44a5ff22)',
     accent: '#00b4d8',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 22, height: 22 }}>
+        <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+      </svg>
+    ),
   },
   {
     title: 'Tech Talks',
     desc: 'Industry speakers sharing real-world insights',
     gradient: 'linear-gradient(135deg, #be6bff22, #00b4d822)',
     accent: '#be6bff',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 22, height: 22 }}>
+        <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" />
+        <path d="M19 10v2a7 7 0 01-14 0v-2" />
+        <line x1="12" y1="19" x2="12" y2="23" />
+        <line x1="8" y1="23" x2="16" y2="23" />
+      </svg>
+    ),
   },
   {
     title: 'Networking',
     desc: 'Connect with peers, mentors, and industry leaders',
     gradient: 'linear-gradient(135deg, #44a5ff22, #ff007f22)',
     accent: '#44a5ff',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 22, height: 22 }}>
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 00-3-3.87" />
+        <path d="M16 3.13a4 4 0 010 7.75" />
+      </svg>
+    ),
   },
 ]
 
@@ -551,9 +582,11 @@ function AboutSection() {
                   }}
                 >
                   <div
-                    className="w-12 h-12 rounded-2xl mb-4"
-                    style={{ background: card.gradient }}
-                  />
+                    className="w-12 h-12 rounded-2xl mb-4 flex items-center justify-center"
+                    style={{ background: card.gradient, color: card.accent }}
+                  >
+                    {card.icon}
+                  </div>
                   <h3 className="font-display font-bold text-sm md:text-base mb-1" style={{ color: '#1a1a2e' }}>
                     {card.title}
                   </h3>

@@ -347,20 +347,76 @@ interface Topic {
   number: string
   title: string
   desc?: string
+  icon: React.ReactNode
 }
+
+/* ── Standardized topic icons (20×20, 1.5px stroke, single-color) ── */
+const iconStyle = { width: 20, height: 20, color: '#00b4d8' }
+
+const IconADK = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}>
+    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+    <path d="M2 17l10 5 10-5" />
+    <path d="M2 12l10 5 10-5" />
+  </svg>
+)
+
+const IconGenAI = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}>
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+  </svg>
+)
+
+const IconCyber = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+  </svg>
+)
+
+const IconRapidProto = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}>
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+  </svg>
+)
+
+const IconFullstack = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}>
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+)
+
+const IconML = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}>
+    <circle cx="4" cy="6" r="2" />
+    <circle cx="20" cy="6" r="2" />
+    <circle cx="12" cy="18" r="2" />
+    <line x1="6" y1="6" x2="10" y2="18" />
+    <line x1="18" y1="6" x2="14" y2="18" />
+  </svg>
+)
+
+const IconCloud = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}>
+    <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" />
+  </svg>
+)
 
 const speakerTopics: Topic[] = [
   {
     number: 'S1',
     title: 'Building ADK with Skills and Tools',
     desc: "Agent Development Kit (ADK)'s SkillToolset enables agents to load domain expertise on demand. With the right skill configuration, your agent can generate entirely new expertise at runtime. In this session, you will first discover how to initialise a new ADK agent project and compose a robust system prompt using structured builder. Next, you will learn adding tools and dynamically load skills into the agent's toolset. After that, you will learn testing the agent's execution locally.",
+    icon: IconADK,
   },
-  { number: 'S2', title: 'Generative AI & Machine Learning' },
-  { number: 'S3', title: 'Cybersecurity' },
+  { number: 'S2', title: 'Generative AI & Machine Learning', icon: IconGenAI },
+  { number: 'S3', title: 'Cybersecurity', icon: IconCyber },
   {
     number: 'S4',
     title: 'Rapid Prototyping with AI Studio',
     desc: 'This is an introductory session aims to empower anyone, with or without technical background, to build and deploy an application in less than 30 minutes. If you are not building and shipping application yet, don\'t miss out!',
+    icon: IconRapidProto,
   },
 ]
 
@@ -369,60 +425,33 @@ const boothTopics: Topic[] = [
     number: 'B1',
     title: 'Fullstack Development',
     desc: 'An introductory session that guides participants through the fundamentals of Full Stack Development using Firebase Studio. Learn how modern web applications are built and deployed through a simple hands-on development workflow.',
+    icon: IconFullstack,
   },
   {
     number: 'B2',
     title: 'Machine Learning',
     desc: 'A beginner-friendly introduction to Machine Learning with TensorFlow, covering neural networks, AI model training, and real-world applications of intelligent systems in modern technology.',
+    icon: IconML,
   },
   {
     number: 'B3',
     title: 'Generative AI',
     desc: 'Discover how Generative AI can be integrated into modern applications to create smarter, more personalized user experiences through intelligent recommendations, automation, and multi-agent systems.',
+    icon: IconGenAI,
   },
   {
     number: 'B4',
     title: 'Cloud Computing',
     desc: 'Explore how autonomous AI agents are built using modern cloud technologies, tool integrations, and AI workflows. This session introduces the fundamentals of agentic AI development and deployment in real-world applications.',
+    icon: IconCloud,
   },
   {
     number: 'B5',
     title: 'Cybersecurity',
     desc: 'Test your cybersecurity skills through interactive hacking challenges, phishing simulations, and Mini-CTF activities designed to introduce real-world digital security concepts in a fun and engaging way.',
+    icon: IconCyber,
   },
 ]
-
-function TopicItem({ topic, delay }: { topic: Topic; delay: number }) {
-  return (
-    <RevealOnScroll direction="left" delay={delay}>
-      <div
-        className="flex items-center gap-5 py-4 px-5 transition-all duration-200 cursor-default"
-        style={{
-          borderLeft: '2px solid rgba(0,180,216,0.2)',
-          backgroundColor: 'rgba(0,180,216,0.02)',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderLeftColor = '#00b4d8'
-          e.currentTarget.style.backgroundColor = 'rgba(0,180,216,0.06)'
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderLeftColor = 'rgba(0,180,216,0.2)'
-          e.currentTarget.style.backgroundColor = 'rgba(0,180,216,0.02)'
-        }}
-      >
-        <span
-          className="font-mono text-techfest flex-shrink-0"
-          style={{ fontSize: '13px', letterSpacing: '2px' }}
-        >
-          {topic.number}
-        </span>
-        <span className="font-body text-text-base text-lg">
-          {topic.title}
-        </span>
-      </div>
-    </RevealOnScroll>
-  )
-}
 
 function BoothAccordion({ topic, delay, isOpen, onToggle }: { topic: Topic; delay: number; isOpen: boolean; onToggle: () => void }) {
 
@@ -441,10 +470,10 @@ function BoothAccordion({ topic, delay, isOpen, onToggle }: { topic: Topic; dela
           className="w-full py-5 px-5 text-left flex items-center gap-4 group focus:outline-none cursor-pointer transition-colors duration-150"
         >
           <span
-            className="font-mono text-techfest flex-shrink-0"
-            style={{ fontSize: '11px', letterSpacing: '2px' }}
+            className="flex-shrink-0 flex items-center justify-center"
+            style={{ opacity: isOpen ? 1 : 0.6, transition: 'opacity 0.2s' }}
           >
-            {topic.number}
+            {topic.icon}
           </span>
           <span
             className="font-display font-medium text-base md:text-lg tracking-wide flex-1 transition-colors duration-200"
