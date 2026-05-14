@@ -744,7 +744,7 @@ function SponsorsSection() {
               Our <span style={{ color: '#00b4d8' }}>Sponsors</span>
             </h2>
             <p className="font-body text-sm" style={{ color: 'rgba(26,26,46,0.4)' }}>
-              Powered by industry leaders
+              Made possible by our sponsors
             </p>
           </div>
 
