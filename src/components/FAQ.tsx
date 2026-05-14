@@ -32,16 +32,28 @@ const gameFestFaqItems: FAQItem[] = [
 
 const techFestFaqItems: FAQItem[] = [
   {
-    question: 'Is TechFest free to attend?',
-    answer: 'Yes — TechFest 2.0 is completely free for all currently enrolled USM students. External attendees may register subject to availability and a nominal fee that will be announced closer to the event date.',
+    question: 'Who can attend?',
+    answer: "It's open to all undergraduates who are passionate about technologies or simply interested in exploring the latest digital trends!",
   },
   {
-    question: 'Will sessions be recorded?',
-    answer: 'Select sessions will be recorded and made available post-event on our official YouTube channel. However, workshops and interactive panels will not be recorded to encourage open participation.',
+    question: 'Is the event free?',
+    answer: 'Yes, admission is completely free for everyone!',
   },
   {
-    question: 'Can I submit a lightning talk?',
-    answer: 'Absolutely. We are running an open call for 5-minute lightning talks on any AI or tech topic. Submission details will be shared via our Discord and social media channels — stay tuned for the announcement.',
+    question: 'How to register?',
+    answer: 'Click the link in our bio or scan the QR code to register now!',
+  },
+  {
+    question: 'How many sessions are available?',
+    answer: 'There are 4 sharing sessions & 5 booth sessions.',
+  },
+  {
+    question: 'What fields will be covered?',
+    answer: 'We will cover 5 fields, including Cybersecurity, Generative AI, Machine Learning, Fullstack Development and Cloud Computing.',
+  },
+  {
+    question: 'Will there be MyCSD points?',
+    answer: 'Yes! MyCSD points will be provided for participants.',
   },
 ]
 
