@@ -143,8 +143,6 @@ function HeroIllustration() {
 }
 
 function HeroSection() {
-  const navigate = useNavigate()
-
   return (
     <section
       id="home"
@@ -233,7 +231,7 @@ function HeroSection() {
           >
             <button
               type="button"
-              onClick={() => navigate('/gamefest')}
+              onClick={() => { window.location.href = '/#events' }}
               className="font-display font-semibold cursor-pointer transition-all duration-200 rounded-full"
               style={{
                 fontSize: '14px',
@@ -257,7 +255,7 @@ function HeroSection() {
             </button>
             <button
               type="button"
-              onClick={() => navigate('/#events')}
+              onClick={() => { window.location.href = '/#about' }}
               className="font-display font-semibold cursor-pointer transition-all duration-200 rounded-full"
               style={{
                 fontSize: '14px',
@@ -853,8 +851,6 @@ function GallerySection() {
    ======================================== */
 
 function FinalCtaSection() {
-  const navigate = useNavigate()
-
   return (
     <section className="w-full px-6 py-20">
       <RevealOnScroll direction="up">
@@ -873,7 +869,7 @@ function FinalCtaSection() {
           </h2>
           <button
             type="button"
-            onClick={() => navigate('/gamefest')}
+            onClick={() => { window.location.href = '/#events' }}
             className="font-display font-bold cursor-pointer transition-all duration-200 rounded-full"
             style={{
               fontSize: '15px',
