@@ -2,14 +2,23 @@ import { useState } from 'react'
 import PageWrapper from '../components/PageWrapper'
 import RevealOnScroll from '../components/RevealOnScroll'
 import gfqr from '../assets/qr/gfqr.png'
+import prize1 from '../assets/prize/1.png'
+import prize2 from '../assets/prize/2.png'
+import prize3 from '../assets/prize/3.png'
+import prize4 from '../assets/prize/4.png'
+import prize5 from '../assets/prize/5.png'
+import prize6 from '../assets/prize/6.png'
+import prizeCaps from '../assets/prize/caps.png'
+import prizeDino from '../assets/prize/dino.png'
 
-type GameFestTab = 'about' | 'timeline' | 'rules' | 'prizepool' | 'register'
+type GameFestTab = 'about' | 'timeline' | 'rules' | 'prize' | 'giftaway' | 'register'
 
 const tabs: { key: GameFestTab; label: string }[] = [
   { key: 'about', label: 'About' },
   { key: 'timeline', label: 'Timeline' },
   { key: 'rules', label: 'Rules' },
-  { key: 'prizepool', label: 'Prizepool' },
+  { key: 'prize', label: 'Prize' },
+  { key: 'giftaway', label: 'Giftaway' },
   { key: 'register', label: 'Register' },
 ]
 
@@ -382,163 +391,211 @@ function RulesTab() {
 }
 
 /* ========================================
-   PRIZEPOOL TAB
+   PRIZE TAB
    ======================================== */
 
 interface PrizeEntry {
   rank: string
-  amount: string
-  label: string
-  highlight: boolean
+  model: string
+  value: string
+  image: string
 }
 
 const prizes: PrizeEntry[] = [
-  { rank: '1ST', amount: '?', label: 'Champion', highlight: true },
-  { rank: '2ND', amount: '?', label: '1st Runner Up', highlight: false },
-  { rank: '3RD', amount: '?', label: '2nd Runner Up', highlight: false },
+  { rank: '1ST', model: 'Fantech MK856 Green MAXFIT87', value: 'RM189', image: prize1 },
+  { rank: '2ND', model: 'Fantech Helios XD3 Wireless Mouse', value: 'RM292', image: prize2 },
+  { rank: '3RD', model: 'Attack Shark X82 Pro HE Manga', value: 'RM299', image: prize3 },
+  { rank: '4TH', model: 'MOFII Sweet 2.4G Wireless Keyboard', value: 'RM130', image: prize4 },
+  { rank: '5TH', model: 'MOFII Honey BT 5.1 Keyboard 83 Key', value: 'RM109', image: prize5 },
+  { rank: '6TH', model: 'Lawak Kampus Deskmat', value: 'RM99', image: prize6 },
 ]
 
-function PrizepoolTab() {
-  const podiumPrizes = [prizes[1], prizes[0], prizes[2]]
-  
-  const getPodiumStyles = (rank: string) => {
-    if (rank === '1ST') {
-      return {
-        height: '110px',
-        borderTop: '2px solid #ff007f',
-        borderLeft: '1px solid #ff007f',
-        borderRight: '1px solid #ff007f',
-        borderBottom: 'none',
-        backgroundColor: 'rgba(255,0,127,0.06)'
-      }
-    }
-    if (rank === '2ND') {
-      return {
-        height: '75px',
-        borderTop: '2px solid rgba(255,0,127,0.35)',
-        borderLeft: '1px solid rgba(255,0,127,0.35)',
-        borderRight: '1px solid rgba(255,0,127,0.35)',
-        borderBottom: 'none',
-        backgroundColor: 'rgba(255,0,127,0.03)'
-      }
-    }
-    return {
-      height: '50px',
-      borderTop: '2px solid rgba(255,0,127,0.2)',
-      borderLeft: '1px solid rgba(255,0,127,0.2)',
-      borderRight: '1px solid rgba(255,0,127,0.2)',
-      borderBottom: 'none',
-      backgroundColor: 'transparent'
-    }
-  }
+const giftaways = [
+  { name: 'GDGoC USM Cap', qty: 2, image: prizeCaps },
+  { name: 'Dino Plush Keychain', qty: 2, image: prizeDino },
+]
 
-  const renderAmount = (amount: string, isFirst: boolean, isPodium: boolean) => {
-    if (amount === '?') {
-      return (
-        <span 
-          className="inline-block font-mono text-gamefest border border-gamefest rounded-sm"
-          style={{ fontSize: '9px', padding: '2px 7px', letterSpacing: '1px' }}
-        >
-          TBA
-        </span>
-      )
-    }
-    return (
-      <span 
-        style={{ 
-          fontFamily: "'Space Grotesk', sans-serif", 
-          fontWeight: 900,
-          fontSize: isPodium ? (isFirst ? '26px' : '20px') : (isFirst ? '16px' : '14px'),
-          color: isFirst ? '#ff007f' : (isPodium ? '#1a1a2e' : 'rgba(232, 228, 212, 0.6)')
-        }}
+/* ── Tier badge SVG ── */
+function RankBadge({ rank, size = 64 }: { rank: string; size?: number }) {
+  const num = rank.replace(/\D/g, '')
+  const isTop3 = ['1ST', '2ND', '3RD'].includes(rank)
+  const accent = isTop3 ? '#ff007f' : 'rgba(26,26,46,0.15)'
+
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="30" stroke={accent} strokeWidth="1.5" />
+      {isTop3 && <circle cx="32" cy="32" r="25" stroke={accent} strokeWidth="0.75" strokeDasharray="3 3" opacity="0.4" />}
+      <text
+        x="32"
+        y="30"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fill={accent}
+        fontSize={isTop3 ? '20' : '16'}
+        fontFamily="'Sora', sans-serif"
+        fontWeight="700"
       >
-        {amount}
-      </span>
-    )
-  }
+        {num}
+      </text>
+      <text
+        x="32"
+        y="44"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fill={isTop3 ? accent : 'rgba(26,26,46,0.3)'}
+        fontSize="7"
+        fontFamily="'Sora', sans-serif"
+        fontWeight="500"
+        letterSpacing="1"
+      >
+        {rank.slice(-2)}
+      </text>
+    </svg>
+  )
+}
+
+function PrizeTab() {
+  const top3 = prizes.slice(0, 3)
+  const rest = prizes.slice(3, 6)
 
   return (
     <RevealOnScroll direction="up">
-      <div className="max-w-3xl mx-auto w-full flex flex-col gap-12">
-        
-        {/* PODIUM */}
-        <div className="grid grid-cols-3 items-end gap-2 sm:gap-4 w-full pt-8 px-2 sm:px-12">
-          {podiumPrizes.map((prize) => {
-            const isFirst = prize.rank === '1ST'
-            const num = prize.rank.replace('ST', '').replace('ND', '').replace('RD', '')
-            return (
-              <div key={prize.rank} className="flex flex-col items-center">
-                <div className="flex flex-col items-center mb-4 text-center">
-                  <span className="font-mono text-gamefest mb-2" style={{ fontSize: '10px', letterSpacing: '2px' }}>
-                    {prize.rank}
-                  </span>
-                  {renderAmount(prize.amount, isFirst, true)}
-                  <span className="font-body text-text-muted mt-2" style={{ fontSize: '13px' }}>
-                    {prize.label}
-                  </span>
-                </div>
-                
-                <div 
-                  className="w-full relative flex justify-center items-center overflow-hidden rounded-t-sm"
-                  style={getPodiumStyles(prize.rank)}
+      <div className="max-w-3xl mx-auto w-full flex flex-col gap-10">
+
+        {/* TOP 3 CARDS */}
+        <div>
+          <p className="font-mono text-gamefest mb-5 opacity-60 uppercase" style={{ fontSize: '11px', letterSpacing: '3px' }}>
+            // Top 3
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {top3.map((prize) => {
+              const isFirst = prize.rank === '1ST'
+              return (
+                <div
+                  key={prize.rank}
+                  className="flex flex-col items-center text-center p-6 transition-all duration-300 hover:-translate-y-1"
+                  style={{
+                    backgroundColor: isFirst ? 'rgba(255,0,127,0.04)' : 'rgba(255,255,255,0.7)',
+                    border: isFirst ? '1px solid rgba(255,0,127,0.25)' : '1px solid rgba(255,0,127,0.1)',
+                    borderRadius: '20px',
+                    boxShadow: isFirst ? '0 8px 30px rgba(255,0,127,0.08)' : '0 4px 20px rgba(0,0,0,0.03)',
+                  }}
                 >
-                  <span 
-                    className="absolute inset-0 flex items-center justify-center leading-none select-none pointer-events-none"
-                    style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
-                      fontWeight: 900,
-                      fontSize: isFirst ? '90px' : prize.rank === '2ND' ? '60px' : '40px',
-                      color: '#ff007f',
-                      opacity: 0.18,
-                      zIndex: 0
-                    }}
+                  <RankBadge rank={prize.rank} size={isFirst ? 72 : 64} />
+                  <div
+                    className="w-full flex items-center justify-center my-4 overflow-hidden"
+                    style={{ height: '120px', borderRadius: '12px', backgroundColor: 'rgba(255,0,127,0.03)' }}
                   >
-                    {num}
+                    <img
+                      src={prize.image}
+                      alt={prize.model}
+                      className="w-full h-full object-contain p-3 select-none"
+                      draggable="false"
+                    />
+                  </div>
+                  <span className="font-display font-semibold block mb-1" style={{ fontSize: '13px', color: '#1a1a2e' }}>
+                    {prize.model}
+                  </span>
+                  <span
+                    className="font-mono text-gamefest border border-gamefest rounded-sm mt-1"
+                    style={{ fontSize: '9px', padding: '2px 8px', letterSpacing: '1px' }}
+                  >
+                    {prize.value}
                   </span>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
 
-        {/* DETAIL STRIP */}
-        <div 
-          className="w-full flex flex-col rounded-sm"
-          style={{
-            border: '1px solid rgba(255,0,127,0.15)',
-            backgroundColor: 'rgba(255,0,127,0.02)'
-          }}
-        >
-          {prizes.map((prize, i) => {
-            const isFirst = prize.rank === '1ST'
-            const borderColor = isFirst ? '#ff007f' : prize.rank === '2ND' ? 'rgba(255,0,127,0.4)' : 'rgba(255,0,127,0.2)'
-            const isLast = i === prizes.length - 1
-
-            return (
-              <div 
+        {/* 4TH–6TH ROW */}
+        <div>
+          <p className="font-mono text-gamefest mb-5 opacity-60 uppercase" style={{ fontSize: '11px', letterSpacing: '3px' }}>
+            // 4th – 6th
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {rest.map((prize) => (
+              <div
                 key={prize.rank}
-                className="grid grid-cols-[60px_1fr_1fr] items-center px-6 py-4 transition-colors duration-200"
+                className="flex flex-col items-center text-center p-5 transition-all duration-300 hover:-translate-y-1"
                 style={{
-                  borderLeft: `2px solid ${borderColor}`,
-                  borderBottom: isLast ? 'none' : '1px solid rgba(255,0,127,0.08)',
+                  backgroundColor: 'rgba(255,255,255,0.5)',
+                  border: '1px solid rgba(26,26,46,0.06)',
+                  borderRadius: '16px',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.02)',
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,0,127,0.05)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
               >
-                <span className="font-mono text-gamefest" style={{ fontSize: '10px', letterSpacing: '3px' }}>
-                  {prize.rank}
-                </span>
-                <span className="font-display font-semibold" style={{ fontSize: '15px', color: '#1a1a2e' }}>
-                  {prize.label}
-                </span>
-                <div className="text-right flex justify-end">
-                  {renderAmount(prize.amount, isFirst, false)}
+                <RankBadge rank={prize.rank} size={52} />
+                <div
+                  className="w-full flex items-center justify-center my-3 overflow-hidden"
+                  style={{ height: '100px', borderRadius: '10px', backgroundColor: 'rgba(26,26,46,0.02)' }}
+                >
+                  <img
+                    src={prize.image}
+                    alt={prize.model}
+                    className="w-full h-full object-contain p-3 select-none"
+                    draggable="false"
+                  />
                 </div>
+                <span className="font-display font-semibold block mb-1" style={{ fontSize: '12px', color: '#1a1a2e' }}>
+                  {prize.model}
+                </span>
+                <span
+                  className="font-mono border rounded-sm mt-1"
+                  style={{ fontSize: '9px', padding: '2px 8px', letterSpacing: '1px', color: 'rgba(26,26,46,0.35)', borderColor: 'rgba(26,26,46,0.12)' }}
+                >
+                  {prize.value}
+                </span>
               </div>
-            )
-          })}
+            ))}
+          </div>
         </div>
 
+      </div>
+    </RevealOnScroll>
+  )
+}
+
+/* ========================================
+   GIFTAWAY TAB
+   ======================================== */
+
+function GiftawayTab() {
+  return (
+    <RevealOnScroll direction="up">
+      <div className="max-w-3xl mx-auto w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {giftaways.map((gift) => (
+            <div
+              key={gift.name}
+              className="flex flex-col items-center text-center p-8 transition-all duration-300 hover:-translate-y-1"
+              style={{
+                backgroundColor: 'rgba(255,255,255,0.6)',
+                border: '1px solid rgba(255,0,127,0.12)',
+                borderRadius: '20px',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+              }}
+            >
+              <div
+                className="w-full overflow-hidden mb-5"
+                style={{ height: '200px', borderRadius: '14px', backgroundColor: 'rgba(255,0,127,0.03)' }}
+              >
+                <img
+                  src={gift.image}
+                  alt={gift.name}
+                  className="w-full h-full object-contain p-4 select-none"
+                  draggable="false"
+                />
+              </div>
+              <span className="font-display font-semibold block mb-1" style={{ fontSize: '16px', color: '#1a1a2e' }}>
+                {gift.name}
+              </span>
+              <span className="font-mono text-gamefest opacity-60" style={{ fontSize: '11px', letterSpacing: '1px' }}>
+                x{gift.qty}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </RevealOnScroll>
   )
@@ -614,8 +671,10 @@ export default function GameFest() {
         return <TimelineTab />
       case 'rules':
         return <RulesTab />
-      case 'prizepool':
-        return <PrizepoolTab />
+      case 'prize':
+        return <PrizeTab />
+      case 'giftaway':
+        return <GiftawayTab />
       case 'register':
         return <RegisterTab />
     }
