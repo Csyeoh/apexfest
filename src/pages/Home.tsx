@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useLenis } from 'lenis/react'
 import { motion } from 'framer-motion'
 import PageWrapper from '../components/PageWrapper'
@@ -229,10 +229,9 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <button
-              type="button"
-              onClick={() => { window.location.href = '/#events' }}
-              className="font-display font-semibold cursor-pointer transition-all duration-200 rounded-full"
+            <Link
+              to="/#events"
+              className="font-display font-semibold cursor-pointer transition-all duration-200 rounded-full no-underline"
               style={{
                 fontSize: '14px',
                 letterSpacing: '0.5px',
@@ -241,6 +240,7 @@ function HeroSection() {
                 padding: '14px 32px',
                 border: 'none',
                 boxShadow: '0 8px 24px rgba(190,107,255,0.3)',
+                textDecoration: 'none',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)'
@@ -252,10 +252,9 @@ function HeroSection() {
               }}
             >
               Register Now
-            </button>
-            <button
-              type="button"
-              onClick={() => { window.location.href = '/#about' }}
+            </Link>
+            <Link
+              to="/#about"
               className="font-display font-semibold cursor-pointer transition-all duration-200 rounded-full"
               style={{
                 fontSize: '14px',
@@ -265,6 +264,7 @@ function HeroSection() {
                 padding: '14px 32px',
                 border: '1px solid rgba(26,26,46,0.08)',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                textDecoration: 'none',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#ffffff'
@@ -276,7 +276,7 @@ function HeroSection() {
               }}
             >
               Learn More
-            </button>
+            </Link>
           </motion.div>
 
           {/* Chips */}
@@ -867,9 +867,8 @@ function FinalCtaSection() {
           >
             Ready to join ApexFest?
           </h2>
-          <button
-            type="button"
-            onClick={() => { window.location.href = '/#events' }}
+          <Link
+            to="/#events"
             className="font-display font-bold cursor-pointer transition-all duration-200 rounded-full"
             style={{
               fontSize: '15px',
@@ -879,6 +878,7 @@ function FinalCtaSection() {
               padding: '14px 36px',
               border: 'none',
               boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
+              textDecoration: 'none',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)'
@@ -890,7 +890,7 @@ function FinalCtaSection() {
             }}
           >
             Register Now
-          </button>
+          </Link>
         </div>
       </RevealOnScroll>
     </section>

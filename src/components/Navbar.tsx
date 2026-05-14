@@ -69,7 +69,6 @@ function NavLinkItem({ link }: { link: NavItem }) {
 function EventsDropdown({ onClose }: { onClose?: () => void }) {
   const [open, setOpen] = useState(false)
   const location = useLocation()
-  const navigate = useNavigate()
 
   const isActive = location.pathname === '/gamefest' || location.pathname === '/techfest'
 
@@ -84,10 +83,9 @@ function EventsDropdown({ onClose }: { onClose?: () => void }) {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <button
-        type="button"
+      <Link
+        to="/#events"
         onClick={() => {
-          navigate('/#events')
           onClose?.()
         }}
         className={`relative inline-flex items-center gap-1 font-ui font-medium cursor-pointer transition-colors duration-200 ${
@@ -121,7 +119,7 @@ function EventsDropdown({ onClose }: { onClose?: () => void }) {
           transition={{ duration: 0.2, ease: 'easeOut' }}
           aria-hidden="true"
         />
-      </button>
+      </Link>
 
       <AnimatePresence>
         {open && (
