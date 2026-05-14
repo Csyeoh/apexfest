@@ -173,12 +173,12 @@ interface AgendaItem {
 
 const techfestAgenda: AgendaItem[] = [
   { time: '09:00 AM', event: 'Opening Ceremony' },
-  { time: '09:20 AM', event: 'Hands-on Session: "Building ADK with Skills and Tools" by Ms. Leong Lai Fong', isHighlight: true },
-  { time: '10:20 AM', event: 'Hands-on Session: Cloud Computing', isHighlight: true },
+  { time: '09:20 AM', event: 'Hands-on Session: "Building ADK with Skills and Tools" by Leong Lai Fong', isHighlight: true },
+  { time: '10:20 AM', event: 'Hands-on Session: "Building Flutter Apps with Generative AI" by Kenichi Kambara', isHighlight: true },
   { time: '11:20 AM', event: 'Interactive Booth Sessions (All Tech Tracks)' },
   { time: '12:30 PM', event: 'Break' },
-  { time: '02:00 PM', event: 'Hands-on Session: Generative AI, Machine Learning', isHighlight: true },
-  { time: '03:00 PM', event: 'Hands-on Session: Cybersecurity', isHighlight: true },
+  { time: '02:00 PM', event: 'Hands-on Session: "Building Smart Projects with AI" by Jeremy Lau Wei Han', isHighlight: true },
+  { time: '03:00 PM', event: 'Hands-on Session: "Rapid Prototyping with AI Studio" by Ho Zhi Yi', isHighlight: true },
   { time: '04:00 PM', event: 'Interactive Booth Sessions (All Tech Tracks)' },
   { time: '05:00 PM', event: 'Closing Ceremony' },
   { time: '05:45 PM', event: 'End' },
@@ -426,7 +426,7 @@ const speakerTopics: Topic[] = [
     icon: IconADK,
   },
   { number: 'S2', title: 'Hands-On Building Flutter Apps with Generative AI', desc: 'In this hands-on workshop, participants will use Generative AI together with Flutter to build their own original mobile app step by step. The session will also briefly introduce some of the latest AI trends and practical AI-powered development workflows.', icon: IconGenAI },
-  { number: 'S3', title: 'Cybersecurity', icon: IconCyber },
+  { number: 'S3', title: 'Hands-On Building Smart Projects with AI', desc: 'In this hands-on session, participants will learn how to leverage AI tools to brainstorm, plan, and build a working project from scratch. The session covers practical workflows for turning ideas into prototypes using AI-assisted development, making it ideal for both beginners and those preparing for hackathons.', icon: IconRapidProto },
   {
     number: 'S4',
     title: 'Rapid Prototyping with AI Studio',

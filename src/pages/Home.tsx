@@ -8,6 +8,7 @@ import FAQ from '../components/FAQ'
 
 import fantechLogo from '../assets/sponsor/fantech.png'
 import mofiiLogo from '../assets/sponsor/mofii.jpg'
+import mkbLogo from '../assets/sponsor/mkb.png'
 import slide1 from '../assets/slideshow/img_1556.webp'
 import slide2 from '../assets/slideshow/img_1561.webp'
 import slide3 from '../assets/slideshow/img_1574.webp'
@@ -719,6 +720,7 @@ function EventsSection() {
 const sponsors = [
   { name: 'Fantech', image: fantechLogo, role: 'In-Kind Sponsor', imageWidth: 'w-[80%]' },
   { name: 'Mofii', image: mofiiLogo, role: 'In-Kind Sponsor', imageWidth: 'w-[80%]' },
+  { name: 'MKB', image: mkbLogo, role: 'In-Kind Sponsor', imageWidth: 'w-[80%]' },
 ]
 
 function SponsorsSection() {
