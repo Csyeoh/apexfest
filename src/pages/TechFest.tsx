@@ -422,7 +422,7 @@ const speakerTopics: Topic[] = [
     desc: "Agent Development Kit (ADK)'s SkillToolset enables agents to load domain expertise on demand. With the right skill configuration, your agent can generate entirely new expertise at runtime. In this session, you will first discover how to initialise a new ADK agent project and compose a robust system prompt using structured builder. Next, you will learn adding tools and dynamically load skills into the agent's toolset. After that, you will learn testing the agent's execution locally.",
     icon: IconADK,
   },
-  { number: 'S2', title: 'Generative AI & Machine Learning', icon: IconGenAI },
+  { number: 'S2', title: 'Hands-On Building Flutter Apps with Generative AI', desc: 'In this hands-on workshop, participants will use Generative AI together with Flutter to build their own original mobile app step by step. The session will also briefly introduce some of the latest AI trends and practical AI-powered development workflows.', icon: IconGenAI },
   { number: 'S3', title: 'Cybersecurity', icon: IconCyber },
   {
     number: 'S4',
