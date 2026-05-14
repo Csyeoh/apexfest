@@ -7,14 +7,17 @@ import zhiyiImage from '../assets/speakers/zhiyi.png'
 import kenichiImage from '../assets/speakers/kenichi.jpg'
 import jeremyImage from '../assets/speakers/jeremy.jpg'
 import tfqr from '../assets/qr/tfqr.png'
+import prizeCaps from '../assets/prize/caps.png'
+import prizeDino from '../assets/prize/dino.png'
 
-type TechFestTab = 'about' | 'timeline' | 'speakers' | 'topics' | 'register'
+type TechFestTab = 'about' | 'timeline' | 'speakers' | 'topics' | 'giftaway' | 'register'
 
 const tabs: { key: TechFestTab; label: string }[] = [
   { key: 'about', label: 'About' },
   { key: 'timeline', label: 'Timeline' },
   { key: 'speakers', label: 'Speakers' },
   { key: 'topics', label: 'Topics' },
+  { key: 'giftaway', label: 'Giftaway' },
   { key: 'register', label: 'Register' },
 ]
 
@@ -566,6 +569,56 @@ function TopicsTab() {
 }
 
 /* ========================================
+   GIFTAWAY TAB
+   ======================================== */
+
+const giftaways = [
+  { name: 'GDGoC USM Cap', qty: 2, image: prizeCaps },
+  { name: 'Dino Plush Keychain', qty: 2, image: prizeDino },
+]
+
+function GiftawayTab() {
+  return (
+    <RevealOnScroll direction="up">
+      <div className="max-w-3xl mx-auto w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {giftaways.map((gift) => (
+            <div
+              key={gift.name}
+              className="flex flex-col items-center text-center p-8 transition-all duration-300 hover:-translate-y-1"
+              style={{
+                backgroundColor: 'rgba(255,255,255,0.6)',
+                border: '1px solid rgba(0,180,216,0.12)',
+                borderRadius: '20px',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+              }}
+            >
+              <div
+                className="w-full overflow-hidden mb-5"
+                style={{ height: '200px', borderRadius: '14px', backgroundColor: 'rgba(0,180,216,0.03)' }}
+              >
+                <img
+                  src={gift.image}
+                  alt={gift.name}
+                  className="w-full h-full object-contain p-4 select-none"
+                  draggable="false"
+                />
+              </div>
+              <span className="font-display font-semibold block mb-1" style={{ fontSize: '16px', color: '#1a1a2e' }}>
+                {gift.name}
+              </span>
+              <span className="font-mono text-techfest opacity-60" style={{ fontSize: '11px', letterSpacing: '1px' }}>
+                x{gift.qty}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </RevealOnScroll>
+  )
+}
+
+/* ========================================
    REGISTER TAB
    ======================================== */
 
@@ -637,6 +690,8 @@ export default function TechFest() {
         return <SpeakersTab />
       case 'topics':
         return <TopicsTab />
+      case 'giftaway':
+        return <GiftawayTab />
       case 'register':
         return <RegisterTab />
     }
