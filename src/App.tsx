@@ -56,7 +56,6 @@ function App() {
           <Route path="/gamefest" element={lazyLoad(GameFest)} />
           <Route path="/techfest" element={lazyLoad(TechFest)} />
           <Route path="/login" element={lazyLoad(Login)} />
-          <Route path="/collect/:boothId" element={lazyLoad(CollectStamp)} />
           <Route
             path="/stamps"
             element={
@@ -78,6 +77,7 @@ function App() {
         {/* Standalone routes (no layout — kiosk/fullscreen) */}
         <Route path="/verify" element={lazyLoad(Verify)} />
         <Route path="/booth/:boothId" element={lazyLoad(BoothDisplay)} />
+        <Route path="/collect/:boothId" element={lazyLoad(CollectStamp)} />
       </Routes>
     </ReactLenis>
   )

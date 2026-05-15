@@ -6,7 +6,6 @@ import { db } from '../lib/firebase'
 import { useAuth } from '../contexts/AuthContext'
 import { parseBoothQrFromUrl, validateBoothQr } from '../lib/token'
 import { getBoothById } from '../lib/booths'
-import PageWrapper from '../components/PageWrapper'
 
 type Status = 'idle' | 'processing' | 'success' | 'error'
 
@@ -77,11 +76,34 @@ export default function CollectStamp() {
     return <Navigate to={`/login?redirect=${encodeURIComponent(currentUrl)}`} replace />
   }
 
-  const accent = status === 'success' ? '#46f4ff' : status === 'error' ? '#ff4444' : '#46f4ff'
+  const isSuccess = status === 'success'
+  const isError = status === 'error'
+  const accent = isSuccess ? '#46f4ff' : isError ? '#ff4444' : '#46f4ff'
 
   return (
-    <PageWrapper>
-      <section className="min-h-[80vh] flex flex-col items-center justify-center px-6 py-20">
+    <div
+      className="min-h-screen flex flex-col"
+      style={{ backgroundColor: '#081120' }}
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: `1px solid ${accent}33` }}>
+        <span
+          className="font-mono uppercase"
+          style={{ fontSize: '11px', letterSpacing: '3px', color: accent }}
+        >
+          {isSuccess ? '// STAMPED' : isError ? '// FAILED' : '// COLLECTING'}
+        </span>
+        <Link
+          to="/stamps"
+          className="font-mono uppercase bg-transparent border-none"
+          style={{ fontSize: '11px', letterSpacing: '2px', color: 'rgba(215,253,255,0.5)', textDecoration: 'none' }}
+        >
+          CLOSE
+        </Link>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 flex flex-col items-center justify-center px-6">
         {status === 'processing' || status === 'idle' ? (
           <motion.div
             className="text-center"
@@ -89,113 +111,106 @@ export default function CollectStamp() {
             animate={{ opacity: 1 }}
           >
             <div
-              className="w-10 h-10 border-2 rounded-full animate-spin mx-auto mb-4"
-              style={{ borderColor: 'rgba(0,180,216,0.3)', borderTopColor: '#00b4d8' }}
+              className="w-8 h-8 border-2 rounded-full animate-spin mx-auto mb-3"
+              style={{ borderColor: 'rgba(70,244,255,0.3)', borderTopColor: '#46f4ff' }}
             />
             <span
-              className="font-mono uppercase"
-              style={{ fontSize: '12px', letterSpacing: '4px', color: '#00b4d8' }}
+              className="font-mono"
+              style={{ fontSize: '11px', letterSpacing: '3px', color: '#46f4ff' }}
             >
-              COLLECTING STAMP...
+              VALIDATING...
             </span>
           </motion.div>
         ) : (
           <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            className="flex flex-col items-center text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
           >
             {/* Icon */}
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-              className="mx-auto mb-6"
+              transition={{ type: 'spring', stiffness: 300, damping: 15, delay: 0.1 }}
             >
-              <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
-                {status === 'success' ? (
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                {isSuccess ? (
                   <>
-                    <circle cx="12" cy="12" r="10" stroke={accent} strokeWidth="2" />
-                    <path d="M8 12l2.5 2.5L16 9" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <circle cx="12" cy="12" r="10" stroke="#46f4ff" strokeWidth="2" />
+                    <path d="M8 12l2.5 2.5L16 9" stroke="#46f4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </>
                 ) : (
                   <>
-                    <circle cx="12" cy="12" r="10" stroke={accent} strokeWidth="2" />
-                    <path d="M15 9l-6 6M9 9l6 6" stroke={accent} strokeWidth="2" strokeLinecap="round" />
+                    <circle cx="12" cy="12" r="10" stroke="#ff4444" strokeWidth="2" />
+                    <path d="M15 9l-6 6M9 9l6 6" stroke="#ff4444" strokeWidth="2" strokeLinecap="round" />
                   </>
                 )}
               </svg>
             </motion.div>
 
             {/* Title */}
-            <h1
-              className="font-display font-bold uppercase tracking-wider mb-2"
-              style={{ fontSize: '28px', color: accent }}
+            <motion.span
+              className="font-display font-bold uppercase tracking-wider mt-4"
+              style={{ fontSize: isSuccess ? '20px' : '16px', color: accent }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
             >
-              {status === 'success' ? 'STAMPED' : 'FAILED'}
-            </h1>
+              {isSuccess ? 'STAMPED' : 'FAILED'}
+            </motion.span>
 
             {/* Booth name / message */}
-            <p
-              className="font-mono mb-8"
-              style={{ fontSize: '13px', letterSpacing: '1px', color: 'rgba(26,26,46,0.6)' }}
+            <motion.span
+              className="font-mono mt-2 text-center"
+              style={{ fontSize: '12px', letterSpacing: '1px', color: 'rgba(215,253,255,0.6)' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.35 }}
             >
               {message || boothName}
-            </p>
+            </motion.span>
 
-            {/* Action buttons */}
-            <div className="flex flex-col gap-3 items-center">
-              {status === 'success' && (
+            {/* Action button */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              {isSuccess ? (
                 <Link
                   to="/stamps"
-                  className="inline-block px-8 py-3 font-mono uppercase"
+                  className="mt-6 px-6 py-3 font-mono uppercase inline-block"
                   style={{
-                    fontSize: '12px',
+                    fontSize: '11px',
                     letterSpacing: '3px',
-                    backgroundColor: '#00b4d8',
-                    color: '#1a1a2e',
+                    backgroundColor: '#46f4ff',
+                    color: '#081120',
                     textDecoration: 'none',
                   }}
                 >
                   VIEW STAMPS
                 </Link>
+              ) : (
+                <Link
+                  to={`/collect/${boothId}?${searchParams.toString()}`}
+                  onClick={() => { setStatus('idle'); setMessage('') }}
+                  className="mt-6 px-6 py-3 font-mono uppercase inline-block"
+                  style={{
+                    fontSize: '11px',
+                    letterSpacing: '3px',
+                    backgroundColor: 'transparent',
+                    color: '#d7fdff',
+                    border: '1px solid rgba(255,68,68,0.4)',
+                    textDecoration: 'none',
+                  }}
+                >
+                  TRY AGAIN
+                </Link>
               )}
-              {status === 'error' && (
-                <>
-                  <Link
-                    to={`/collect/${boothId}?${searchParams.toString()}`}
-                    onClick={() => { setStatus('idle'); setMessage('') }}
-                    className="inline-block px-8 py-3 font-mono uppercase"
-                    style={{
-                      fontSize: '12px',
-                      letterSpacing: '3px',
-                      backgroundColor: 'transparent',
-                      color: '#d7fdff',
-                      border: '1px solid rgba(255,68,68,0.4)',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    TRY AGAIN
-                  </Link>
-                  <Link
-                    to="/stamps"
-                    className="font-mono uppercase"
-                    style={{
-                      fontSize: '11px',
-                      letterSpacing: '2px',
-                      color: 'rgba(26,26,46,0.4)',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    GO TO STAMPS
-                  </Link>
-                </>
-              )}
-            </div>
+            </motion.div>
           </motion.div>
         )}
-      </section>
-    </PageWrapper>
+      </div>
+    </div>
   )
 }
