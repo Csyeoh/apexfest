@@ -14,6 +14,7 @@ const Stamps = lazy(() => import('./pages/Stamps'))
 const BoothDisplay = lazy(() => import('./pages/BoothDisplay'))
 const Verify = lazy(() => import('./pages/Verify'))
 const Settings = lazy(() => import('./pages/Settings'))
+const CollectStamp = lazy(() => import('./pages/CollectStamp'))
 
 function LoadingFallback() {
   return (
@@ -55,6 +56,7 @@ function App() {
           <Route path="/gamefest" element={lazyLoad(GameFest)} />
           <Route path="/techfest" element={lazyLoad(TechFest)} />
           <Route path="/login" element={lazyLoad(Login)} />
+          <Route path="/collect/:boothId" element={lazyLoad(CollectStamp)} />
           <Route
             path="/stamps"
             element={

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Html5Qrcode } from 'html5-qrcode'
 import { useAuth } from '../contexts/AuthContext'
-import { parseBoothQr, validateBoothQr } from '../lib/token'
+import { parseBoothQr, parseBoothQrFromUrl, validateBoothQr } from '../lib/token'
 import { getBoothById } from '../lib/booths'
 import { doc, updateDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../lib/firebase'
@@ -44,7 +44,17 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
           setResultMsg('')
 
           try {
-            const payload = parseBoothQr(decodedText)
+            // Try JSON format first (legacy), then URL format
+            let payload = parseBoothQr(decodedText)
+            if (!payload) {
+              try {
+                const url = new URL(decodedText)
+                const boothId = url.pathname.match(/\/collect\/(.+)/)?.[1]
+                if (boothId) {
+                  payload = parseBoothQrFromUrl(url.searchParams, boothId)
+                }
+              } catch { /* not a valid URL */ }
+            }
             if (!payload) {
               showError('Invalid QR code')
               return

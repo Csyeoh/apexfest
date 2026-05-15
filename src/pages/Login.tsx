@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAuth } from '../contexts/AuthContext'
 import PageWrapper from '../components/PageWrapper'
@@ -13,6 +13,8 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const { signInWithEmail, signUpWithEmail, signInWithGoogle } = useAuth()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const redirect = searchParams.get('redirect')
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -24,7 +26,7 @@ export default function Login() {
       } else {
         await signInWithEmail(email, password)
       }
-      navigate('/stamps')
+      navigate(redirect ?? '/stamps')
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Something went wrong'
       setError(message)
@@ -38,7 +40,7 @@ export default function Login() {
     setLoading(true)
     try {
       await signInWithGoogle()
-      navigate('/stamps')
+      navigate(redirect ?? '/stamps')
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Something went wrong'
       setError(message)

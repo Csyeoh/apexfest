@@ -75,6 +75,22 @@ export function parseBoothQr(raw: string): BoothQrPayload | null {
   }
 }
 
+// --- URL-based QR encoding (for camera / Google Lens scanning) ---
+
+export function encodeBoothQrUrl(boothId: string, token: string, origin: string): string {
+  const ts = Math.floor(Date.now() / 1000)
+  return `${origin}/collect/${boothId}?token=${token}&ts=${ts}`
+}
+
+export function parseBoothQrFromUrl(searchParams: URLSearchParams, boothId: string): BoothQrPayload | null {
+  const token = searchParams.get('token')
+  const tsStr = searchParams.get('ts')
+  if (!token || !tsStr) return null
+  const ts = Number(tsStr)
+  if (isNaN(ts)) return null
+  return { booth: boothId, token, ts }
+}
+
 // Max age of QR payload in seconds — reject if older than one full period
 const MAX_QR_AGE = PERIOD
 

@@ -168,20 +168,21 @@ function AboutTab() {
 interface AgendaItem {
   time: string
   event: string
+  venue: string
   isHighlight?: boolean
 }
 
 const techfestAgenda: AgendaItem[] = [
-  { time: '09:00 AM', event: 'Opening Ceremony' },
-  { time: '09:20 AM', event: 'Hands-on Session: "Building ADK with Skills and Tools" by Leong Lai Fong', isHighlight: true },
-  { time: '10:20 AM', event: 'Hands-on Session: "Building Flutter Apps with Generative AI" by Kenichi Kambara', isHighlight: true },
-  { time: '11:20 AM', event: 'Interactive Booth Sessions (All Tech Tracks)' },
-  { time: '12:30 PM', event: 'Break' },
-  { time: '02:00 PM', event: 'Hands-on Session: "Building Smart Projects with AI" by Jeremy Lau Wei Han', isHighlight: true },
-  { time: '03:00 PM', event: 'Hands-on Session: "Rapid Prototyping with AI Studio" by Ho Zhi Yi', isHighlight: true },
-  { time: '04:00 PM', event: 'Interactive Booth Sessions (All Tech Tracks)' },
-  { time: '05:00 PM', event: 'Closing Ceremony' },
-  { time: '05:45 PM', event: 'End' },
+  { time: '08:30 AM', event: 'Registration', venue: 'Auditorium' },
+  { time: '09:00 AM', event: 'Opening Ceremony - Dr Gan Keng Hoon & Yeoh Chong Siang', venue: 'Auditorium' },
+  { time: '10:00 AM', event: 'Building ADK with Skills and Tools - Leong Lai Fong', venue: 'Auditorium', isHighlight: true },
+  { time: '11:00 AM', event: 'Hands-On Building Flutter Apps with Generative AI - Kenichi Kambara', venue: 'Auditorium', isHighlight: true },
+  { time: '12:00 PM', event: 'Booth Visit & Networking', venue: 'SCL 1&2' },
+  { time: '12:30 PM', event: 'Break', venue: 'Outside ELL' },
+  { time: '02:00 PM', event: 'Hands-on Session 3 - Jeremy Lau Wei Han', venue: 'Auditorium', isHighlight: true },
+  { time: '03:00 PM', event: 'Rapid Prototyping with AI Studio - Ho Zhi Yi', venue: 'Auditorium', isHighlight: true },
+  { time: '04:00 PM', event: 'Booth Visit & Networking', venue: 'SCL 1&2' },
+  { time: '05:00 PM', event: 'Closing Ceremony - Dr Gan Keng Hoon & Yeoh Chong Siang', venue: 'Auditorium' },
 ]
 
 function TimelineTab() {
@@ -239,6 +240,16 @@ function TimelineTab() {
               <div className="flex-1 flex flex-col justify-center p-3 pl-4">
                 <span className="font-display text-[#1a1a2e]" style={{ fontSize: '14px', fontWeight: row.isHighlight ? 700 : 400, letterSpacing: '0.5px' }}>
                   {row.event}
+                </span>
+              </div>
+
+              {/* Venue Column */}
+              <div
+                className="w-[120px] flex-shrink-0 flex items-center justify-center p-3"
+                style={{ borderLeft: '1px solid rgba(0,180,216,0.12)' }}
+              >
+                <span className="font-mono text-[#00b4d8] opacity-70 text-center" style={{ fontSize: '11px', letterSpacing: '0.5px' }}>
+                  {row.venue}
                 </span>
               </div>
             </div>

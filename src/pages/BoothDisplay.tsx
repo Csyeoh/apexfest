@@ -6,7 +6,7 @@ import { doc, getDoc } from 'firebase/firestore'
 import { signInAnonymously, onAuthStateChanged } from 'firebase/auth'
 import { db, auth } from '../lib/firebase'
 import { getBoothById } from '../lib/booths'
-import { generateToken, encodeBoothQr, getTokenRemainingSeconds } from '../lib/token'
+import { generateToken, encodeBoothQrUrl, getTokenRemainingSeconds } from '../lib/token'
 import PinEntry from '../components/PinEntry'
 
 export default function BoothDisplay() {
@@ -59,7 +59,7 @@ export default function BoothDisplay() {
   async function updateQr() {
     if (!booth) return
     const token = await generateToken(booth.secret)
-    const data = encodeBoothQr(booth.id, token)
+    const data = encodeBoothQrUrl(booth.id, token, window.location.origin)
     const url = await QRCode.toDataURL(data, {
       width: 300,
       margin: 3,
@@ -180,7 +180,7 @@ export default function BoothDisplay() {
         className="font-mono uppercase mt-8 mb-6"
         style={{ fontSize: '12px', letterSpacing: '4px', color: 'rgba(215,253,255,0.4)' }}
       >
-        Scan to collect stamp
+        Scan with camera or Google Lens to collect
       </p>
 
       {/* Countdown */}
