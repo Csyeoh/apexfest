@@ -131,7 +131,7 @@ function AboutTab() {
               <p className="font-body text-text-muted text-base">Open to all passionate students from higher education institutions in Malaysia who are eager to explore Google technologies.</p>
             </div>
           </div>
-          
+
           <div className="flex gap-4 transition-all duration-300 hover:-translate-y-1 hover:drop-shadow-md">
             <div className="w-1 h-auto bg-techfest rounded-full" />
             <div>
@@ -179,7 +179,7 @@ const techfestAgenda: AgendaItem[] = [
   { time: '11:00 AM', event: 'Hands-On Building Flutter Apps with Generative AI - Kenichi Kambara', venue: 'Auditorium', isHighlight: true },
   { time: '12:00 PM', event: 'Booth Visit & Networking', venue: 'SCL 1&2' },
   { time: '12:30 PM', event: 'Break', venue: 'Outside ELL' },
-  { time: '02:00 PM', event: 'Hands-on Session 3 - Jeremy Lau Wei Han', venue: 'Auditorium', isHighlight: true },
+  { time: '02:00 PM', event: 'Beyond Prompt Engineering: Building Secure AI Applications - Jeremy Lau Wei Han', venue: 'Auditorium', isHighlight: true },
   { time: '03:00 PM', event: 'Rapid Prototyping with AI Studio - Ho Zhi Yi', venue: 'Auditorium', isHighlight: true },
   { time: '04:00 PM', event: 'Booth Visit & Networking', venue: 'SCL 1&2' },
   { time: '05:00 PM', event: 'Closing Ceremony - Dr Gan Keng Hoon & Yeoh Chong Siang', venue: 'Auditorium' },
@@ -205,7 +205,7 @@ function TimelineTab() {
         {/* AGENDA LIST */}
         <div className="flex flex-col">
           {techfestAgenda.map((row, idx) => (
-            <div 
+            <div
               key={idx}
               className="flex items-stretch transition-colors duration-200"
               style={{
@@ -227,7 +227,7 @@ function TimelineTab() {
               }}
             >
               {/* Time Column */}
-              <div 
+              <div
                 className="w-[70px] sm:w-[90px] flex-shrink-0 flex items-center justify-center p-3"
                 style={{ borderRight: '1px solid rgba(0,180,216,0.12)' }}
               >
@@ -279,7 +279,7 @@ interface Speaker {
 const speakers: Speaker[] = [
   { id: 'SPEAKER_01', name: 'Leong Lai Fong', role: 'Senior AI Engineer', org: 'Guest Speaker', initials: 'LF', image: msLeongImage },
   { id: 'SPEAKER_02', name: 'Kenichi Kambara', role: 'Principal Evangelist (Tech) • SekaiPhone Owner', org: 'Guest Speaker', initials: 'KK', image: kenichiImage },
-  { id: 'SPEAKER_03', name: 'Jeremy Lau Wei Han', role: 'Digital Analyst @ Central Bank of Malaysia (BNM)', org: 'Guest Speaker', initials: 'JL', image: jeremyImage },
+  { id: 'SPEAKER_03', name: 'Jeremy Lau Wei Han', role: 'Digital Analyst', org: 'Guest Speaker', initials: 'JL', image: jeremyImage },
   { id: 'SPEAKER_04', name: 'Ho Zhi Yi', role: 'Developer Community Manager for Singapore and Malaysia, Google', org: 'Guest Speaker', initials: 'ZY', image: zhiyiImage },
 ]
 
@@ -440,7 +440,7 @@ const speakerTopics: Topic[] = [
     icon: IconADK,
   },
   { number: 'S2', title: 'Hands-On Building Flutter Apps with Generative AI', desc: 'In this hands-on workshop, participants will use Generative AI together with Flutter to build their own original mobile app step by step. The session will also briefly introduce some of the latest AI trends and practical AI-powered development workflows.', icon: IconGenAI },
-  { number: 'S3', title: 'Hands-On Building Smart Projects with AI', desc: 'In this hands-on session, participants will learn how to leverage AI tools to brainstorm, plan, and build a working project from scratch. The session covers practical workflows for turning ideas into prototypes using AI-assisted development, making it ideal for both beginners and those preparing for hackathons.', icon: IconRapidProto },
+  { number: 'S3', title: 'Beyond Prompt Engineering: Building Secure AI Applications', desc: 'Prompting is only the first step in building AI systems. This workshop introduces students to the foundations of AI application security using Google Gemini and Python. Through hands-on exercises, participants will learn how AI guardrails work, why prompt injection attacks happen, and how developers can design safer AI applications using layered security approaches.', icon: IconCyber },
   {
     number: 'S4',
     title: 'Rapid Prototyping with AI Studio',
@@ -713,13 +713,13 @@ export default function TechFest() {
 
   return (
     <PageWrapper>
-    <section className="min-h-screen max-w-7xl mx-auto px-6 py-10 md:py-16">
-      <PageHeader />
-      <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
-      <div key={activeTab} className="tab-content-enter" role="tabpanel">
-        {renderTab()}
-      </div>
-    </section>
+      <section className="min-h-screen max-w-7xl mx-auto px-6 py-10 md:py-16">
+        <PageHeader />
+        <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
+        <div key={activeTab} className="tab-content-enter" role="tabpanel">
+          {renderTab()}
+        </div>
+      </section>
     </PageWrapper>
   )
 }
