@@ -7,6 +7,7 @@ import RevealOnScroll from '../components/RevealOnScroll'
 import FAQ from '../components/FAQ'
 
 import fantechLogo from '../assets/sponsor/fantech.png'
+import fantechPromo from '../assets/sponsor/fantechpromo.png'
 import mofiiLogo from '../assets/sponsor/mofii.jpg'
 import mkbLogo from '../assets/sponsor/mkb.png'
 import slide1 from '../assets/slideshow/img_1556.webp'
@@ -721,6 +722,15 @@ const sponsors = [
   { name: 'MKB', image: mkbLogo, role: 'In-Kind Sponsor', imageWidth: 'w-[80%]' },
 ]
 
+/* ── Sponsor Promotional Content (images or video embeds) ── */
+const sponsorPromos: {
+  name: string
+  type: 'image' | 'video'
+  src: string
+}[] = [
+  { name: 'Fantech', type: 'image', src: fantechPromo },
+]
+
 function SponsorsSection() {
   return (
     <section id="sponsors" className="w-full max-w-7xl mx-auto px-6 py-24 md:py-28 overflow-hidden" style={{ backgroundColor: 'rgba(26,26,46,0.015)' }}>
@@ -776,6 +786,60 @@ function SponsorsSection() {
                 </p>
               </div>
             ))}
+          </div>
+
+          {/* Sponsor Promotional Content */}
+          <div className="mt-12">
+            <div className="w-full h-[1px] mb-10" style={{ backgroundColor: 'rgba(26,26,46,0.06)' }} />
+            <p
+              className="font-mono text-center mb-8"
+              style={{ fontSize: '10px', letterSpacing: '3px', color: 'rgba(26,26,46,0.35)' }}
+            >
+              FEATURED BY OUR SPONSORS
+            </p>
+            <div className="flex justify-center">
+              <div className="w-full max-w-lg">
+              {sponsorPromos.map((promo) => (
+                <div
+                  key={promo.name}
+                  className="flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '1px solid rgba(26,26,46,0.06)',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
+                  }}
+                >
+                  {promo.type === 'video' ? (
+                    <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+                      <iframe
+                        src={promo.src}
+                        title={`${promo.name} promotional video`}
+                        className="absolute inset-0 w-full h-full"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        style={{ borderRadius: '16px 16px 0 0' }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full overflow-hidden" style={{ minHeight: '300px' }}>
+                      <img
+                        src={promo.src}
+                        alt={`${promo.name} promotional poster`}
+                        className="w-full h-auto object-contain select-none"
+                        draggable="false"
+                      />
+                    </div>
+                  )}
+                  <div className="p-4 text-center">
+                    <span className="font-display font-semibold text-sm" style={{ color: '#1a1a2e' }}>
+                      {promo.name}
+                    </span>
+                  </div>
+                </div>
+              ))}
+              </div>
+            </div>
           </div>
         </div>
       </RevealOnScroll>
