@@ -458,7 +458,7 @@ export default function Navbar() {
         <Link
           to="/#home"
           className="font-display font-bold select-none"
-          style={{ fontSize: '17px', letterSpacing: '0.02em' }}
+          style={{ fontSize: 'clamp(13px, 3.5vw, 17px)', letterSpacing: '0.02em' }}
           aria-label="ApexFest home"
           onClick={closeMenu}
         >

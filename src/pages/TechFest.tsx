@@ -35,7 +35,7 @@ function PageHeader() {
         >
           EVENT_02 // AI & TECH
         </p>
-        <h1 className="font-display font-black leading-none mb-3" style={{ fontSize: '56px' }}>
+        <h1 className="font-display font-black leading-none mb-3" style={{ fontSize: 'clamp(2rem, 8vw, 3.5rem)' }}>
           <span className="text-text-base">TechFest </span>
           <span className="text-techfest">2.0</span>
         </h1>
@@ -228,7 +228,7 @@ function TimelineTab() {
             >
               {/* Time Column */}
               <div 
-                className="w-[90px] flex-shrink-0 flex items-center justify-center p-3"
+                className="w-[70px] sm:w-[90px] flex-shrink-0 flex items-center justify-center p-3"
                 style={{ borderRight: '1px solid rgba(0,180,216,0.12)' }}
               >
                 <span className="font-mono font-bold text-[#00b4d8] text-center" style={{ fontSize: '12px', letterSpacing: '1px' }}>
@@ -241,11 +241,14 @@ function TimelineTab() {
                 <span className="font-display text-[#1a1a2e]" style={{ fontSize: '14px', fontWeight: row.isHighlight ? 700 : 400, letterSpacing: '0.5px' }}>
                   {row.event}
                 </span>
+                <span className="font-mono text-[#00b4d8] opacity-70 sm:hidden mt-1" style={{ fontSize: '10px', letterSpacing: '0.5px' }}>
+                  {row.venue}
+                </span>
               </div>
 
               {/* Venue Column */}
               <div
-                className="w-[120px] flex-shrink-0 flex items-center justify-center p-3"
+                className="hidden sm:flex w-[120px] flex-shrink-0 items-center justify-center p-3"
                 style={{ borderLeft: '1px solid rgba(0,180,216,0.12)' }}
               >
                 <span className="font-mono text-[#00b4d8] opacity-70 text-center" style={{ fontSize: '11px', letterSpacing: '0.5px' }}>

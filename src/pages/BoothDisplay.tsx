@@ -170,7 +170,7 @@ export default function BoothDisplay() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
           >
-            <img src={qrDataUrl} alt="Booth QR Code" width={300} height={300} />
+            <img src={qrDataUrl} alt="Booth QR Code" width={260} height={260} className="max-w-full" />
           </motion.div>
         </AnimatePresence>
       )}

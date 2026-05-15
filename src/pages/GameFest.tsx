@@ -36,7 +36,7 @@ function PageHeader() {
         >
           EVENT_01 // GAMING
         </p>
-        <h1 className="font-display font-black leading-none mb-4" style={{ fontSize: '56px' }}>
+        <h1 className="font-display font-black leading-none mb-4" style={{ fontSize: 'clamp(2rem, 8vw, 3.5rem)' }}>
           <span className="text-text-base">Game Fest </span>
           <span className="text-gamefest">2026</span>
         </h1>
@@ -317,7 +317,7 @@ function TimelineTab() {
               >
                 {/* Time Column */}
                 <div 
-                  className="w-[90px] flex-shrink-0 flex items-center justify-center p-3"
+                  className="w-[70px] sm:w-[90px] flex-shrink-0 flex items-center justify-center p-3"
                   style={{ borderRight: '1px solid rgba(255,0,127,0.12)' }}
                 >
                   <span className="font-mono font-bold text-[#ff007f] text-center" style={{ fontSize: '12px', letterSpacing: '1px' }}>

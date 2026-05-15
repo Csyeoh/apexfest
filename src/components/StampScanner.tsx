@@ -173,8 +173,8 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
             <div
               className="relative overflow-hidden"
               style={{
-                width: '280px',
-                height: '280px',
+                width: 'min(280px, calc(100vw - 48px))',
+                height: 'min(280px, calc(100vw - 48px))',
                 border: `2px solid ${accent}${isSuccess || isError ? '' : '44'}`,
               }}
             >
@@ -182,8 +182,8 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
               <div
                 id="stamp-scanner-region"
                 style={{
-                  width: '280px',
-                  height: '280px',
+                  width: 'min(280px, calc(100vw - 48px))',
+                  height: 'min(280px, calc(100vw - 48px))',
                   objectFit: 'cover',
                 }}
               />
@@ -352,8 +352,8 @@ export default function StampScanner({ onClose, onStamped, existingStamps }: Sta
           background: #081120 !important;
         }
         #stamp-scanner-region video {
-          width: 280px !important;
-          height: 280px !important;
+          width: min(280px, calc(100vw - 48px)) !important;
+          height: min(280px, calc(100vw - 48px)) !important;
           object-fit: cover !important;
         }
         #stamp-scanner-region__dashboard,

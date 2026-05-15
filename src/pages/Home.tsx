@@ -33,7 +33,7 @@ import bannerLogo from '../assets/bannerlogo.png'
 
 function HeroIllustration() {
   return (
-    <div className="relative w-full max-w-[520px] mx-auto" style={{ aspectRatio: '1 / 1' }}>
+    <div className="relative w-[80vw] sm:w-full max-w-[520px] mx-auto" style={{ aspectRatio: '1 / 1' }}>
       {/* Logo — center of canvas */}
       <img
         src={logoImg}
@@ -43,7 +43,7 @@ function HeroIllustration() {
           left: '50%',
           top: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '180px',
+          width: '34%',
           zIndex: 10,
         }}
         draggable="false"
@@ -54,7 +54,7 @@ function HeroIllustration() {
         src={bg1Img}
         alt=""
         className="absolute select-none"
-        style={{ left: '15%', top: '20%', width: '280px', zIndex: 2 }}
+        style={{ left: '15%', top: '20%', width: '54%', zIndex: 2 }}
         draggable="false"
       />
 
@@ -63,7 +63,7 @@ function HeroIllustration() {
         src={bg2Img}
         alt=""
         className="absolute select-none"
-        style={{ right: '20%', bottom: '20%', width: '300px', zIndex: 2 }}
+        style={{ right: '20%', bottom: '20%', width: '58%', zIndex: 2 }}
         draggable="false"
       />
 
@@ -72,7 +72,7 @@ function HeroIllustration() {
         src={shadow2Img}
         alt=""
         className="absolute select-none floating"
-        style={{ right: '0%', top: '50%', width: '500px', zIndex: 1 }}
+        style={{ right: '0%', top: '50%', width: '96%', zIndex: 1 }}
         draggable="false"
       />
 
@@ -90,7 +90,7 @@ function HeroIllustration() {
         src={firebaseImg}
         alt=""
         className="absolute select-none floating-r1"
-        style={{ right: '20%', top: '70%', width: '150px', zIndex: 4 }}
+        style={{ right: '20%', top: '70%', width: '29%', zIndex: 4 }}
         draggable="false"
       />
 
@@ -99,7 +99,7 @@ function HeroIllustration() {
         src={flutterImg}
         alt=""
         className="absolute select-none floating-r2"
-        style={{ left: '65%', bottom: '65%', width: '150px', zIndex: 4 }}
+        style={{ left: '65%', bottom: '65%', width: '29%', zIndex: 4 }}
         draggable="false"
       />
 
@@ -108,7 +108,7 @@ function HeroIllustration() {
         src={geminiImg}
         alt=""
         className="absolute select-none floating-r3"
-        style={{ left: '5%', top: '55%', width: '90px', zIndex: 6 }}
+        style={{ left: '5%', top: '55%', width: '17%', zIndex: 6 }}
         draggable="false"
       />
 
@@ -117,7 +117,7 @@ function HeroIllustration() {
         src={yellowdotImg}
         alt=""
         className="absolute select-none floating-r4"
-        style={{ left: '28%', top: '70%', width: '55px', zIndex: 3 }}
+        style={{ left: '28%', top: '70%', width: '10%', zIndex: 3 }}
         draggable="false"
       />
 
@@ -126,7 +126,7 @@ function HeroIllustration() {
         src={bluedotImg}
         alt=""
         className="absolute select-none floating-r5"
-        style={{ right: '15%', top: '30%', width: '55px', zIndex: 3 }}
+        style={{ right: '15%', top: '30%', width: '10%', zIndex: 3 }}
         draggable="false"
       />
 
@@ -135,7 +135,7 @@ function HeroIllustration() {
         src={lightdotImg}
         alt=""
         className="absolute select-none floating-r6"
-        style={{ left: '15%', top: '40%', width: '50px', zIndex: 6 }}
+        style={{ left: '15%', top: '40%', width: '10%', zIndex: 6 }}
         draggable="false"
       />
     </div>
@@ -157,7 +157,7 @@ function HeroSection() {
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-center relative z-10">
         {/* Left: text */}
-        <div style={{ marginTop: '-48px' }}>
+        <div className="md:mt-[-48px]">
           <motion.div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
             style={{
@@ -325,7 +325,7 @@ function HeroSection() {
           src={bannerLogo}
           alt="Supported by Universiti Sains Malaysia, Pusat Kreativiti & Inovasi, and Google Developer Group on Campus USM"
           className="select-none"
-          style={{ height: '50px', transform: 'translateX(8px)' }}
+          style={{ height: '50px' }}
           draggable="false"
         />
       </div>

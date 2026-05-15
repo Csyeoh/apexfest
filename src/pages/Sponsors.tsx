@@ -38,7 +38,7 @@ export default function Sponsors() {
           >
             // PARTNERS & SPONSORS
           </p>
-          <h1 className="font-display font-black leading-none mb-4" style={{ fontSize: '56px' }}>
+          <h1 className="font-display font-black leading-none mb-4" style={{ fontSize: 'clamp(2rem, 8vw, 3.5rem)' }}>
             <span className="text-text-base">Our </span>
             <span className="text-techfest">Sponsors</span>
           </h1>
