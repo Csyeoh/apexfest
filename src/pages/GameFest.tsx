@@ -367,7 +367,7 @@ function RulesTab() {
             // OFFICIAL RULEBOOK
           </p>
           <a
-            href="https://drive.google.com/file/d/1Q9bbf7vlQU3li_KKyfKkcCDRLuHTAghY/view?usp=drive_link"
+            href="https://drive.google.com/drive/folders/1Z2OKM7Ef3_76iHttcDncUJNK68lyZMFn"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-text-muted hover:text-gamefest transition-colors"
@@ -377,13 +377,22 @@ function RulesTab() {
           </a>
         </div>
 
-        <div className="w-full aspect-[1/1.4] md:aspect-video relative overflow-hidden rounded">
-          <iframe
-            src="https://drive.google.com/file/d/1Q9bbf7vlQU3li_KKyfKkcCDRLuHTAghY/preview"
-            className="absolute top-0 left-0 w-full h-full border-none"
-            allow="autoplay"
-            title="GameFest Official Rulebook"
-          ></iframe>
+        <div className="w-full flex items-center justify-center py-20">
+          <a
+            href="https://drive.google.com/drive/folders/1Z2OKM7Ef3_76iHttcDncUJNK68lyZMFn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 font-mono uppercase transition-colors"
+            style={{
+              fontSize: '12px',
+              letterSpacing: '3px',
+              backgroundColor: '#ff007f',
+              color: '#ffffff',
+              textDecoration: 'none',
+            }}
+          >
+            VIEW RULEBOOK
+          </a>
         </div>
       </div>
     </RevealOnScroll>
